@@ -4,12 +4,16 @@ import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
 import {dataUser} from '../consts/user';
 
-// import {notify} from '../consts/notify';
+import {notifyError, notifySuccess, notifyWarning} from '../consts/notify';
 import {validationRegisterUser} from '../services/validations/validationUser';
+import {createUser} from '../services/apis/user';
 
 import '../styles/register.css';
+import { useHistory } from 'react-router-dom';
+
 
 const Register = () => {
+  const history = useHistory();
   const handleChangeData = (evt ) => {
     evt.preventDefault();
 
@@ -24,6 +28,20 @@ const Register = () => {
     };
     
     let isCorrectData = validationRegisterUser(dataUser);
+    if (isCorrectData) {
+      createUser(dataUser).then( _ => {
+        notifySuccess('Usuario creado correctamente');
+        history.push('/');
+      }).catch(err => {
+        console.log({err});
+        if (err.message === 'Request failed with status code 409') {
+          notifyWarning('Ingresa un diferente nombre de usuario');
+        }
+        if (err.message === '"Network Error"') {
+          notifyError('No encontramos una conexión a internet');
+        }
+      });
+    }
   };
   return (
     <section>
