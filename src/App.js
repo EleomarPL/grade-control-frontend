@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
 import Login from './pages/Login';
+import Register from './pages/Register';
 
 const App = () => {
   return (
@@ -25,6 +26,13 @@ const App = () => {
                   <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones" />
                 </Helmet>
                 <Login />
+              </PublicRoute>
+              <PublicRoute path="/register">
+                <Helmet>
+                  <title>Register | Calificaciones</title>
+                  <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
+                </Helmet>
+                <Register />
               </PublicRoute>
             </Switch>
           </BrowserRouter>
