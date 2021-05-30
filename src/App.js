@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
+import Login from './pages/Login';
 
 const App = () => {
   return (
@@ -23,7 +24,7 @@ const App = () => {
                   <title>Login | Calificaciones</title>
                   <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones" />
                 </Helmet>
-                <p>Login</p>
+                <Login />
               </PublicRoute>
             </Switch>
           </BrowserRouter>
