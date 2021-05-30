@@ -4,6 +4,9 @@ import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
 import {dataUser} from '../consts/user';
 
+// import {notify} from '../consts/notify';
+import {validationRegisterUser} from '../services/validations/validationUser';
+
 import '../styles/register.css';
 
 const Register = () => {
@@ -19,8 +22,8 @@ const Register = () => {
       'userName': evt.target[5].value,
       'password': evt.target[6].value
     };
-
-    console.log(dataUser);
+    
+    let isCorrectData = validationRegisterUser(dataUser);
   };
   return (
     <section>

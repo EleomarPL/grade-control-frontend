@@ -1,6 +1,8 @@
 import React, { Fragment } from 'react';
 import Helmet from 'react-helmet';
 import { BrowserRouter, Switch } from 'react-router-dom';
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import './styles/index.css';
 
@@ -38,6 +40,12 @@ const App = () => {
           </BrowserRouter>
         </AuthProvider>
       </main>
+      <ToastContainer position="top-right"
+        autoClose={ 5000 } hideProgressBar={ false }
+        newestOnTop={ false } closeOnClick
+        rtl={ false } pauseOnFocusLoss
+        draggable pauseOnHover
+      />
     </Fragment>
   );
 };
