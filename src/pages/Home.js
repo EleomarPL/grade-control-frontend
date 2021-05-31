@@ -12,7 +12,9 @@ import {ModalAddQualification, showModalStatic} from '../components/ModalAddQual
 import ListQualifications from '../components/ListQualifications';
 
 const Home = () => {
-  const [qualifications, setQualification] = useState(null);
+  const [qualifications, setQualification] = useState([]);
+  const [isCreated, setIsCreated] = useState(true);
+  const [dataToEdit, setDataToEdit] = useState({});
   const { url } = useRouteMatch();
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const Home = () => {
     });
   }, []);
   const showModal = () => {
+    setIsCreated(true);
     showModalStatic();
   };
 
@@ -45,7 +48,7 @@ const Home = () => {
       </div>
       <HashRouter>
         <div className="home">
-          <div className="d-flex justify-content-center">
+          <div className="d-flex flex-wrap justify-content-center">
             <NavLink
               className="option-router"
               exact
@@ -65,7 +68,12 @@ const Home = () => {
           <div className="content p-3 mt-3">
             <Switch>
               <PrivateRoute exact path={ url }>
-                <ListQualifications qualifications={ qualifications } setQualifications={ setQualification } />
+                <ListQualifications
+                  qualifications={ qualifications }
+                  setQualifications={ setQualification }
+                  setIsCreated={ setIsCreated }
+                  setDataToEdit={ setDataToEdit }
+                />
               </PrivateRoute>
               <PrivateRoute path={ url + 'ordenated' }>
                 <p>Ordenado</p>
@@ -79,7 +87,12 @@ const Home = () => {
           <i className="bi bi-plus-circle-fill" />
         </button>
       </div>
-      <ModalAddQualification setQualifications={ setQualification } qualifications={ qualifications } />
+      <ModalAddQualification
+        setQualifications={ setQualification }
+        qualifications={ qualifications }
+        isCreated={ isCreated }
+        dataToEdit={ dataToEdit }
+      />
     </section>
   );
 };

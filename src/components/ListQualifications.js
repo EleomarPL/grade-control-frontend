@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {deleteQualification} from '../services/apis/qualification';
 import {notifySuccess, notifyError, notifyWarning} from '../consts/notify';
+import {showModalStatic} from '../components/ModalAddQualification';
 
-const ListQualifications = ({qualifications, setQualifications}) => {
+const ListQualifications = ({qualifications, setQualifications, setIsCreated, setDataToEdit}) => {
+
   const deleteThisQualification = (idQualification) => {
     const getToken = window.localStorage.getItem('session');
     deleteQualification({token: JSON.parse(getToken), idQualification: idQualification}).
@@ -21,8 +23,16 @@ const ListQualifications = ({qualifications, setQualifications}) => {
         }
       });
   };
+
+  const editQualification = (valueToEdit) => {
+    setIsCreated(false);
+    if (valueToEdit !== null) {
+      setDataToEdit(valueToEdit);
+      showModalStatic();
+    }
+  };
   return (
-    <Fragment>
+    <div className="table-responsive">
       <table className="table text-center">
         <thead className="table-dark">
           <tr>
@@ -35,9 +45,9 @@ const ListQualifications = ({qualifications, setQualifications}) => {
           </tr>
         </thead>
         <tbody>
-          { qualifications !== undefined && qualifications !== null &&
-            qualifications.map(value =>
-              <tr key={ value.id }>
+          { qualifications !== null && qualifications !== undefined &&
+            qualifications.map((value, index) =>
+              <tr key={ index }>
                 <th scope="row">{ value.course }</th>
                 <td>{ value.unit }</td>
                 <td>{ value.score }</td>
@@ -46,6 +56,7 @@ const ListQualifications = ({qualifications, setQualifications}) => {
                   <button
                     type="button"
                     className="btn btn-primary w-100"
+                    onClick={ () => editQualification(value) }
                   >
                     Editar
                   </button>
@@ -64,7 +75,7 @@ const ListQualifications = ({qualifications, setQualifications}) => {
           }
         </tbody>
       </table>
-    </Fragment>
+    </div>
   );
 };
 
@@ -73,7 +84,10 @@ ListQualifications.propTypes = {
     PropTypes.oneOf([null]),
     PropTypes.array
   ]),
-  setQualifications: PropTypes.func.isRequired
+  setQualifications: PropTypes.func.isRequired,
+  setIsCreated: PropTypes.func,
+  setDataToEdit: PropTypes.func
+
 };
 
 export default ListQualifications;

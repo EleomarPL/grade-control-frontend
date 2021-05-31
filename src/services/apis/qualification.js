@@ -29,3 +29,12 @@ export const deleteQualification = async({token, idQualification}) => {
   let response = await axios.delete(`${baseAPI}/qualifications/delete/${idQualification}`, config);
   return response;
 };
+export const editQualification = async({token, idQualification, dataQualification}) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  let response = await axios.put(`${baseAPI}/qualifications/edit/${idQualification}`, dataQualification, config);
+  return response;
+};
