@@ -35,8 +35,8 @@ export const validationCreateQualification = (dataQualification) => {
     isCorrectUserData = false;
   } else {
     let semester = Number(dataQualification.semester);
-    if ( semester < 0 || semester > 15) {
-      notifyInfo('El rango del semestre debe ser entre 0 y 15');
+    if ( semester < 1 || semester > 15) {
+      notifyInfo('El rango del semestre debe ser entre 1 y 15');
       isCorrectUserData = false;
     }
   }
