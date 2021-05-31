@@ -2,9 +2,43 @@
   padding: 0;
   margin: 0;
 }
-.menu-selection{
+.option-router{
+  border: none;
+  opacity: 0.5;
+  color: black;
   width: 20%;
+
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-align: center;
+
+  padding: 10px 10px;
+}
+.active-nav-user{
+  opacity: 1;
+  border: solid 1px gray;
+  border-radius: 10px;
 }
 .content{
-  width: 80%;
+  
+}
+.add-new-qualification > button {
+  background: transparent;
+  border: none;
+}
+.add-new-qualification{
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+
+  font-size: 3rem;
+  
+  transition: all .5s;
+}
+.add-new-qualification:hover{ transform: scale(1.2); }
+@media screen and (max-width: 700px){
+  .option-router{ width: 40%; }
+  .add-new-qualification{ font-size: 2.5rem; }
 }

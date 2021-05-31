@@ -6,9 +6,13 @@ import {getAllQualificationUser} from '../services/apis/qualification';
 import {notifyError, notifyWarning} from '../consts/notify';
 
 import '../styles/home.css';
+import { HashRouter, NavLink, Switch, useRouteMatch } from 'react-router-dom';
+import PrivateRoute from '../routes/PrivateRoute';
 
 const Home = () => {
   const [qualifications, setQualification] = useState(null);
+  const { url } = useRouteMatch();
+
   useEffect(() => {
     const getToken = window.localStorage.getItem('session');
     getAllQualificationUser({token: JSON.parse(getToken)}).then(response => {
@@ -27,14 +31,44 @@ const Home = () => {
         <Logo />
         <OptionsUser />
       </div>
-      <div className="home d-flex flex-wrap">
-        <div className="menu-selection">
-          <p>Lista</p>
-          <p>Ordenados</p>
+      <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
+        <strong>Calificaciones</strong>
+      </div>
+      <HashRouter>
+        <div className="home">
+          <div className="d-flex justify-content-center">
+            <NavLink
+              className="option-router"
+              exact
+              to={ url }
+              activeClassName="active-nav-user"
+            >
+              Lista
+            </NavLink>
+            <NavLink
+              className="option-router"
+              to={ url + 'ordenated' }
+              activeClassName="active-nav-user"
+            >
+              Ordenados
+            </NavLink>
+          </div>
+          <div className="content p-3 mt-3">
+            <Switch>
+              <PrivateRoute exact path={ url }>
+                <p>Lista</p>
+              </PrivateRoute>
+              <PrivateRoute path={ url + 'ordenated' }>
+                <p>Ordenado</p>
+              </PrivateRoute>
+            </Switch>
+          </div>
         </div>
-        <div className="content">
-
-        </div>
+      </HashRouter>
+      <div className="add-new-qualification add-new-qualification">
+        <button type="button">
+          <i className="bi bi-plus-circle-fill" />
+        </button>
       </div>
     </section>
   );
