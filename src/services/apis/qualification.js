@@ -11,3 +11,12 @@ export const getAllQualificationUser = async({token}) => {
   let response = await axios.get(`${baseAPI}/qualifications`, config);
   return response;
 };
+export const createQualification = async({token, dataQualification}) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  let response = await axios.post(`${baseAPI}/qualifications/create-qualification`, dataQualification, config);
+  return response;
+};

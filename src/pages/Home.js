@@ -8,6 +8,7 @@ import {notifyError, notifyWarning} from '../consts/notify';
 import '../styles/home.css';
 import { HashRouter, NavLink, Switch, useRouteMatch } from 'react-router-dom';
 import PrivateRoute from '../routes/PrivateRoute';
+import {ModalAddQualification, showModalStatic} from '../components/ModalAddQualification';
 
 const Home = () => {
   const [qualifications, setQualification] = useState(null);
@@ -25,6 +26,11 @@ const Home = () => {
       }
     });
   }, []);
+  const showModal = () => {
+    console.log(qualifications);
+    showModalStatic();
+  };
+
   return (
     <section>
       <div className="px-0 mx-0 d-flex flex-wrap justify-content-around align-items-center navbar-user">
@@ -66,10 +72,11 @@ const Home = () => {
         </div>
       </HashRouter>
       <div className="add-new-qualification add-new-qualification">
-        <button type="button">
+        <button type="button" onClick={ showModal }>
           <i className="bi bi-plus-circle-fill" />
         </button>
       </div>
+      <ModalAddQualification setQualifications={ setQualification } qualifications={ qualifications } />
     </section>
   );
 };
