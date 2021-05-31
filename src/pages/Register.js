@@ -37,7 +37,7 @@ const Register = () => {
         if (err.message === 'Request failed with status code 409') {
           notifyWarning('Ingresa un diferente nombre de usuario');
         }
-        if (err.message === '"Network Error"') {
+        if (err.message === 'Network Error') {
           notifyError('No encontramos una conexión a internet');
         }
       });

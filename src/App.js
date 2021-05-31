@@ -14,6 +14,8 @@ import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import PrivateRoute from './routes/PrivateRoute';
+import Home from './pages/Home';
 
 const App = () => {
   return (
@@ -31,11 +33,18 @@ const App = () => {
               </PublicRoute>
               <PublicRoute path="/register">
                 <Helmet>
-                  <title>Register | Calificaciones</title>
+                  <title>Registrarse | Calificaciones</title>
                   <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
                 </Helmet>
                 <Register />
               </PublicRoute>
+              <PrivateRoute path="/home">
+                <Helmet>
+                  <title>Inicio | Calificaciones</title>
+                  <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
+                </Helmet>
+                <Home />
+              </PrivateRoute>
             </Switch>
           </BrowserRouter>
         </AuthProvider>

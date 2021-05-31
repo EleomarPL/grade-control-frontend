@@ -1,0 +1,15 @@
+.navbar-user{
+  background: rgb(48, 108, 197);
+}
+.button-user{
+  background: transparent;
+  color: #dfdfdf;
+  border: 0;
+
+  font-size: 2rem;
+}
+.dropdown-menu{
+  background: white;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}

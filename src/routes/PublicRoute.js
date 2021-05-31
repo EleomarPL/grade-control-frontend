@@ -9,7 +9,7 @@ const PublicRoute = ({children}, props) => {
   let isLogged = userData === null ? false : true;
 
   if (isLogged) {
-    return <Redirect to="/user" />;
+    return <Redirect to="/home" />;
   } else {
     return <Route { ...props }>{ children }</Route>;
   }
