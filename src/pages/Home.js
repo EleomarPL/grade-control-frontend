@@ -65,7 +65,7 @@ const Home = () => {
           <div className="content p-3 mt-3">
             <Switch>
               <PrivateRoute exact path={ url }>
-                <ListQualifications qualifications={ qualifications } />
+                <ListQualifications qualifications={ qualifications } setQualifications={ setQualification } />
               </PrivateRoute>
               <PrivateRoute path={ url + 'ordenated' }>
                 <p>Ordenado</p>

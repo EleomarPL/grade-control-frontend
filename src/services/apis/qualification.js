@@ -20,3 +20,12 @@ export const createQualification = async({token, dataQualification}) => {
   let response = await axios.post(`${baseAPI}/qualifications/create-qualification`, dataQualification, config);
   return response;
 };
+export const deleteQualification = async({token, idQualification}) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  let response = await axios.delete(`${baseAPI}/qualifications/delete/${idQualification}`, config);
+  return response;
+};
