@@ -1,18 +1,50 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomizedInput from '../components/CustomizedInput';
 import Logo from '../components/Logo';
+import Auth from '../context/Auth';
 
 import '../styles/login.css';
 
+import {login} from '../services/apis/login';
+import {notifyInfo, notifyError} from '../consts/notify';
+
 const Login = () => {
 
-  const [email, setEmail] = useState('');
+  const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+
+  const {setUserData} = useContext(Auth);
 
   const handleLogin = (evt) => {
     evt.preventDefault();
-    console.log(email + ' ' + password);
+
+    if (userName.trim() === '' || password.trim === '') {
+      notifyInfo('Rellene todos los campos');
+    } else {
+      login({userName, password}).then(response => {
+        const {data} = response;
+        let dataUser = {
+          name: data.name,
+          lastName: data.lastName,
+          motherLastName: data.motherLastName,
+          phone: data.phone,
+          email: data.email,
+          userName: data.userName
+        };
+        window.localStorage.setItem('datauser', JSON.stringify(dataUser));
+        window.localStorage.setItem('session', JSON.stringify(data.token));
+        setUserData(dataUser);
+      }).catch(response => {
+        if (response.message === 'Network Error') {
+          notifyError('No encontramos una conexión a internet');
+        } else if (response.response.data.error === 'Invalid user or password') {
+          notifyInfo('Usuario o contraseña invalido');
+        }
+      });
+    }
+
+    
   };
 
   return (
@@ -36,8 +68,8 @@ const Login = () => {
             <CustomizedInput
               type="text"
               placeholder="Usuario"
-              state={ email }
-              setState={ setEmail }
+              state={ userName }
+              setState={ setUserName }
               classNameIcon="bi bi-person-fill"
             />
             <CustomizedInput
