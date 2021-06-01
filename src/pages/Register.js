@@ -4,7 +4,7 @@ import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
 import {dataUser} from '../consts/user';
 
-import {notifyError, notifySuccess, notifyWarning} from '../consts/notify';
+import {notifyError, notifySuccess, notifyWarning, notifyInfo} from '../consts/notify';
 import {validationRegisterUser} from '../services/validations/validationUser';
 import {createUser} from '../services/apis/user';
 
@@ -26,21 +26,26 @@ const Register = () => {
       'userName': evt.target[5].value,
       'password': evt.target[6].value
     };
-    
-    let isCorrectData = validationRegisterUser(dataUser);
-    if (isCorrectData) {
-      createUser(dataUser).then( _ => {
-        notifySuccess('Usuario creado correctamente');
-        history.push('/');
-      }).catch(err => {
-        console.log({err});
-        if (err.message === 'Request failed with status code 409') {
-          notifyWarning('Ingresa un diferente nombre de usuario');
-        }
-        if (err.message === 'Network Error') {
-          notifyError('No encontramos una conexión a internet');
-        }
-      });
+    if (dataUser.name.trim() === '' || dataUser.lastName.trim() === ''
+    || dataUser.motherLastName.trim() === '' || dataUser.phone.trim() === ''
+    || dataUser.email.trim() === '' || dataUser.userName.trim() === ''
+    || dataUser.password.trim() === '') {
+      notifyInfo('Rellene todos los campos');
+    } else {
+      let isCorrectData = validationRegisterUser(dataUser);
+      if (isCorrectData) {
+        createUser(dataUser).then( () => {
+          notifySuccess('Usuario creado correctamente');
+          history.push('/');
+        }).catch(err => {
+          if (err.message === 'Request failed with status code 409') {
+            notifyWarning('Ingresa un diferente nombre de usuario');
+          }
+          if (err.message === 'Network Error') {
+            notifyError('No encontramos una conexión a internet');
+          }
+        });
+      }
     }
   };
   return (

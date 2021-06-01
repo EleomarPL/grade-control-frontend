@@ -11,6 +11,7 @@ import PrivateRoute from '../routes/PrivateRoute';
 import {ModalAddQualification, showModalStatic} from '../components/ModalAddQualification';
 import {ModalConfirmDelete} from '../components/ModalConfirmDelete';
 import ListQualifications from '../components/ListQualifications';
+import OrdenatedQualification from '../components/OrdenatedQualification';
 
 const Home = () => {
   const [qualifications, setQualification] = useState([]);
@@ -79,7 +80,9 @@ const Home = () => {
                 />
               </PrivateRoute>
               <PrivateRoute path={ url + 'ordenated' }>
-                <p>Ordenado</p>
+                <OrdenatedQualification
+                  qualifications={ qualifications }
+                />
               </PrivateRoute>
             </Switch>
           </div>
