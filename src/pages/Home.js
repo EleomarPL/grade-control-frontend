@@ -9,12 +9,15 @@ import '../styles/home.css';
 import { HashRouter, NavLink, Switch, useRouteMatch } from 'react-router-dom';
 import PrivateRoute from '../routes/PrivateRoute';
 import {ModalAddQualification, showModalStatic} from '../components/ModalAddQualification';
+import {ModalConfirmDelete} from '../components/ModalConfirmDelete';
 import ListQualifications from '../components/ListQualifications';
 
 const Home = () => {
   const [qualifications, setQualification] = useState([]);
   const [isCreated, setIsCreated] = useState(true);
   const [dataToEdit, setDataToEdit] = useState({});
+  const [idQualificationDelete, setIdQualificationDelete] = useState(null);
+
   const { url } = useRouteMatch();
 
   useEffect(() => {
@@ -70,9 +73,9 @@ const Home = () => {
               <PrivateRoute exact path={ url }>
                 <ListQualifications
                   qualifications={ qualifications }
-                  setQualifications={ setQualification }
                   setIsCreated={ setIsCreated }
                   setDataToEdit={ setDataToEdit }
+                  setIdQualificationDelete={ setIdQualificationDelete }
                 />
               </PrivateRoute>
               <PrivateRoute path={ url + 'ordenated' }>
@@ -92,6 +95,11 @@ const Home = () => {
         qualifications={ qualifications }
         isCreated={ isCreated }
         dataToEdit={ dataToEdit }
+      />
+      <ModalConfirmDelete
+        idQualificationDelete={ idQualificationDelete }
+        setQualifications={ setQualification }
+        qualifications={ qualifications }
       />
     </section>
   );

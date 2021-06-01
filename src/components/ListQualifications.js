@@ -1,27 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {deleteQualification} from '../services/apis/qualification';
-import {notifySuccess, notifyError, notifyWarning} from '../consts/notify';
 import {showModalStatic} from '../components/ModalAddQualification';
+import {showModalStaticDelete} from '../components/ModalConfirmDelete';
 
-const ListQualifications = ({qualifications, setQualifications, setIsCreated, setDataToEdit}) => {
+const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQualificationDelete}) => {
 
   const deleteThisQualification = (idQualification) => {
-    const getToken = window.localStorage.getItem('session');
-    deleteQualification({token: JSON.parse(getToken), idQualification: idQualification}).
-      then(response => {
-        if (response.status === 204) {
-          setQualifications(qualifications.filter((value) => value.id !== idQualification));
-          notifySuccess('Calificación eliminada correctamente');
-        }
-      }).catch(err => {
-        if (err.message === 'Network Error') {
-          notifyError('No encontramos una conexión a internet');
-        } else if (err.response.data.error === 'Token missing or invalid') {
-          notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
-        }
-      });
+    setIdQualificationDelete(idQualification);
+    showModalStaticDelete();
   };
 
   const editQualification = (valueToEdit) => {
@@ -84,9 +71,9 @@ ListQualifications.propTypes = {
     PropTypes.oneOf([null]),
     PropTypes.array
   ]),
-  setQualifications: PropTypes.func.isRequired,
   setIsCreated: PropTypes.func,
-  setDataToEdit: PropTypes.func
+  setDataToEdit: PropTypes.func,
+  setIdQualificationDelete: PropTypes.func
 
 };
 
