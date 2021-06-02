@@ -8,17 +8,17 @@ export const dataQualification = {
     label: 'Materia'
   },
   unit: {
-    type: 'text',
+    type: 'number',
     placeholder: 'Ingresa la unidad',
     label: 'Unidad'
   },
   score: {
-    type: 'text',
+    type: 'number',
     placeholder: 'Ingresa la calificación',
     label: 'Calificacion'
   },
   semester: {
-    type: 'text',
+    type: 'number',
     placeholder: 'Ingresa el semestre',
     label: 'Semestre'
   }

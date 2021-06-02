@@ -15,12 +15,12 @@ export const dataUser = {
     label: 'Apellido materno'
   },
   phone: {
-    type: 'text',
+    type: 'tel',
     placeholder: 'Ingresa tu telefono',
     label: 'Telefono'
   },
   email: {
-    type: 'text',
+    type: 'email',
     placeholder: 'Ingresa tu email',
     label: 'Email'
   },

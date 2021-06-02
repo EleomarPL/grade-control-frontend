@@ -34,9 +34,9 @@ const Register = () => {
     || dataUser.password.trim() === '') {
       notifyInfo('Rellene todos los campos');
     } else {
-      setIsLoading(true);
       let isCorrectData = validationRegisterUser(dataUser);
       if (isCorrectData) {
+        setIsLoading(true);
         createUser(dataUser).then( () => {
           notifySuccess('Usuario creado correctamente');
           setIsLoading(false);
