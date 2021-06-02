@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, Suspense } from 'react';
 import Helmet from 'react-helmet';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import {ToastContainer} from 'react-toastify';
@@ -13,9 +13,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
 import Login from './pages/Login';
-import Register from './pages/Register';
+const Register = React.lazy(() => import('./pages/Register'));
 import PrivateRoute from './routes/PrivateRoute';
-import Home from './pages/Home';
+import SpinnerLoading from './components/SpinnerLoading';
+const Home = React.lazy(() => import('./pages/Home'));
 
 const App = () => {
   return (
@@ -36,14 +37,18 @@ const App = () => {
                   <title>Registrarse | Calificaciones</title>
                   <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
                 </Helmet>
-                <Register />
+                <Suspense fallback={ <SpinnerLoading /> }>
+                  <Register />
+                </Suspense>
               </PublicRoute>
               <PrivateRoute path="/home">
                 <Helmet>
                   <title>Inicio | Calificaciones</title>
                   <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
                 </Helmet>
-                <Home />
+                <Suspense fallback={ <SpinnerLoading /> }>
+                  <Home />
+                </Suspense>
               </PrivateRoute>
             </Switch>
           </BrowserRouter>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
@@ -13,6 +13,8 @@ import { useHistory } from 'react-router-dom';
 
 
 const Register = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
   const handleChangeData = (evt ) => {
     evt.preventDefault();
@@ -32,10 +34,12 @@ const Register = () => {
     || dataUser.password.trim() === '') {
       notifyInfo('Rellene todos los campos');
     } else {
+      setIsLoading(true);
       let isCorrectData = validationRegisterUser(dataUser);
       if (isCorrectData) {
         createUser(dataUser).then( () => {
           notifySuccess('Usuario creado correctamente');
+          setIsLoading(false);
           history.push('/');
         }).catch(err => {
           if (err.message === 'Request failed with status code 409') {
@@ -44,6 +48,7 @@ const Register = () => {
           if (err.message === 'Network Error') {
             notifyError('No encontramos una conexión a internet');
           }
+          setIsLoading(false);
         });
       }
     }
@@ -90,6 +95,11 @@ const Register = () => {
               className="btn btn-primary save mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
             >
+              <span
+                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
+                role="status"
+                aria-hidden="true"
+              ></span>
               Registrar
             </button>
           </form>

@@ -13,6 +13,7 @@ const Login = () => {
 
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const {setUserData} = useContext(Auth);
 
@@ -22,6 +23,7 @@ const Login = () => {
     if (userName.trim() === '' || password.trim === '') {
       notifyInfo('Rellene todos los campos');
     } else {
+      setIsLoading(true);
       login({userName, password}).then(response => {
         const {data} = response;
         let dataUser = {
@@ -34,6 +36,7 @@ const Login = () => {
         };
         window.localStorage.setItem('datauser', JSON.stringify(dataUser));
         window.localStorage.setItem('session', JSON.stringify(data.token));
+        setIsLoading(false);
         setUserData(dataUser);
       }).catch(response => {
         if (response.message === 'Network Error') {
@@ -41,6 +44,7 @@ const Login = () => {
         } else if (response.response.data.error === 'Invalid user or password') {
           notifyInfo('Usuario o contraseña invalido');
         }
+        setIsLoading(false);
       });
     }
 
@@ -82,6 +86,11 @@ const Login = () => {
           </div>
           <div>
             <button className="btn btn-primary mt-3 w-100" type="submit">
+              <span
+                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
+                role="status"
+                aria-hidden="true"
+              ></span>
               Iniciar ahora
             </button>
           </div>
