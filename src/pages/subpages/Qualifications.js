@@ -18,19 +18,24 @@ const Qualifications = () => {
   const [dataToEdit, setDataToEdit] = useState({});
   const [idQualificationDelete, setIdQualificationDelete] = useState(null);
 
+  const [isLoadingQualifications, setIsLoadingQualifications] = useState(false);
+
   useEffect(() => {
+    setIsLoadingQualifications(true);
     const getToken = window.localStorage.getItem('session');
     getAllQualificationUser({token: JSON.parse(getToken)}).then(response => {
       setQualification(response.data);
       if (response.data.length === 0) {
         notifyInfo('Aun no tienes calificaciones agregadas');
       }
+      setIsLoadingQualifications(false);
     }).catch(err => {
       if (err.message === 'Network Error') {
         notifyError('No encontramos una conexión a internet');
       } else if (err.response.data.error === 'Token missing or invalid') {
         notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
       }
+      setIsLoadingQualifications(false);
     });
   }, []);
   const showModal = () => {
@@ -70,6 +75,9 @@ const Qualifications = () => {
                   setDataToEdit={ setDataToEdit }
                   setIdQualificationDelete={ setIdQualificationDelete }
                 />
+                { isLoadingQualifications &&
+                  <SpinnerLoading />
+                }
               </PrivateRoute>
               <PrivateRoute path={ '/ordenated' }>
                 <Suspense fallback={ <SpinnerLoading /> }>

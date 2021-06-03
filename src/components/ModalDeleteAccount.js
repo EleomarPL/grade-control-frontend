@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {Modal} from 'bootstrap';
 
 import {notifySuccess, notifyError, notifyWarning} from '../consts/notify';
@@ -17,6 +17,7 @@ export const showModalStaticDeleteAccount = () => {
 };
 export const ModalDeleteAccount = () => {
   const {setUserData} = useContext(Auth);
+  const [isLoading, setIsLoading] = useState(false);
 
   const hideModalStatic = () => {
     let myModal = Modal.getInstance(
@@ -26,6 +27,7 @@ export const ModalDeleteAccount = () => {
   };
 
   const executeDelete = () => {
+    setIsLoading(true);
     const getToken = window.localStorage.getItem('session');
     deleteUser({token: JSON.parse(getToken)}).
       then(response => {
@@ -35,12 +37,14 @@ export const ModalDeleteAccount = () => {
           window.localStorage.clear();
           setUserData(null);
         }
+        setIsLoading(false);
       }).catch(err => {
         if (err.message === 'Network Error') {
           notifyError('No encontramos una conexión a internet');
         } else if (err.response.data.error === 'Token missing or invalid') {
           notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
         }
+        setIsLoading(false);
       });
   };
   return (
@@ -74,6 +78,11 @@ export const ModalDeleteAccount = () => {
               className="btn btn-danger"
               onClick={ executeDelete }
             >
+              <span
+                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
+                role="status"
+                aria-hidden="true"
+              ></span>
               Eliminar
             </button>
             <button

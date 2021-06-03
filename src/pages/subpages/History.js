@@ -2,22 +2,27 @@ import React, { useEffect, useState } from 'react';
 
 import {getAllHistoryUser, deleteHistory} from '../../services/apis/history';
 import {notifyInfo, notifyError, notifyWarning, notifySuccess} from '../../consts/notify';
+import SpinnerLoading from '../../components/SpinnerLoading';
 
 const History = () => {
   const [history, setHistory] = useState(null);
+  const [isLoadHistory, setIsLoadHistory] = useState(false);
   useEffect(() => {
+    setIsLoadHistory(true);
     const getToken = window.localStorage.getItem('session');
     getAllHistoryUser({token: JSON.parse(getToken)}).then(response => {
       setHistory(response.data.reverse());
       if (response.data.length === 0) {
         notifyInfo('Historial vacio');
       }
+      setIsLoadHistory(false);
     }).catch(err => {
       if (err.message === 'Network Error') {
         notifyError('No encontramos una conexión a internet');
       } else if (err.response.data.error === 'Token missing or invalid') {
         notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
       }
+      setIsLoadHistory(false);
     });
   }, []);
 
@@ -66,6 +71,9 @@ const History = () => {
           </tbody>
         </table>
       </div>
+      { isLoadHistory &&
+        <SpinnerLoading />
+      }
     </section>
   );
 };

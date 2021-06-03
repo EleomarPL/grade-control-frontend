@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {Modal} from 'bootstrap';
 
@@ -19,7 +19,7 @@ export const showModalStatic = () => {
   myModal.show();
 };
 export const ModalAddQualification = ( { setQualifications, qualifications, dataToEdit, isCreated} ) => {
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     let form = document.getElementById('form-qualification');
     if (!isCreated) {
@@ -66,6 +66,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
         const getToken = window.localStorage.getItem('session');
         
         if (isCreated) {
+          setIsLoading(true);
           createQualification({dataQualification: dataQualification, token: JSON.parse(getToken)}).
             then(response => {
               notifySuccess('Calificación creada correctamente');
@@ -79,6 +80,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                   calificación ${response.data.score} de la unidad ${response.data.unit} del 
                   semestre ${response.data.semester}`}
               });
+              setIsLoading(false);
               hideModalStatic();
             }).catch(err => {
               if (err.message === 'Network Error') {
@@ -86,6 +88,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
               } else if (err.response.data.error === 'Token missing or invalid') {
                 notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
               }
+              setIsLoading(false);
             });
         } else {
           if (dataQualification.course === dataToEdit.course && Number(dataQualification.unit) === dataToEdit.unit &&
@@ -93,6 +96,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
             notifyInfo('Realmente no actualizo los datos, pero el trabajo esta hecho');
             hideModalStatic();
           } else {
+            setIsLoading(true);
             editQualification({idQualification: dataToEdit.id, dataQualification: dataQualification, token: JSON.parse(getToken)}).
               then(response => {
                 if (response.status === 200) {
@@ -114,6 +118,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                   ${dataToEdit.score !== response.data.score ? 'calificación: ' + response.data.score : '' } 
                   ${dataToEdit.semester !== response.data.semester ? 'semestre: ' + response.data.semester : '' }`}
                 });
+                setIsLoading(false);
                 hideModalStatic();
               }).catch(err => {
                 if (err.message === 'Network Error') {
@@ -121,6 +126,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                 } else if (err.response.data.error === 'Token missing or invalid') {
                   notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
                 }
+                setIsLoading(false);
               });
           }
         }
@@ -185,6 +191,11 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
               className="btn btn-primary"
               form="form-qualification"
             >
+              <span
+                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
+                role="status"
+                aria-hidden="true"
+              ></span>
               Aceptar
             </button>
             <button

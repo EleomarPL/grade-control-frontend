@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {Modal} from 'bootstrap';
 
@@ -17,6 +17,7 @@ export const showModalStaticDelete = () => {
   myModal.show();
 };
 export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, qualifications }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const hideModalStatic = () => {
     let myModal = Modal.getInstance(
       document.getElementById('staticBackdrop2')
@@ -26,6 +27,7 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
 
   const executeDelete = () => {
     const getToken = window.localStorage.getItem('session');
+    setIsLoading(true);
     deleteQualification({token: JSON.parse(getToken), idQualification: idQualificationDelete}).
       then(response => {
         if (response.status === 204) {
@@ -42,6 +44,7 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
                   calificación ${temporallyObjectToDelete.score} de la unidad ${temporallyObjectToDelete.unit} del 
                   semestre ${temporallyObjectToDelete.semester}`
           }});
+          setIsLoading(false);
           hideModalStatic();
         }
       }).catch(err => {
@@ -50,6 +53,7 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
         } else if (err.response.data.error === 'Token missing or invalid') {
           notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
         }
+        setIsLoading(false);
       });
   };
   return (
@@ -83,6 +87,11 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
               className="btn btn-danger"
               onClick={ executeDelete }
             >
+              <span
+                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
+                role="status"
+                aria-hidden="true"
+              ></span>
               Eliminar
             </button>
             <button
