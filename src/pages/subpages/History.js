@@ -8,7 +8,7 @@ const History = () => {
   useEffect(() => {
     const getToken = window.localStorage.getItem('session');
     getAllHistoryUser({token: JSON.parse(getToken)}).then(response => {
-      setHistory(response.data);
+      setHistory(response.data.reverse());
       if (response.data.length === 0) {
         notifyInfo('Historial vacio');
       }

@@ -2,6 +2,15 @@ import axios from 'axios';
 
 const baseAPI = 'https://radiant-journey-60007.herokuapp.com/api';
 
+export const createHistory = async({token, dataHistory}) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  };
+  let response = await axios.post(`${baseAPI}/history/create-history`, dataHistory, config);
+  return response;
+};
 export const getAllHistoryUser = async({token}) => {
   const config = {
     headers: {

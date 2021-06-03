@@ -6,6 +6,7 @@ import {dataQualification} from '../consts/qualification';
 import {validationCreateQualification} from '../services/validations/validationQualification';
 import {notifyInfo, notifySuccess, notifyError, notifyWarning} from '../consts/notify';
 import {createQualification, editQualification} from '../services/apis/qualification';
+import {createHistory} from '../services/apis/history';
 
 export const showModalStatic = () => {
   let myModal = new Modal(
@@ -72,6 +73,12 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                 ...qualifications,
                 response.data
               ]);
+              createHistory({
+                token: JSON.parse(getToken),
+                dataHistory: {operation: `Se creó la materia ${response.data.course} con la
+                  calificación ${response.data.score} de la unidad ${response.data.unit} del 
+                  semestre ${response.data.semester}`}
+              });
               hideModalStatic();
             }).catch(err => {
               if (err.message === 'Network Error') {
@@ -98,6 +105,15 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                   return value;
                 });
                 setQualifications(updateQualificationsLocal);
+                createHistory({
+                  token: JSON.parse(getToken),
+                  dataHistory: {operation: `Se modificaron datos de la materia ${dataToEdit.course} la
+                  información cambiante fue,  
+                  ${dataToEdit.course !== response.data.course ? 'materia: ' + response.data.course : '' }  
+                  ${dataToEdit.unit !== response.data.unit ? 'unidad: ' + response.data.unit : '' } 
+                  ${dataToEdit.score !== response.data.score ? 'calificación: ' + response.data.score : '' } 
+                  ${dataToEdit.semester !== response.data.semester ? 'semestre: ' + response.data.semester : '' }`}
+                });
                 hideModalStatic();
               }).catch(err => {
                 if (err.message === 'Network Error') {

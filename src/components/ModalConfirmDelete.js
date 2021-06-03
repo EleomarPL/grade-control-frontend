@@ -4,6 +4,7 @@ import {Modal} from 'bootstrap';
 
 import {notifySuccess, notifyError, notifyWarning} from '../consts/notify';
 import {deleteQualification} from '../services/apis/qualification';
+import {createHistory} from '../services/apis/history';
 
 export const showModalStaticDelete = () => {
   let myModal = new Modal(
@@ -28,8 +29,19 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
     deleteQualification({token: JSON.parse(getToken), idQualification: idQualificationDelete}).
       then(response => {
         if (response.status === 204) {
+          let temporallyObjectToDelete = {};
+          qualifications.forEach(value => {
+            if (value.id === idQualificationDelete) {
+              temporallyObjectToDelete = value;
+            }
+          });
           setQualifications(qualifications.filter((value) => value.id !== idQualificationDelete));
           notifySuccess('Calificación eliminada correctamente');
+          createHistory({token: JSON.parse(getToken), dataHistory: {
+            operation: `Se elimino la materia ${temporallyObjectToDelete.course} con la
+                  calificación ${temporallyObjectToDelete.score} de la unidad ${temporallyObjectToDelete.unit} del 
+                  semestre ${temporallyObjectToDelete.semester}`
+          }});
           hideModalStatic();
         }
       }).catch(err => {
