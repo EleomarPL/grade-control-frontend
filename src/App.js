@@ -42,10 +42,6 @@ const App = () => {
                 </Suspense>
               </PublicRoute>
               <PrivateRoute path="/home">
-                <Helmet>
-                  <title>Inicio | Calificaciones</title>
-                  <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
-                </Helmet>
                 <Suspense fallback={ <SpinnerLoading /> }>
                   <Home />
                 </Suspense>
