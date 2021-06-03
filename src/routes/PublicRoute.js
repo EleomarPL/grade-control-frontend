@@ -6,7 +6,7 @@ import Auth from '../context/Auth';
 
 const PublicRoute = ({children}, props) => {
   const {userData} = useContext(Auth);
-  let isLogged = userData === null ? false : true;
+  let isLogged = userData === null || userData === {} ? false : true;
 
   if (isLogged) {
     return <Redirect to="/home" />;

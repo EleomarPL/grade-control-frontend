@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 const Auth = React.createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     const getUserFromStorage = window.localStorage.getItem('datauser');
     if (getUserFromStorage) {
       setUserData(JSON.parse(getUserFromStorage));
+    } else {
+      setUserData(null);
     }
   }, []);
   return (

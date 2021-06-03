@@ -2,6 +2,7 @@ import React, { Fragment, useContext } from 'react';
 
 import '../styles/optionsUser.css';
 import Auth from '../context/Auth';
+import { NavLink } from 'react-router-dom';
 
 const OptionsUser = () => {
   const {userData, setUserData} = useContext(Auth);
@@ -30,6 +31,26 @@ const OptionsUser = () => {
           <li>{ userData.name }</li>
           <li className="py-1">{ userData.email }</li>
           <li><hr className="dropdown-divider" /></li>
+          <li className="pb-2">
+            <NavLink
+              to={ '/home/settings' }
+              exact
+              className="btn btn-primary w-100"
+            >
+              <i className="bi bi-gear"> </i>
+              Configuración
+            </NavLink>
+          </li>
+          <li className="pb-2">
+            <NavLink
+              to={ '/home/history' }
+              exact
+              className="btn btn-secondary w-100"
+            >
+              <i className="bi bi-clock-history"> </i>
+              Historial
+            </NavLink>
+          </li>
           <li>
             <button
               type="button"
