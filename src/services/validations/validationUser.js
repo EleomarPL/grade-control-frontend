@@ -2,7 +2,7 @@
 /* eslint-disable semi */
 import {notifyInfo} from '../../consts/notify';
 
-export const validationRegisterUser = (dataUser) => {
+export const validationRegisterUser = (dataUser, isEdit = false) => {
   let isCorrectUserData = true;
   let emailRegex = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
@@ -41,9 +41,11 @@ export const validationRegisterUser = (dataUser) => {
     notifyInfo('El tamaño para el nombre de usuario debe ser mayor a 5 y menor que 40');
     isCorrectUserData = false;
   }
-  if ( dataUser.password.length < 6 || dataUser.password.length > 40) {
-    notifyInfo('El tamaño para la contraseña debe ser mayor a 5 y menor que 40');
-    isCorrectUserData = false;
+  if (!isEdit) {
+    if ( dataUser.password.length < 6 || dataUser.password.length > 40) {
+      notifyInfo('El tamaño para la contraseña debe ser mayor a 5 y menor que 40');
+      isCorrectUserData = false;
+    }
   }
   return isCorrectUserData;
 };

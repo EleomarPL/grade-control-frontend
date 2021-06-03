@@ -9,12 +9,14 @@ import SpinnerLoading from '../components/SpinnerLoading';
 const Qualifications = React.lazy(() => import('./subpages/Qualifications'));
 const SettingsUser = React.lazy(() => import('./subpages/SettingsUser'));
 const History = React.lazy(() => import('./subpages/History'));
+const EditUser = React.lazy(() => import('./subpages/EditUser'));
+const EditPassword = React.lazy(() => import('./subpages/EditPassword'));
 
 const Home = () => {
   return (
     <section>
       <BrowserRouter>
-        <div className="px-0 mx-0 d-flex flex-wrap justify-content-around align-items-center navbar-user">
+        <div className="px-0 mx-0 d-flex flex-wrap justify-content-around align-items-center navbar-user sticky-top">
           <Link to="/home" style={ {color: 'black', textDecoration: 'none'} }>
             <Logo />
           </Link>
@@ -34,6 +36,16 @@ const Home = () => {
           <PrivateRoute path={ '/home/history' }>
             <Suspense fallback={ <SpinnerLoading /> }>
               <History />
+            </Suspense>
+          </PrivateRoute>
+          <PrivateRoute path={ '/home/edit' }>
+            <Suspense fallback={ <SpinnerLoading /> }>
+              <EditUser />
+            </Suspense>
+          </PrivateRoute>
+          <PrivateRoute path={ '/home/editpassword' }>
+            <Suspense fallback={ <SpinnerLoading /> }>
+              <EditPassword />
             </Suspense>
           </PrivateRoute>
         </Switch>

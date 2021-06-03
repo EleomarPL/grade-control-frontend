@@ -1,0 +1,20 @@
+.settings-container{ width: 70%; }
+.container-settings-data{
+  border: solid 1.5px #8a8a8a;
+  border-radius: 10px;
+  background: white;
+}
+@media screen and (max-width: 900px){
+  .settings-container{ width: 80%; }
+}
+@media screen and (max-width: 700px){
+  .settings-container{ width: 80%; }
+  .save{ width: 100%; }
+  .button-delete{ width: 100%; }
+}
+@media screen and (max-width: 600px){
+  .container-settings-data{ border: none; }
+  .indications{ text-align: center; }
+
+  .settings-container{ width: 100%; }
+}
