@@ -66,7 +66,10 @@ const Login = () => {
             <p>
               <strong>Inserta tus datos, y accede para gestionar tus calificaciones</strong>
             </p>
-            <p>Controla tus calificaciones, de una manera personalizada y en la nube</p>
+            <h1
+              style={ {fontSize: '1rem', fontWeight: 'normal'} }>
+              Controla tus calificaciones, de una manera personalizada y en la nube
+            </h1>
           </div>
           <div className="d-flex flex-column mt-4 pt-1">
             <CustomizedInput

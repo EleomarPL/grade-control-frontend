@@ -31,10 +31,14 @@ const Register = () => {
     if (dataUser.name.trim() === '' || dataUser.lastName.trim() === ''
     || dataUser.motherLastName.trim() === '' || dataUser.phone.trim() === ''
     || dataUser.email.trim() === '' || dataUser.userName.trim() === ''
-    || dataUser.password.trim() === '') {
+    || dataUser.password.trim() === '' || evt.target[7].value.trim() === '') {
       notifyInfo('Rellene todos los campos');
-    } else {
+    } else if (evt.target[7].value === dataUser.password) {
       let isCorrectData = validationRegisterUser(dataUser);
+      if (evt.target[7].value.length < 6 || evt.target[7].value.length > 40) {
+        notifyInfo('El tamaño para confirmar la contraseña debe ser mayor a 5 y menor que 40');
+        isCorrectData = false;
+      }
       if (isCorrectData) {
         setIsLoading(true);
         createUser(dataUser).then( () => {
@@ -51,6 +55,8 @@ const Register = () => {
           setIsLoading(false);
         });
       }
+    } else {
+      notifyInfo('Las contraseñas no coinciden');
     }
   };
   return (
@@ -90,6 +96,17 @@ const Register = () => {
                 }
               })
             }
+            <div className="d-flex flex-column pb-2">
+              <label htmlFor="confirm-password">
+                Confirmar contraseña
+              </label>
+              <input
+                type="password"
+                className="py-3"
+                placeholder="Confirma tu contraseña"
+                id="confirm-password"
+              />
+            </div>
             <button
               type="submit"
               className="btn btn-primary save mb-3 px-3 py-2"

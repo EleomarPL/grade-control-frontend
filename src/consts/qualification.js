@@ -1,6 +1,3 @@
-/*
-
-  */
 export const dataQualification = {
   course: {
     type: 'text',
@@ -14,7 +11,7 @@ export const dataQualification = {
   },
   score: {
     type: 'number',
-    placeholder: 'Ingresa la calificación',
+    placeholder: 'Ingresa la calificación, rango de 0-100',
     label: 'Calificacion'
   },
   semester: {
