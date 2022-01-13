@@ -1,11 +1,10 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import useLogin from '../hooks/useLogin';
 import CustomizedInput from '../components/CustomizedInput';
 import Logo from '../components/Logo';
-import Auth from '../context/Auth';
-import { login } from '../services/apis/login';
-import { notifyInfo, notifyError } from '../consts/notify';
+import { notifyInfo } from '../consts/notify';
 import '../styles/login.css';
 
 const Login = () => {
@@ -13,8 +12,7 @@ const Login = () => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
-  const {setUserData} = useContext(Auth);
+  const { login } = useLogin();
 
   const handleLogin = (evt) => {
     evt.preventDefault();
@@ -23,31 +21,8 @@ const Login = () => {
       notifyInfo('Rellene todos los campos');
     } else {
       setIsLoading(true);
-      login({userName, password}).then(response => {
-        const {data} = response;
-        let dataUser = {
-          name: data.name,
-          lastName: data.lastName,
-          motherLastName: data.motherLastName,
-          phone: data.phone,
-          email: data.email,
-          userName: data.userName
-        };
-        window.localStorage.setItem('datauser', JSON.stringify(dataUser));
-        window.localStorage.setItem('session', JSON.stringify(data.token));
-        setIsLoading(false);
-        setUserData(dataUser);
-      }).catch(response => {
-        if (response.message === 'Network Error') {
-          notifyError('No encontramos una conexión a internet');
-        } else if (response.response.data.error === 'Invalid user or password') {
-          notifyInfo('Usuario o contraseña invalido');
-        }
-        setIsLoading(false);
-      });
+      login({userName, password, setState: setIsLoading});
     }
-
-    
   };
 
   return (
@@ -87,7 +62,9 @@ const Login = () => {
             />
           </div>
           <div>
-            <button className="btn btn-primary mt-3 w-100" type="submit">
+            <button className="btn btn-primary mt-3 w-100" type="submit"
+              disabled={ isLoading }
+            >
               <span
                 className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
                 role="status"
