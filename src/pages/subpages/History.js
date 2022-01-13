@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getAllHistoryUser, deleteHistory } from '../../services/apis/history';
 import {

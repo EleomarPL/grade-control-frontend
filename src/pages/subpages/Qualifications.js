@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, Fragment } from 'react';
+import { useEffect, useState, Suspense, lazy } from 'react';
 
 import { HashRouter, NavLink, Switch } from 'react-router-dom';
 import { getAllQualificationUser } from '../../services/apis/qualification';
@@ -10,7 +10,7 @@ import { ModalAddQualification, showModalStatic } from '../../components/ModalAd
 import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import ListQualifications from '../../components/ListQualifications';
 import SpinnerLoading from '../../components/SpinnerLoading';
-const OrdenatedQualification = React.lazy(() => import('../../components/OrdenatedQualification'));
+const OrdenatedQualification = lazy(() => import('../../components/OrdenatedQualification'));
 
 const Qualifications = () => {
   const [qualifications, setQualification] = useState([]);
@@ -43,7 +43,7 @@ const Qualifications = () => {
     showModalStatic();
   };
   return (
-    <Fragment>
+    <>
       <HashRouter>
         <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
           <strong>Calificaciones</strong>
@@ -106,7 +106,7 @@ const Qualifications = () => {
         setQualifications={ setQualification }
         qualifications={ qualifications }
       />
-    </Fragment>
+    </>
   );
 };
 

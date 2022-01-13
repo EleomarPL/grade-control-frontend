@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CustomizedInput from '../components/CustomizedInput';
 import Logo from '../components/Logo';

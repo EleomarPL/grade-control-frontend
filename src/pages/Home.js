@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import Logo from '../components/Logo';
 import OptionsUser from '../components/OptionsUser';
 
@@ -7,11 +7,11 @@ import { BrowserRouter, Link, Switch } from 'react-router-dom';
 import PrivateRoute from '../routes/PrivateRoute';
 import SpinnerLoading from '../components/SpinnerLoading';
 import { Helmet } from 'react-helmet';
-const Qualifications = React.lazy(() => import('./subpages/Qualifications'));
-const SettingsUser = React.lazy(() => import('./subpages/SettingsUser'));
-const History = React.lazy(() => import('./subpages/History'));
-const EditUser = React.lazy(() => import('./subpages/EditUser'));
-const EditPassword = React.lazy(() => import('./subpages/EditPassword'));
+const Qualifications = lazy(() => import('./subpages/Qualifications'));
+const SettingsUser = lazy(() => import('./subpages/SettingsUser'));
+const History = lazy(() => import('./subpages/History'));
+const EditUser = lazy(() => import('./subpages/EditUser'));
+const EditPassword = lazy(() => import('./subpages/EditPassword'));
 
 const Home = () => {
   return (

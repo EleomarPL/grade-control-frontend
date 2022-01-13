@@ -1,4 +1,4 @@
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const settings = {
   position: 'top-right',

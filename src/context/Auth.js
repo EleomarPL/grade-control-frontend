@@ -1,8 +1,8 @@
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState, createContext } from 'react';
 import PropTypes from 'prop-types';
 
-const Auth = React.createContext({});
+const Auth = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState({});

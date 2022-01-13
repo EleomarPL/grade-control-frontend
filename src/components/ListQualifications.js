@@ -1,8 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
-import {showModalStatic} from '../components/ModalAddQualification';
-import {showModalStaticDelete} from '../components/ModalConfirmDelete';
+import { showModalStatic } from '../components/ModalAddQualification';
+import { showModalStaticDelete } from '../components/ModalConfirmDelete';
 
 const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQualificationDelete}) => {
 

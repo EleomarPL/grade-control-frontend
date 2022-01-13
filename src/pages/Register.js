@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import { useContext } from 'react';
 
 import '../styles/optionsUser.css';
 import Auth from '../context/Auth';
@@ -12,7 +12,7 @@ const OptionsUser = () => {
     setUserData(null);
   };
   return (
-    <Fragment>
+    <>
       <div className="dropdown">
         <button
           className="dropdown-toggle button-user"
@@ -62,7 +62,7 @@ const OptionsUser = () => {
           </li>
         </ul>
       </div>
-    </Fragment>
+    </>
   );
 };
 

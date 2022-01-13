@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CustomizedInput from '../../components/CustomizedInput';
 import { updatePasswordUser } from '../../services/apis/user';

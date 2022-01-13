@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 
@@ -52,7 +52,7 @@ const OrdenatedQualification = ({qualifications}) => {
   }, [qualifications]);
   
   return (
-    <Fragment>
+    <>
       { ordenatedQualification !== null ?
         ordenatedQualification.map((array, generalIndex) => {
           if (array !== null) {
@@ -87,16 +87,14 @@ const OrdenatedQualification = ({qualifications}) => {
                                 <td>{ key }</td>
                                 {
                                   array[key].sort((a, b) => (a['unit'] - b['unit']) * 1).map((object, indexObject) =>
-                                    <Fragment key={ indexObject }>
-                                      <td>
-                                        <div className="d-flex flex-column">
-                                          <div className="unit">Unidad { ` ${object.unit}` }</div>
-                                          <div className={ `${object.score <= 69 ? 'reproved' : 'approved'}` }>
-                                            { ` ${object.score}` }
-                                          </div>
+                                    <td key={ indexObject }>
+                                      <div className="d-flex flex-column">
+                                        <div className="unit">Unidad { ` ${object.unit}` }</div>
+                                        <div className={ `${object.score <= 69 ? 'reproved' : 'approved'}` }>
+                                          { ` ${object.score}` }
                                         </div>
-                                      </td>
-                                    </Fragment>
+                                      </div>
+                                    </td>
                                   )
                                 }
                               </tr>;
@@ -113,7 +111,7 @@ const OrdenatedQualification = ({qualifications}) => {
         })
         : <p>Sin registros</p>
       }
-    </Fragment>
+    </>
   );
 };
 

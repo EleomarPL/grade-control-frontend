@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Modal } from 'bootstrap';
 
 import { notifySuccess, notifyError, notifyWarning } from '../consts/notify';

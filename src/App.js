@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -9,8 +9,8 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
-const Register = React.lazy(() => import('./pages/Register'));
-const Home = React.lazy(() => import('./pages/Home'));
+const Register = lazy(() => import('./pages/Register'));
+const Home = lazy(() => import('./pages/Home'));
 
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
@@ -20,7 +20,7 @@ import SpinnerLoading from './components/SpinnerLoading';
 
 const App = () => {
   return (
-    <Fragment>
+    <>
       <main>
         <AuthProvider>
           <BrowserRouter>
@@ -56,7 +56,7 @@ const App = () => {
         rtl={ false } pauseOnFocusLoss
         draggable={ false } pauseOnHover
       />
-    </Fragment>
+    </>
   );
 };
 
