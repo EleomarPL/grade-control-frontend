@@ -4,35 +4,36 @@ import { useNavigate } from 'react-router-dom';
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
 import { dataUser } from '../consts/user';
-import {
-  notifyError, notifySuccess, notifyWarning, notifyInfo
-} from '../consts/notify';
+import { notifyInfo } from '../consts/notify';
 import { validationRegisterUser } from '../services/validations/validationUser';
-import { createUser } from '../services/apis/user';
 
 import '../styles/register.css';
+import useUser from '../hooks/useUser';
 
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const { createUser } = useUser();
 
   const navigate = useNavigate();
+
   const handleChangeData = (evt ) => {
     evt.preventDefault();
 
     let dataUser = {
-      'name': evt.target[0].value,
-      'lastName': evt.target[1].value,
-      'motherLastName': evt.target[2].value,
-      'phone': evt.target[3].value,
-      'email': evt.target[4].value,
-      'userName': evt.target[5].value,
-      'password': evt.target[6].value
+      name: evt.target[0].value.trim(),
+      lastName: evt.target[1].value.trim(),
+      motherLastName: evt.target[2].value.trim(),
+      phone: evt.target[3].value.trim(),
+      email: evt.target[4].value.trim(),
+      userName: evt.target[5].value.trim(),
+      password: evt.target[6].value.trim()
     };
-    if (dataUser.name.trim() === '' || dataUser.lastName.trim() === ''
-    || dataUser.motherLastName.trim() === '' || dataUser.phone.trim() === ''
-    || dataUser.email.trim() === '' || dataUser.userName.trim() === ''
-    || dataUser.password.trim() === '' || evt.target[7].value.trim() === '') {
+    if (!(dataUser.name && dataUser.lastName &&
+      dataUser.motherLastName && dataUser.phone &&
+      dataUser.email && dataUser.userName &&
+      dataUser.password && evt.target[7].value
+    )) {
       notifyInfo('Rellene todos los campos');
     } else if (evt.target[7].value === dataUser.password) {
       let isCorrectData = validationRegisterUser(dataUser);
@@ -42,18 +43,15 @@ const Register = () => {
       }
       if (isCorrectData) {
         setIsLoading(true);
-        createUser(dataUser).then( () => {
-          notifySuccess('Usuario creado correctamente');
+
+        createUser({
+          name: dataUser.name, lastName: dataUser.lastName,
+          motherLastName: dataUser.motherLastName,
+          phone: dataUser.phone, email: dataUser.email,
+          userName: dataUser.userName, password: dataUser.password
+        }).then(res => {
           setIsLoading(false);
-          navigate('/');
-        }).catch(err => {
-          if (err.message === 'Request failed with status code 409') {
-            notifyWarning('Ingresa un diferente nombre de usuario');
-          }
-          if (err.message === 'Network Error') {
-            notifyError('No encontramos una conexión a internet');
-          }
-          setIsLoading(false);
+          if (res) navigate('/');
         });
       }
     } else {
@@ -112,6 +110,7 @@ const Register = () => {
               type="submit"
               className="btn btn-primary save mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
+              disabled={ isLoading }
             >
               <span
                 className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
