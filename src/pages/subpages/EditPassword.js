@@ -5,9 +5,9 @@ import { updatePasswordUser } from '../../services/apis/user';
 import {
   notifySuccess, notifyWarning, notifyError, notifyInfo
 } from '../../consts/notify';
+import ButtonBack from '../../components/ButtonBack';
 
 import '../../styles/login.css';
-import ButtonBack from '../../components/ButtonBack';
 
 const EditPassword = () => {
   const [isLoading, setIsLoading] = useState(false);

@@ -14,14 +14,6 @@
 
   padding: 10px 10px;
 }
-.active-nav-user{
-  opacity: 1;
-  border: solid 1px gray;
-  border-radius: 10px;
-}
-.content{
-  
-}
 .add-new-qualification > button {
   background: transparent;
   border: none;

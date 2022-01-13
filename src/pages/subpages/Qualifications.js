@@ -1,6 +1,6 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
 
-import { HashRouter, NavLink, Routes, Route } from 'react-router-dom';
+import { NavLink, Routes, Route } from 'react-router-dom';
 import { getAllQualificationUser } from '../../services/apis/qualification';
 import { notifyError, notifyInfo, notifyWarning } from '../../consts/notify';
 
@@ -43,66 +43,64 @@ const Qualifications = () => {
   };
   return (
     <>
-      <>
-        <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
-          <strong>Calificaciones</strong>
+      <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
+        <strong>Calificaciones</strong>
+      </div>
+      <div className="home">
+        <div className="d-flex flex-wrap justify-content-center">
+          <NavLink
+            className="option-router"
+            to={ '' }
+            end
+            style={ ({ isActive }) => ({
+              opacity: isActive && '1',
+              border: isActive && 'solid 1px gray',
+              borderRadius: isActive && '10px'
+            }) }
+          >
+            Lista
+          </NavLink>
+          <NavLink
+            className="option-router"
+            to={ 'ordenated' }
+            style={ ({ isActive }) => ({
+              opacity: isActive && '1',
+              border: isActive && 'solid 1px gray',
+              borderRadius: isActive && '10px'
+            }) }
+          >
+            Ordenados
+          </NavLink>
         </div>
-        <div className="home">
-          <div className="d-flex flex-wrap justify-content-center">
-            <NavLink
-              className="option-router"
-              to={ '' }
-              end
-              style={ ({ isActive }) => ({
-                opacity: isActive && '1',
-                border: isActive && 'solid 1px gray',
-                borderRadius: isActive && '10px'
-              }) }
-            >
-              Lista
-            </NavLink>
-            <NavLink
-              className="option-router"
-              to={ 'ordenated' }
-              style={ ({ isActive }) => ({
-                opacity: isActive && '1',
-                border: isActive && 'solid 1px gray',
-                borderRadius: isActive && '10px'
-              }) }
-            >
-              Ordenados
-            </NavLink>
-          </div>
-          <div className="content p-3 mt-3">
-            <Routes>
-              <Route path="/"
-                element={
-                  <div>
-                    <ListQualifications
-                      qualifications={ qualifications }
-                      setIsCreated={ setIsCreated }
-                      setDataToEdit={ setDataToEdit }
-                      setIdQualificationDelete={ setIdQualificationDelete }
-                    />
-                    { isLoadingQualifications &&
-                      <SpinnerLoading />
-                    }
-                  </div>
-                }
-              />
-              <Route path="ordenated"
-                element={
-                  <Suspense fallback={ <SpinnerLoading /> }>
-                    <OrdenatedQualification
-                      qualifications={ qualifications }
-                    />
-                  </Suspense>
-                }
-              />
-            </Routes>
-          </div>
+        <div className="content p-3 mt-3">
+          <Routes>
+            <Route path="/"
+              element={
+                <div>
+                  <ListQualifications
+                    qualifications={ qualifications }
+                    setIsCreated={ setIsCreated }
+                    setDataToEdit={ setDataToEdit }
+                    setIdQualificationDelete={ setIdQualificationDelete }
+                  />
+                  { isLoadingQualifications &&
+                    <SpinnerLoading />
+                  }
+                </div>
+              }
+            />
+            <Route path="ordenated"
+              element={
+                <Suspense fallback={ <SpinnerLoading /> }>
+                  <OrdenatedQualification
+                    qualifications={ qualifications }
+                  />
+                </Suspense>
+              }
+            />
+          </Routes>
         </div>
-      </>
+      </div>
       <div className="add-new-qualification add-new-qualification">
         <button type="button" onClick={ showModal }>
           <i className="bi bi-plus-circle-fill" />

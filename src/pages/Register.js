@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
 import { dataUser } from '../consts/user';
-
 import {
   notifyError, notifySuccess, notifyWarning, notifyInfo
 } from '../consts/notify';
@@ -11,7 +11,6 @@ import { validationRegisterUser } from '../services/validations/validationUser';
 import { createUser } from '../services/apis/user';
 
 import '../styles/register.css';
-import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {

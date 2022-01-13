@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable semi */
-import {notifyInfo} from '../../consts/notify';
+import { notifyInfo } from '../../consts/notify';
 
 export const validationRegisterUser = (dataUser, isEdit = false) => {
   let isCorrectUserData = true;

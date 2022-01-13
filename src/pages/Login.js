@@ -1,13 +1,12 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import CustomizedInput from '../components/CustomizedInput';
 import Logo from '../components/Logo';
 import Auth from '../context/Auth';
-
-import '../styles/login.css';
-
 import { login } from '../services/apis/login';
 import { notifyInfo, notifyError } from '../consts/notify';
+import '../styles/login.css';
 
 const Login = () => {
 

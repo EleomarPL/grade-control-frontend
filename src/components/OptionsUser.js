@@ -1,8 +1,8 @@
 import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import '../styles/optionsUser.css';
 import Auth from '../context/Auth';
-import { NavLink } from 'react-router-dom';
 
 const OptionsUser = () => {
   const {userData, setUserData} = useContext(Auth);

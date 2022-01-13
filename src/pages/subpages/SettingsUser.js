@@ -1,10 +1,9 @@
 import { useContext } from 'react';
-
-import Auth from '../../context/Auth';
+import { Link } from 'react-router-dom';
 
 import '../../styles/settings.css';
+import Auth from '../../context/Auth';
 import { ModalDeleteAccount, showModalStaticDeleteAccount } from '../../components/ModalDeleteAccount';
-import { Link } from 'react-router-dom';
 
 const SettingsUser = () => {
   const {userData} = useContext(Auth);

@@ -3,8 +3,7 @@ import Logo from '../components/Logo';
 import OptionsUser from '../components/OptionsUser';
 
 import '../styles/home.css';
-import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
-import PrivateRoute from '../routes/PrivateRoute';
+import { Link, Routes, Route } from 'react-router-dom';
 import SpinnerLoading from '../components/SpinnerLoading';
 import { Helmet } from 'react-helmet';
 const Qualifications = lazy(() => import('./subpages/Qualifications'));

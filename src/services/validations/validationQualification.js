@@ -1,4 +1,4 @@
-import {notifyInfo} from '../../consts/notify';
+import { notifyInfo } from '../../consts/notify';
 
 export const validationCreateQualification = (dataQualification) => {
   let isCorrectUserData = true;

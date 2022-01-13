@@ -11,10 +11,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Register = lazy(() => import('./pages/Register'));
 const Home = lazy(() => import('./pages/Home'));
+const Login = lazy(() => import('./pages/Login'));
 
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
-import Login from './pages/Login';
 import PrivateRoute from './routes/PrivateRoute';
 import SpinnerLoading from './components/SpinnerLoading';
 
@@ -32,7 +32,9 @@ const App = () => {
                       <title>Login | Calificaciones</title>
                       <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones" />
                     </Helmet>
-                    <Login />
+                    <Suspense fallback={ <SpinnerLoading /> }>
+                      <Login />
+                    </Suspense>
                   </PublicRoute>
                 }
               />

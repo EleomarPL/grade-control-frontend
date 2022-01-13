@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import ButtonBack from '../../components/ButtonBack';
 import { dataUser } from '../../consts/user';
-
 import {
   notifyError, notifySuccess, notifyWarning, notifyInfo
 } from '../../consts/notify';
@@ -12,8 +11,6 @@ import { getDataUser, updateDataUser } from '../../services/apis/user';
 import Auth from '../../context/Auth';
 
 import '../../styles/register.css';
-
-
 
 const EditUser = () => {
   const [isLoading, setIsLoading] = useState(false);
