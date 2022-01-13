@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Modal} from 'bootstrap';
+import { Modal } from 'bootstrap';
 
-import {notifySuccess, notifyError, notifyWarning} from '../consts/notify';
-import {deleteQualification} from '../services/apis/qualification';
-import {createHistory} from '../services/apis/history';
+import { notifySuccess, notifyError, notifyWarning } from '../consts/notify';
+import { deleteQualification } from '../services/apis/qualification';
+import { createHistory } from '../services/apis/history';
 
 export const showModalStaticDelete = () => {
   let myModal = new Modal(

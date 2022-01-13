@@ -1,13 +1,13 @@
 import React, { useEffect, useState, Suspense, Fragment } from 'react';
 
 import { HashRouter, NavLink, Switch } from 'react-router-dom';
-import {getAllQualificationUser} from '../../services/apis/qualification';
-import {notifyError, notifyInfo, notifyWarning} from '../../consts/notify';
+import { getAllQualificationUser } from '../../services/apis/qualification';
+import { notifyError, notifyInfo, notifyWarning } from '../../consts/notify';
 
 import '../../styles/home.css';
 import PrivateRoute from '../../routes/PrivateRoute';
-import {ModalAddQualification, showModalStatic} from '../../components/ModalAddQualification';
-import {ModalConfirmDelete} from '../../components/ModalConfirmDelete';
+import { ModalAddQualification, showModalStatic } from '../../components/ModalAddQualification';
+import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import ListQualifications from '../../components/ListQualifications';
 import SpinnerLoading from '../../components/SpinnerLoading';
 const OrdenatedQualification = React.lazy(() => import('../../components/OrdenatedQualification'));

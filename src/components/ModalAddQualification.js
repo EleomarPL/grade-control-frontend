@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {Modal} from 'bootstrap';
 
-import {dataQualification} from '../consts/qualification';
-import {validationCreateQualification} from '../services/validations/validationQualification';
-import {notifyInfo, notifySuccess, notifyError, notifyWarning} from '../consts/notify';
-import {createQualification, editQualification} from '../services/apis/qualification';
-import {createHistory} from '../services/apis/history';
+import { dataQualification } from '../consts/qualification';
+import { validationCreateQualification } from '../services/validations/validationQualification';
+import { notifyInfo, notifySuccess, notifyError, notifyWarning } from '../consts/notify';
+import { createQualification, editQualification } from '../services/apis/qualification';
+import { createHistory } from '../services/apis/history';
 
 export const showModalStatic = () => {
   let myModal = new Modal(

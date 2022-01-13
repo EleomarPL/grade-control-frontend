@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
-import {Modal} from 'bootstrap';
+import { Modal } from 'bootstrap';
 
-import {notifySuccess, notifyError, notifyWarning} from '../consts/notify';
-import {deleteUser} from '../services/apis/user';
+import { notifySuccess, notifyError, notifyWarning } from '../consts/notify';
+import { deleteUser } from '../services/apis/user';
 import Auth from '../context/Auth';
 
 export const showModalStaticDeleteAccount = () => {

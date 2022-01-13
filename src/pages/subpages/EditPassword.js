@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 
 import CustomizedInput from '../../components/CustomizedInput';
-import {updatePasswordUser} from '../../services/apis/user';
-import {notifySuccess, notifyWarning, notifyError, notifyInfo} from '../../consts/notify';
+import { updatePasswordUser } from '../../services/apis/user';
+import {
+  notifySuccess, notifyWarning, notifyError, notifyInfo
+} from '../../consts/notify';
 
 import '../../styles/login.css';
 import ButtonBack from '../../components/ButtonBack';

@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import ButtonBack from '../../components/ButtonBack';
-import {dataUser} from '../../consts/user';
+import { dataUser } from '../../consts/user';
 
-import {notifyError, notifySuccess, notifyWarning, notifyInfo} from '../../consts/notify';
-import {validationRegisterUser} from '../../services/validations/validationUser';
-import {getDataUser, updateDataUser} from '../../services/apis/user';
+import {
+  notifyError, notifySuccess, notifyWarning, notifyInfo
+} from '../../consts/notify';
+import { validationRegisterUser } from '../../services/validations/validationUser';
+import { getDataUser, updateDataUser } from '../../services/apis/user';
 import Auth from '../../context/Auth';
 
 import '../../styles/register.css';

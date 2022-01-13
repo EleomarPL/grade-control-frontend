@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import {getAllHistoryUser, deleteHistory} from '../../services/apis/history';
-import {notifyInfo, notifyError, notifyWarning, notifySuccess} from '../../consts/notify';
+import { getAllHistoryUser, deleteHistory } from '../../services/apis/history';
+import {
+  notifyInfo, notifyError, notifyWarning, notifySuccess
+} from '../../consts/notify';
 import SpinnerLoading from '../../components/SpinnerLoading';
 
 const History = () => {

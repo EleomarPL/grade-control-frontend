@@ -6,8 +6,8 @@ import Auth from '../context/Auth';
 
 import '../styles/login.css';
 
-import {login} from '../services/apis/login';
-import {notifyInfo, notifyError} from '../consts/notify';
+import { login } from '../services/apis/login';
+import { notifyInfo, notifyError } from '../consts/notify';
 
 const Login = () => {
 

@@ -1,22 +1,22 @@
 import React, { Fragment, Suspense } from 'react';
-import {Helmet} from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import { BrowserRouter, Switch } from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 import './styles/index.css';
-
 import '@fontsource/roboto';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+const Register = React.lazy(() => import('./pages/Register'));
+const Home = React.lazy(() => import('./pages/Home'));
 
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
 import Login from './pages/Login';
-const Register = React.lazy(() => import('./pages/Register'));
 import PrivateRoute from './routes/PrivateRoute';
 import SpinnerLoading from './components/SpinnerLoading';
-const Home = React.lazy(() => import('./pages/Home'));
 
 const App = () => {
   return (

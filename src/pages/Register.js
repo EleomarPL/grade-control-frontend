@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
-import {dataUser} from '../consts/user';
+import { dataUser } from '../consts/user';
 
-import {notifyError, notifySuccess, notifyWarning, notifyInfo} from '../consts/notify';
-import {validationRegisterUser} from '../services/validations/validationUser';
-import {createUser} from '../services/apis/user';
+import {
+  notifyError, notifySuccess, notifyWarning, notifyInfo
+} from '../consts/notify';
+import { validationRegisterUser } from '../services/validations/validationUser';
+import { createUser } from '../services/apis/user';
 
 import '../styles/register.css';
 import { useHistory } from 'react-router-dom';

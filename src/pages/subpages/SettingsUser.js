@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import Auth from '../../context/Auth';
 
 import '../../styles/settings.css';
-import {ModalDeleteAccount, showModalStaticDeleteAccount} from '../../components/ModalDeleteAccount';
+import { ModalDeleteAccount, showModalStaticDeleteAccount } from '../../components/ModalDeleteAccount';
 import { Link } from 'react-router-dom';
 
 const SettingsUser = () => {
