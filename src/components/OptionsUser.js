@@ -33,8 +33,8 @@ const OptionsUser = () => {
           <li><hr className="dropdown-divider" /></li>
           <li className="pb-2">
             <NavLink
-              to={ '/home/settings' }
-              exact
+              to={ 'settings' }
+              end
               className="btn btn-primary w-100"
             >
               <i className="bi bi-gear"> </i>
@@ -44,7 +44,7 @@ const OptionsUser = () => {
           <li className="pb-2">
             <NavLink
               to={ '/home/history' }
-              exact
+              end
               className="btn btn-secondary w-100"
             >
               <i className="bi bi-clock-history"> </i>

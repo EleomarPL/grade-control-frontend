@@ -1,11 +1,10 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
 
-import { HashRouter, NavLink, Switch } from 'react-router-dom';
+import { HashRouter, NavLink, Routes, Route } from 'react-router-dom';
 import { getAllQualificationUser } from '../../services/apis/qualification';
 import { notifyError, notifyInfo, notifyWarning } from '../../consts/notify';
 
 import '../../styles/home.css';
-import PrivateRoute from '../../routes/PrivateRoute';
 import { ModalAddQualification, showModalStatic } from '../../components/ModalAddQualification';
 import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import ListQualifications from '../../components/ListQualifications';
@@ -44,7 +43,7 @@ const Qualifications = () => {
   };
   return (
     <>
-      <HashRouter>
+      <>
         <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
           <strong>Calificaciones</strong>
         </div>
@@ -52,44 +51,58 @@ const Qualifications = () => {
           <div className="d-flex flex-wrap justify-content-center">
             <NavLink
               className="option-router"
-              exact
-              to={ '/' }
-              activeClassName="active-nav-user"
+              to={ '' }
+              end
+              style={ ({ isActive }) => ({
+                opacity: isActive && '1',
+                border: isActive && 'solid 1px gray',
+                borderRadius: isActive && '10px'
+              }) }
             >
               Lista
             </NavLink>
             <NavLink
               className="option-router"
-              to={ '/ordenated' }
-              activeClassName="active-nav-user"
+              to={ 'ordenated' }
+              style={ ({ isActive }) => ({
+                opacity: isActive && '1',
+                border: isActive && 'solid 1px gray',
+                borderRadius: isActive && '10px'
+              }) }
             >
               Ordenados
             </NavLink>
           </div>
           <div className="content p-3 mt-3">
-            <Switch>
-              <PrivateRoute exact path={ '/' }>
-                <ListQualifications
-                  qualifications={ qualifications }
-                  setIsCreated={ setIsCreated }
-                  setDataToEdit={ setDataToEdit }
-                  setIdQualificationDelete={ setIdQualificationDelete }
-                />
-                { isLoadingQualifications &&
-                  <SpinnerLoading />
+            <Routes>
+              <Route path="/"
+                element={
+                  <div>
+                    <ListQualifications
+                      qualifications={ qualifications }
+                      setIsCreated={ setIsCreated }
+                      setDataToEdit={ setDataToEdit }
+                      setIdQualificationDelete={ setIdQualificationDelete }
+                    />
+                    { isLoadingQualifications &&
+                      <SpinnerLoading />
+                    }
+                  </div>
                 }
-              </PrivateRoute>
-              <PrivateRoute path={ '/ordenated' }>
-                <Suspense fallback={ <SpinnerLoading /> }>
-                  <OrdenatedQualification
-                    qualifications={ qualifications }
-                  />
-                </Suspense>
-              </PrivateRoute>
-            </Switch>
+              />
+              <Route path="ordenated"
+                element={
+                  <Suspense fallback={ <SpinnerLoading /> }>
+                    <OrdenatedQualification
+                      qualifications={ qualifications }
+                    />
+                  </Suspense>
+                }
+              />
+            </Routes>
           </div>
         </div>
-      </HashRouter>
+      </>
       <div className="add-new-qualification add-new-qualification">
         <button type="button" onClick={ showModal }>
           <i className="bi bi-plus-circle-fill" />

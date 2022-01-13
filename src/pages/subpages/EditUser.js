@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import ButtonBack from '../../components/ButtonBack';
 import { dataUser } from '../../consts/user';
@@ -40,7 +40,7 @@ const EditUser = () => {
     });
   }, []);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleChangeData = (evt ) => {
     evt.preventDefault();
 
@@ -73,7 +73,7 @@ const EditUser = () => {
             email: response.data.email,
             userName: response.data.userName
           });
-          history.goBack();
+          navigate(-1);
         }).catch(err => {
           if (err.message === 'Request failed with status code 409') {
             notifyWarning('Ingresa un diferente nombre de usuario');

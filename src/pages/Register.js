@@ -11,13 +11,13 @@ import { validationRegisterUser } from '../services/validations/validationUser';
 import { createUser } from '../services/apis/user';
 
 import '../styles/register.css';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleChangeData = (evt ) => {
     evt.preventDefault();
 
@@ -46,7 +46,7 @@ const Register = () => {
         createUser(dataUser).then( () => {
           notifySuccess('Usuario creado correctamente');
           setIsLoading(false);
-          history.push('/');
+          navigate('/');
         }).catch(err => {
           if (err.message === 'Request failed with status code 409') {
             notifyWarning('Ingresa un diferente nombre de usuario');

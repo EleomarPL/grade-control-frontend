@@ -1,6 +1,6 @@
 import { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet';
-import { BrowserRouter, Switch } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 import './styles/index.css';
@@ -24,29 +24,41 @@ const App = () => {
       <main>
         <AuthProvider>
           <BrowserRouter>
-            <Switch>
-              <PublicRoute exact path="/">
-                <Helmet>
-                  <title>Login | Calificaciones</title>
-                  <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones" />
-                </Helmet>
-                <Login />
-              </PublicRoute>
-              <PublicRoute path="/register">
-                <Helmet>
-                  <title>Registrarse | Calificaciones</title>
-                  <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
-                </Helmet>
-                <Suspense fallback={ <SpinnerLoading /> }>
-                  <Register />
-                </Suspense>
-              </PublicRoute>
-              <PrivateRoute path="/home">
-                <Suspense fallback={ <SpinnerLoading /> }>
-                  <Home />
-                </Suspense>
-              </PrivateRoute>
-            </Switch>
+            <Routes>
+              <Route index
+                element={
+                  <PublicRoute>
+                    <Helmet>
+                      <title>Login | Calificaciones</title>
+                      <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones" />
+                    </Helmet>
+                    <Login />
+                  </PublicRoute>
+                }
+              />
+              <Route path="/register"
+                element={
+                  <PublicRoute>
+                    <Helmet>
+                      <title>Registrarse | Calificaciones</title>
+                      <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
+                    </Helmet>
+                    <Suspense fallback={ <SpinnerLoading /> }>
+                      <Register />
+                    </Suspense>
+                  </PublicRoute>
+                }
+              />
+              <Route path="/home/*"
+                element={
+                  <PrivateRoute>
+                    <Suspense fallback={ <SpinnerLoading /> }>
+                      <Home />
+                    </Suspense>
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
           </BrowserRouter>
         </AuthProvider>
       </main>

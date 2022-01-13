@@ -1,7 +1,7 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ButtonBack = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <button
@@ -11,7 +11,7 @@ const ButtonBack = () => {
         border: 'none'
       } }
       type="button"
-      onClick={ () => history.goBack() }
+      onClick={ () => navigate(-1) }
       className="button fw-bold pb-2"
     >
       <i className="bi bi-caret-left"></i>
