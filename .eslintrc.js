@@ -9,7 +9,6 @@ module.exports = {
      
     'react/button-has-type': 'error',
     'indent': ['error', 2],
-    'linebreak-style': ['error', 'windows'],
     'quotes': ['error', 'single'],
     'camelcase': 'error',
     'no-unused-vars': 'warn',
