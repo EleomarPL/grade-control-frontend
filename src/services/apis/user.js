@@ -34,13 +34,22 @@ export const updatePasswordUserAxios = async({token, oldPassword, newPassword}) 
   );
   return response;
 };
-export const updateDataUser = async({token, dataUser}) => {
+export const updateDataUserAxios = async({
+  name, lastName, motherLastName, phone,
+  email, password, userName, token
+}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   };
-  let response = await axios.put(`${baseAPI}/users/edit-data`, dataUser, config);
+  let response = await axios.put(
+    `${baseAPI}/users/edit-data`,
+    {
+      name, lastName, motherLastName, phone, email, password, userName
+    },
+    config
+  );
   return response;
 };
 export const deleteUser = async({token}) => {

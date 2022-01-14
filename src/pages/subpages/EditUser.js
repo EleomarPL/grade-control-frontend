@@ -1,23 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ButtonBack from '../../components/ButtonBack';
 import { dataUser } from '../../consts/user';
-import {
-  notifyError, notifySuccess, notifyWarning, notifyInfo
-} from '../../consts/notify';
+import { notifyInfo } from '../../consts/notify';
 import { validationRegisterUser } from '../../services/validations/validationUser';
-import { updateDataUser } from '../../services/apis/user';
-import Auth from '../../context/Auth';
 import useUser from '../../hooks/useUser';
 
 import '../../styles/register.css';
 
 const EditUser = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const {setUserData} = useContext(Auth);
 
-  const { getDataUser } = useUser();
+  const { getDataUser, updateDataUser } = useUser();
 
   useEffect(() => {
     getDataUser().then(res => {
@@ -38,43 +33,32 @@ const EditUser = () => {
     evt.preventDefault();
 
     let dataUser = {
-      'name': evt.target[0].value,
-      'lastName': evt.target[1].value,
-      'motherLastName': evt.target[2].value,
-      'phone': evt.target[3].value,
-      'email': evt.target[4].value,
-      'userName': evt.target[5].value,
-      'password': evt.target[6].value
+      name: evt.target[0].value.trim(),
+      lastName: evt.target[1].value.trim(),
+      motherLastName: evt.target[2].value.trim(),
+      phone: evt.target[3].value.trim(),
+      email: evt.target[4].value.trim(),
+      userName: evt.target[5].value.trim(),
+      password: evt.target[6].value.trim()
     };
-    if (dataUser.name.trim() === '' || dataUser.lastName.trim() === ''
-    || dataUser.motherLastName.trim() === '' || dataUser.phone.trim() === ''
-    || dataUser.email.trim() === '' || dataUser.userName.trim() === '') {
+    if (!(dataUser.name && dataUser.lastName &&
+      dataUser.motherLastName && dataUser.phone &&
+      dataUser.email && dataUser.userName
+    )) {
       notifyInfo('Rellene todos los campos');
     } else {
       let isCorrectData = validationRegisterUser(dataUser, true);
       if (isCorrectData) {
         setIsLoading(true);
-        const getToken = window.localStorage.getItem('session');
-        updateDataUser({dataUser: dataUser, token: JSON.parse(getToken)}).then( (response) => {
-          notifySuccess('Usuario actualizado correctamente');
+
+        updateDataUser({
+          name: dataUser.name, lastName: dataUser.lastName,
+          motherLastName: dataUser.motherLastName,
+          phone: dataUser.phone, email: dataUser.email,
+          password: dataUser.password, userName: dataUser.userName
+        }).then(res => {
           setIsLoading(false);
-          setUserData({
-            name: response.data.name,
-            lastName: response.data.lastName,
-            motherLastName: response.data.motherLastName,
-            phone: response.data.phone,
-            email: response.data.email,
-            userName: response.data.userName
-          });
-          navigate(-1);
-        }).catch(err => {
-          if (err.message === 'Request failed with status code 409') {
-            notifyWarning('Ingresa un diferente nombre de usuario');
-          }
-          if (err.message === 'Network Error') {
-            notifyError('No encontramos una conexión a internet');
-          }
-          setIsLoading(false);
+          if (res) navigate(-1);
         });
       }
     }
@@ -119,6 +103,7 @@ const EditUser = () => {
               type="submit"
               className="btn btn-primary save mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
+              disabled={ isLoading }
             >
               <span
                 className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
