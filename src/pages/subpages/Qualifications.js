@@ -1,12 +1,11 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 
-import { getAllQualificationUser } from '../../services/apis/qualification';
-import { notifyError, notifyInfo, notifyWarning } from '../../consts/notify';
 import { ModalAddQualification, showModalStatic } from '../../components/ModalAddQualification';
 import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import SpinnerLoading from '../../components/SpinnerLoading';
 import '../../styles/home.css';
+import useQualification from '../../hooks/useQualification';
 
 const ListQualifications = lazy(() => import('../../components/ListQualifications'));
 const OrdenatedQualification = lazy(() => import('../../components/OrdenatedQualification'));
@@ -16,25 +15,16 @@ const Qualifications = () => {
   const [isCreated, setIsCreated] = useState(true);
   const [dataToEdit, setDataToEdit] = useState({});
   const [idQualificationDelete, setIdQualificationDelete] = useState(null);
-
   const [isLoadingQualifications, setIsLoadingQualifications] = useState(false);
+
+  const { getAllQualifications } = useQualification();
 
   useEffect(() => {
     setIsLoadingQualifications(true);
-    const getToken = window.localStorage.getItem('session');
-    getAllQualificationUser({token: JSON.parse(getToken)}).then(response => {
-      setQualification(response.data);
-      if (response.data.length === 0) {
-        notifyInfo('Aun no tienes calificaciones agregadas');
-      }
+
+    getAllQualifications().then(res => {
       setIsLoadingQualifications(false);
-    }).catch(err => {
-      if (err.message === 'Network Error') {
-        notifyError('No encontramos una conexión a internet');
-      } else if (err.response.data.error === 'Token missing or invalid') {
-        notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
-      }
-      setIsLoadingQualifications(false);
+      if (res) setQualification(res);
     });
   }, []);
   const showModal = () => {

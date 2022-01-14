@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const baseAPI = 'https://radiant-journey-60007.herokuapp.com/api';
 
-export const getAllQualificationUser = async({token}) => {
+export const getAllQualificationUserAxios = async({token}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
