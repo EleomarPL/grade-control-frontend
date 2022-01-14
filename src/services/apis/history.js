@@ -11,7 +11,7 @@ export const createHistoryAxios = async({token, dataHistory}) => {
   let response = await axios.post(`${baseAPI}/history/create-history`, dataHistory, config);
   return response;
 };
-export const getAllHistoryUser = async({token}) => {
+export const getAllHistoryUserAxios = async({token}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
