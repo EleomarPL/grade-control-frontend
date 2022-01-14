@@ -5,7 +5,6 @@ import { Modal } from 'bootstrap';
 import { dataQualification } from '../consts/qualification';
 import { validationCreateQualification } from '../services/validations/validationQualification';
 import { notifyInfo } from '../consts/notify';
-import { createHistory } from '../services/apis/history';
 import useQualification from '../hooks/useQualification';
 
 export const showModalStatic = () => {
@@ -65,7 +64,6 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
           score: evt.target[2].value,
           semester: evt.target[3].value
         };
-        const getToken = window.localStorage.getItem('session');
         
         if (isCreated) {
           setIsLoading(true);
@@ -79,12 +77,6 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                 ...qualifications,
                 res
               ]);
-              createHistory({
-                token: JSON.parse(getToken),
-                dataHistory: {operation: `Se creó la materia ${res.course} con la
-                  calificación ${res.score} de la unidad ${res.unit} del 
-                  semestre ${res.semester}`}
-              });
               hideModalStatic();
             }
           });
@@ -110,15 +102,6 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                   return value;
                 });
                 setQualifications(updateQualificationsLocal);
-                createHistory({
-                  token: JSON.parse(getToken),
-                  dataHistory: {operation: `Se modificaron datos de la materia ${dataToEdit.course} la
-                  información cambiante fue,  
-                  ${dataToEdit.course !== res.course ? 'materia: ' + res.course : '' }  
-                  ${dataToEdit.unit !== res.unit ? 'unidad: ' + res.unit : '' } 
-                  ${dataToEdit.score !== res.score ? 'calificación: ' + res.score : '' } 
-                  ${dataToEdit.semester !== res.semester ? 'semestre: ' + res.semester : '' }`}
-                });
                 hideModalStatic();
               }
             });

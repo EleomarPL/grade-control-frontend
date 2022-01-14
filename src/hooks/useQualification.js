@@ -1,5 +1,9 @@
 import { notifyError, notifyInfo, notifySuccess, notifyWarning } from '../consts/notify';
-import { createQualificationAxios, deleteQualificationAxios, editQualificationAxios, getAllQualificationUserAxios } from '../services/apis/qualification';
+import {
+  createQualificationAxios, deleteQualificationAxios,
+  editQualificationAxios, getAllQualificationUserAxios
+} from '../services/apis/qualification';
+import { createHistoryAxios } from '../services/apis/history';
 
 const useQualification = () => {
   const getAllQualifications = async() => {
@@ -26,6 +30,15 @@ const useQualification = () => {
       });
       notifySuccess('Calificación creada correctamente');
 
+      createHistoryAxios({
+        token,
+        dataHistory: {
+          operation: `Se creó la materia ${data.course} con la
+            calificación ${data.score} de la unidad ${data.unit} del 
+            semestre ${data.semester}`
+        }
+      });
+
       return data;
     } catch (err) {
       if (err.message === 'Network Error')
@@ -43,11 +56,24 @@ const useQualification = () => {
       const response = await editQualificationAxios({
         course, score, unit, semester, idQualification, token
       });
+
+      const { data } = response;
+
       if (response.status === 200) {
         notifySuccess('Calificación editada correctamente');
       }
+      createHistoryAxios({
+        token,
+        dataHistory: {
+          operation: `Se modificaron datos de la materia ${course} la
+        información cambiante fue,  
+        ${course !== data.course ? 'materia: ' + data.course : '' }  
+        ${unit !== data.unit ? 'unidad: ' + data.unit : '' } 
+        ${score !== data.score ? 'calificación: ' + data.score : '' } 
+        ${semester !== data.semester ? 'semestre: ' + data.semester : '' }`}
+      });
 
-      return response.data;
+      return data;
     } catch (err) {
       if (err.message === 'Network Error')
         notifyError('No encontramos una conexión a internet');

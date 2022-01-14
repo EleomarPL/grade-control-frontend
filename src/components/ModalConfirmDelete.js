@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Modal } from 'bootstrap';
 
 import { notifySuccess } from '../consts/notify';
-import { createHistory } from '../services/apis/history';
+import { createHistoryAxios } from '../services/apis/history';
 import useQualification from '../hooks/useQualification';
 
 export const showModalStaticDelete = () => {
@@ -35,15 +35,13 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
       setIsLoading(false);
 
       if (res) {
-        let temporallyObjectToDelete = {};
-        qualifications.forEach(value => {
-          if (value.id === idQualificationDelete) {
-            temporallyObjectToDelete = value;
-          }
-        });
+        const findIndex = qualifications.findIndex(el => el.id === idQualificationDelete);
+        
+        let temporallyObjectToDelete = qualifications[findIndex];
+        
         setQualifications(qualifications.filter((value) => value.id !== idQualificationDelete));
         notifySuccess('Calificación eliminada correctamente');
-        createHistory({token: JSON.parse(getToken), dataHistory: {
+        createHistoryAxios({token: JSON.parse(getToken), dataHistory: {
           operation: `Se elimino la materia ${temporallyObjectToDelete.course} con la
                   calificación ${temporallyObjectToDelete.score} de la unidad ${temporallyObjectToDelete.unit} del 
                   semestre ${temporallyObjectToDelete.semester}`
