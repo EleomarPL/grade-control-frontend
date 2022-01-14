@@ -20,7 +20,7 @@ export const getAllHistoryUserAxios = async({token}) => {
   let response = await axios.get(`${baseAPI}/history`, config);
   return response;
 };
-export const deleteHistory = async({token, idHistory}) => {
+export const deleteHistoryAxios = async({token, idHistory}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
