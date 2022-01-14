@@ -26,7 +26,7 @@ export const createQualificationAxios = async({
   );
   return response;
 };
-export const deleteQualification = async({token, idQualification}) => {
+export const deleteQualificationAxios = async({token, idQualification}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
