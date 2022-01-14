@@ -5,6 +5,7 @@ import { Modal } from 'bootstrap';
 import { notifySuccess } from '../consts/notify';
 import { createHistoryAxios } from '../services/apis/history';
 import useQualification from '../hooks/useQualification';
+import useHistory from '../hooks/useHistory';
 
 export const showModalStaticDelete = () => {
   let myModal = new Modal(
@@ -19,6 +20,7 @@ export const showModalStaticDelete = () => {
 export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, qualifications }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { deleteQualification } = useQualification();
+  const { createHistoryDelete } = useHistory();
 
   const hideModalStatic = () => {
     let myModal = Modal.getInstance(
@@ -36,16 +38,18 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
 
       if (res) {
         const findIndex = qualifications.findIndex(el => el.id === idQualificationDelete);
-        
+
         let temporallyObjectToDelete = qualifications[findIndex];
         
         setQualifications(qualifications.filter((value) => value.id !== idQualificationDelete));
         notifySuccess('Calificación eliminada correctamente');
-        createHistoryAxios({token: JSON.parse(getToken), dataHistory: {
-          operation: `Se elimino la materia ${temporallyObjectToDelete.course} con la
-                  calificación ${temporallyObjectToDelete.score} de la unidad ${temporallyObjectToDelete.unit} del 
-                  semestre ${temporallyObjectToDelete.semester}`
-        }});
+        
+        createHistoryDelete({
+          course: temporallyObjectToDelete.course,
+          score: temporallyObjectToDelete.score,
+          unit: temporallyObjectToDelete.unit,
+          semester: temporallyObjectToDelete.semester
+        });
         hideModalStatic();
       }
     });
