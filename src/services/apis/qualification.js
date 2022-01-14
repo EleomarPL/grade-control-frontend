@@ -11,13 +11,19 @@ export const getAllQualificationUserAxios = async({token}) => {
   let response = await axios.get(`${baseAPI}/qualifications`, config);
   return response;
 };
-export const createQualification = async({token, dataQualification}) => {
+export const createQualificationAxios = async({
+  token, course, unit, score, semester
+}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   };
-  let response = await axios.post(`${baseAPI}/qualifications/create-qualification`, dataQualification, config);
+  let response = await axios.post(
+    `${baseAPI}/qualifications/create-qualification`,
+    { course, unit, score, semester },
+    config
+  );
   return response;
 };
 export const deleteQualification = async({token, idQualification}) => {

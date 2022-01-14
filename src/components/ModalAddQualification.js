@@ -5,8 +5,9 @@ import { Modal } from 'bootstrap';
 import { dataQualification } from '../consts/qualification';
 import { validationCreateQualification } from '../services/validations/validationQualification';
 import { notifyInfo, notifySuccess, notifyError, notifyWarning } from '../consts/notify';
-import { createQualification, editQualification } from '../services/apis/qualification';
+import { editQualification } from '../services/apis/qualification';
 import { createHistory } from '../services/apis/history';
+import useQualification from '../hooks/useQualification';
 
 export const showModalStatic = () => {
   let myModal = new Modal(
@@ -20,6 +21,8 @@ export const showModalStatic = () => {
 };
 export const ModalAddQualification = ( { setQualifications, qualifications, dataToEdit, isCreated} ) => {
   const [isLoading, setIsLoading] = useState(false);
+  const { createQualification } = useQualification();
+
   useEffect(() => {
     let form = document.getElementById('form-qualification');
     if (!isCreated) {
@@ -67,29 +70,25 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
         
         if (isCreated) {
           setIsLoading(true);
-          createQualification({dataQualification: dataQualification, token: JSON.parse(getToken)}).
-            then(response => {
-              notifySuccess('Calificación creada correctamente');
+          createQualification({
+            course: dataQualification.course, unit: dataQualification.unit,
+            score: dataQualification.score, semester: dataQualification.semester
+          }).then(res => {
+            setIsLoading(false);
+            if (res) {
               setQualifications([
                 ...qualifications,
-                response.data
+                res
               ]);
               createHistory({
                 token: JSON.parse(getToken),
-                dataHistory: {operation: `Se creó la materia ${response.data.course} con la
-                  calificación ${response.data.score} de la unidad ${response.data.unit} del 
-                  semestre ${response.data.semester}`}
+                dataHistory: {operation: `Se creó la materia ${res.course} con la
+                  calificación ${res.score} de la unidad ${res.unit} del 
+                  semestre ${res.semester}`}
               });
-              setIsLoading(false);
               hideModalStatic();
-            }).catch(err => {
-              if (err.message === 'Network Error') {
-                notifyError('No encontramos una conexión a internet');
-              } else if (err.response.data.error === 'Token missing or invalid') {
-                notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
-              }
-              setIsLoading(false);
-            });
+            }
+          });
         } else {
           if (dataQualification.course === dataToEdit.course && Number(dataQualification.unit) === dataToEdit.unit &&
             Number(dataQualification.score) === dataToEdit.score && Number(dataQualification.semester) === dataToEdit.semester) {
@@ -190,6 +189,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
               type="submit"
               className="btn btn-primary"
               form="form-qualification"
+              disabled={ isLoading }
             >
               <span
                 className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
