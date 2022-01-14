@@ -7,6 +7,7 @@ import './styles/index.css';
 import '@fontsource/roboto';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Register = lazy(() => import('./pages/Register'));

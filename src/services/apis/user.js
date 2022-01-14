@@ -21,13 +21,17 @@ export const getDataUser = async({token}) => {
   let response = await axios.get(`${baseAPI}/users`, config);
   return response;
 };
-export const updatePasswordUser = async({token, dataUser}) => {
+export const updatePasswordUserAxios = async({token, oldPassword, newPassword}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }
   };
-  let response = await axios.put(`${baseAPI}/users/edit-password`, dataUser, config);
+  let response = await axios.put(
+    `${baseAPI}/users/edit-password`,
+    { oldPassword, newPassword },
+    config
+  );
   return response;
 };
 export const updateDataUser = async({token, dataUser}) => {

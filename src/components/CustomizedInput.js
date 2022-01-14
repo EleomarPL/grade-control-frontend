@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import '../styles/customizedInput.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) => {
   const handleChange = (evt) => {

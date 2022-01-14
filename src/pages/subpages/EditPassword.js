@@ -1,20 +1,21 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import CustomizedInput from '../../components/CustomizedInput';
-import { updatePasswordUser } from '../../services/apis/user';
-import {
-  notifySuccess, notifyWarning, notifyError, notifyInfo
-} from '../../consts/notify';
+import { notifyInfo } from '../../consts/notify';
 import ButtonBack from '../../components/ButtonBack';
 
 import '../../styles/login.css';
+import useUser from '../../hooks/useUser';
 
 const EditPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
-
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
+
+  const { updatePasswordUser } = useUser();
+  const navigate = useNavigate();
 
   const handleUpdatePassword = (evt) => {
     evt.preventDefault();
@@ -25,26 +26,14 @@ const EditPassword = () => {
       if ( newPassword.length < 6 || newPassword.length > 40 ||
         (confirmNewPassword.length < 6 || confirmNewPassword.length > 40) ) {
         notifyInfo('La contraseña debe ser mayor a 5 y menor que 40');
-      } else if (newPassword === confirmNewPassword) {
-        setIsLoading(true);
-        const getToken = window.localStorage.getItem('session');
-        updatePasswordUser({dataUser: {
-          oldPassword,
-          newPassword
-        }, token: JSON.parse(getToken)}).then( () => {
-          notifySuccess('Contraseña actualizado correctamente');
-          setIsLoading(false);
-          history.goBack();
-        }).catch(err => {
-          if (err.message === 'Request failed with status code 401') {
-            notifyWarning('Tu contraseña actual no es valida');
-          } else if (err.message === 'Network Error') {
-            notifyError('No encontramos una conexión a internet');
-          }
-          setIsLoading(false);
-        });
-      } else {
+      } else if (newPassword !== confirmNewPassword)
         notifyInfo('Las contraseñas no coinciden');
+      else {
+        setIsLoading(true);
+        updatePasswordUser({newPassword, oldPassword}).then(res => {
+          setIsLoading(false);
+          if (res) navigate(-1);
+        });
       }
     }
   };
@@ -88,7 +77,9 @@ const EditPassword = () => {
             />
           </div>
           <div>
-            <button className="btn btn-primary mt-3 w-100" type="submit">
+            <button className="btn btn-primary mt-3 w-100" type="submit"
+              disabled={ isLoading }
+            >
               <span
                 className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
                 role="status"
