@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Modal } from 'bootstrap';
 
 import { notifySuccess } from '../consts/notify';
-import { createHistoryAxios } from '../services/apis/history';
 import useQualification from '../hooks/useQualification';
 import useHistory from '../hooks/useHistory';
 
@@ -43,7 +42,7 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
         
         setQualifications(qualifications.filter((value) => value.id !== idQualificationDelete));
         notifySuccess('Calificación eliminada correctamente');
-        
+
         createHistoryDelete({
           course: temporallyObjectToDelete.course,
           score: temporallyObjectToDelete.score,
