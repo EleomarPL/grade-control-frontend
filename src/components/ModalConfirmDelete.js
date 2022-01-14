@@ -29,7 +29,6 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
   };
 
   const executeDelete = () => {
-    const getToken = window.localStorage.getItem('session');
     setIsLoading(true);
 
     deleteQualification({idQualification: idQualificationDelete}).then(res => {
