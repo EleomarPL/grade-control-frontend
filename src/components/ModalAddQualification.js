@@ -4,8 +4,7 @@ import { Modal } from 'bootstrap';
 
 import { dataQualification } from '../consts/qualification';
 import { validationCreateQualification } from '../services/validations/validationQualification';
-import { notifyInfo, notifySuccess, notifyError, notifyWarning } from '../consts/notify';
-import { editQualification } from '../services/apis/qualification';
+import { notifyInfo } from '../consts/notify';
 import { createHistory } from '../services/apis/history';
 import useQualification from '../hooks/useQualification';
 
@@ -21,7 +20,7 @@ export const showModalStatic = () => {
 };
 export const ModalAddQualification = ( { setQualifications, qualifications, dataToEdit, isCreated} ) => {
   const [isLoading, setIsLoading] = useState(false);
-  const { createQualification } = useQualification();
+  const { createQualification, updateQualification } = useQualification();
 
   useEffect(() => {
     let form = document.getElementById('form-qualification');
@@ -96,14 +95,17 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
             hideModalStatic();
           } else {
             setIsLoading(true);
-            editQualification({idQualification: dataToEdit.id, dataQualification: dataQualification, token: JSON.parse(getToken)}).
-              then(response => {
-                if (response.status === 200) {
-                  notifySuccess('Calificación editada correctamente');
-                }
+            updateQualification({
+              course: dataQualification.course, unit: dataQualification.unit,
+              score: dataQualification.score, semester: dataQualification.semester,
+              idQualification: dataToEdit.id
+            }).then(res => {
+              setIsLoading(false);
+
+              if (res) {
                 let updateQualificationsLocal = qualifications.map(value => {
-                  if (value.id === response.data.id) {
-                    return response.data;
+                  if (value.id === res.id) {
+                    return res;
                   }
                   return value;
                 });
@@ -112,21 +114,14 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
                   token: JSON.parse(getToken),
                   dataHistory: {operation: `Se modificaron datos de la materia ${dataToEdit.course} la
                   información cambiante fue,  
-                  ${dataToEdit.course !== response.data.course ? 'materia: ' + response.data.course : '' }  
-                  ${dataToEdit.unit !== response.data.unit ? 'unidad: ' + response.data.unit : '' } 
-                  ${dataToEdit.score !== response.data.score ? 'calificación: ' + response.data.score : '' } 
-                  ${dataToEdit.semester !== response.data.semester ? 'semestre: ' + response.data.semester : '' }`}
+                  ${dataToEdit.course !== res.course ? 'materia: ' + res.course : '' }  
+                  ${dataToEdit.unit !== res.unit ? 'unidad: ' + res.unit : '' } 
+                  ${dataToEdit.score !== res.score ? 'calificación: ' + res.score : '' } 
+                  ${dataToEdit.semester !== res.semester ? 'semestre: ' + res.semester : '' }`}
                 });
-                setIsLoading(false);
                 hideModalStatic();
-              }).catch(err => {
-                if (err.message === 'Network Error') {
-                  notifyError('No encontramos una conexión a internet');
-                } else if (err.response.data.error === 'Token missing or invalid') {
-                  notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
-                }
-                setIsLoading(false);
-              });
+              }
+            });
           }
         }
       }
