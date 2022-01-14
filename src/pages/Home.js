@@ -1,11 +1,12 @@
 import { Suspense, lazy } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 import Logo from '../components/Logo';
 import OptionsUser from '../components/OptionsUser';
-
-import '../styles/home.css';
-import { Link, Routes, Route } from 'react-router-dom';
 import SpinnerLoading from '../components/SpinnerLoading';
-import { Helmet } from 'react-helmet';
+import '../styles/home.css';
+
 const Qualifications = lazy(() => import('./subpages/Qualifications'));
 const SettingsUser = lazy(() => import('./subpages/SettingsUser'));
 const History = lazy(() => import('./subpages/History'));
