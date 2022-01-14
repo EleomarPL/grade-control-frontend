@@ -1,14 +1,14 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
-
 import { NavLink, Routes, Route } from 'react-router-dom';
+
 import { getAllQualificationUser } from '../../services/apis/qualification';
 import { notifyError, notifyInfo, notifyWarning } from '../../consts/notify';
-
-import '../../styles/home.css';
 import { ModalAddQualification, showModalStatic } from '../../components/ModalAddQualification';
 import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
-import ListQualifications from '../../components/ListQualifications';
 import SpinnerLoading from '../../components/SpinnerLoading';
+import '../../styles/home.css';
+
+const ListQualifications = lazy(() => import('../../components/ListQualifications'));
 const OrdenatedQualification = lazy(() => import('../../components/OrdenatedQualification'));
 
 const Qualifications = () => {
@@ -76,7 +76,7 @@ const Qualifications = () => {
           <Routes>
             <Route path="/"
               element={
-                <div>
+                <Suspense fallback={ <SpinnerLoading /> }>
                   <ListQualifications
                     qualifications={ qualifications }
                     setIsCreated={ setIsCreated }
@@ -86,7 +86,7 @@ const Qualifications = () => {
                   { isLoadingQualifications &&
                     <SpinnerLoading />
                   }
-                </div>
+                </Suspense>
               }
             />
             <Route path="ordenated"
