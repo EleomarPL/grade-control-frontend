@@ -1,5 +1,5 @@
 import { notifyError, notifySuccess, notifyWarning } from '../consts/notify';
-import { createUserAxios, updatePasswordUserAxios } from '../services/apis/user';
+import { createUserAxios, getDataUserAxios, updatePasswordUserAxios } from '../services/apis/user';
 
 const useUser = () => {
   const createUser = async({
@@ -35,13 +35,28 @@ const useUser = () => {
       } else if (err.message === 'Network Error') {
         notifyError('No encontramos una conexión a internet');
       }
-      
+
       return false;
     }
   };
+  const getDataUser = async() => {
+    const token = JSON.parse(window.localStorage.getItem('session'));
+    try {
+      const { data } = await getDataUserAxios({token});
+      return data;
+    } catch (err) {
+      if (err.message === 'Network Error') {
+        notifyError('No encontramos una conexión a internet');
+      } else if (err.response.data.error === 'Token missing or invalid') {
+        notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
+      }
+      return false;
+    }
+
+  };
   
   return {
-    createUser, updatePasswordUser
+    getDataUser, createUser, updatePasswordUser
   };
 };
 

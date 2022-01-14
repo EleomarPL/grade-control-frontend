@@ -12,7 +12,7 @@ export const createUserAxios = async({
   });
   return response;
 };
-export const getDataUser = async({token}) => {
+export const getDataUserAxios = async({token}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`

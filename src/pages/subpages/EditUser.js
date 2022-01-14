@@ -7,32 +7,28 @@ import {
   notifyError, notifySuccess, notifyWarning, notifyInfo
 } from '../../consts/notify';
 import { validationRegisterUser } from '../../services/validations/validationUser';
-import { getDataUser, updateDataUser } from '../../services/apis/user';
+import { updateDataUser } from '../../services/apis/user';
 import Auth from '../../context/Auth';
+import useUser from '../../hooks/useUser';
 
 import '../../styles/register.css';
 
 const EditUser = () => {
   const [isLoading, setIsLoading] = useState(false);
-
   const {setUserData} = useContext(Auth);
 
+  const { getDataUser } = useUser();
+
   useEffect(() => {
-    const getToken = window.localStorage.getItem('session');
-    getDataUser({token: JSON.parse(getToken)}).then(response => {
-      let form = document.getElementById('form-data-user');
-      form[0].value = response.data.name;
-      form[1].value = response.data.lastName;
-      form[2].value = response.data.motherLastName;
-      form[3].value = response.data.phone;
-      form[4].value = response.data.email;
-      form[5].value = response.data.userName;
-      
-    }).catch(err => {
-      if (err.message === 'Network Error') {
-        notifyError('No encontramos una conexión a internet');
-      } else if (err.response.data.error === 'Token missing or invalid') {
-        notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
+    getDataUser().then(res => {
+      if (res) {
+        let form = document.getElementById('form-data-user');
+        form[0].value = res.name;
+        form[1].value = res.lastName;
+        form[2].value = res.motherLastName;
+        form[3].value = res.phone;
+        form[4].value = res.email;
+        form[5].value = res.userName;
       }
     });
   }, []);
