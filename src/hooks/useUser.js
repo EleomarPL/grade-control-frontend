@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { notifyError, notifySuccess, notifyWarning } from '../consts/notify';
 import Auth from '../context/Auth';
 import {
-  createUserAxios, getDataUserAxios, updateDataUserAxios, updatePasswordUserAxios
+  createUserAxios, deleteUserAxios, getDataUserAxios, updateDataUserAxios, updatePasswordUserAxios
 } from '../services/apis/user';
 
 const useUser = () => {
@@ -90,9 +90,36 @@ const useUser = () => {
       return false;
     }
   };
+  const deleteAccountUser = async({ setState, hideModalStatic }) => {
+    const token = JSON.parse(window.localStorage.getItem('session'));
+
+    try {
+      const response = await deleteUserAxios({token});
+      if (response.status === 204) {
+        setState(false);
+        hideModalStatic();
+        
+        notifySuccess('Cuenta eliminada correctamente');
+        window.localStorage.clear();
+        setUserData(null);
+
+        return true;
+      }
+
+      return false;
+    } catch (err) {
+      if (err.message === 'Network Error')
+        notifyError('No encontramos una conexión a internet');
+      else if (err.response.data.error === 'Token missing or invalid')
+        notifyWarning('Al parecer, perdiste los permisos, te recomiendo cerrar sesión');
+
+      return false;
+    }
+  };
   
   return {
-    getDataUser, createUser, updatePasswordUser, updateDataUser
+    getDataUser, createUser, updatePasswordUser, updateDataUser,
+    deleteAccountUser
   };
 };
 

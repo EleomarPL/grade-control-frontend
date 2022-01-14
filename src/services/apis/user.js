@@ -52,7 +52,7 @@ export const updateDataUserAxios = async({
   );
   return response;
 };
-export const deleteUser = async({token}) => {
+export const deleteUserAxios = async({token}) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
