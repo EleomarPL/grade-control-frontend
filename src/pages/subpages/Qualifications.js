@@ -88,11 +88,9 @@ const Qualifications = () => {
             <Route path="ordenated"
               element={
                 <Suspense fallback={ <SpinnerLoading /> }>
-                  { qualifications.length !== 0 &&
-                    <OrdenatedQualification
-                      qualifications={ qualifications }
-                    />
-                  }
+                  <OrdenatedQualification
+                    qualifications={ qualifications }
+                  />
                   { isLoadingQualifications &&
                     <SpinnerLoading />
                   }
