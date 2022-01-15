@@ -6,6 +6,7 @@ import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import SpinnerLoading from '../../components/SpinnerLoading';
 import '../../styles/home.css';
 import useQualification from '../../hooks/useQualification';
+import NoQualificationMessage from '../../components/NoQualificationMessage';
 
 const ListQualifications = lazy(() => import('../../components/ListQualifications'));
 const OrdenatedQualification = lazy(() => import('../../components/OrdenatedQualification'));
@@ -62,17 +63,22 @@ const Qualifications = () => {
             Ordenados
           </NavLink>
         </div>
+        { qualifications.length === 0 && !isLoadingQualifications &&
+          <NoQualificationMessage />
+        }
         <div className="content p-3 mt-3">
           <Routes>
             <Route path="/"
               element={
                 <Suspense fallback={ <SpinnerLoading /> }>
-                  <ListQualifications
-                    qualifications={ qualifications }
-                    setIsCreated={ setIsCreated }
-                    setDataToEdit={ setDataToEdit }
-                    setIdQualificationDelete={ setIdQualificationDelete }
-                  />
+                  { qualifications.length !== 0 &&
+                    <ListQualifications
+                      qualifications={ qualifications }
+                      setIsCreated={ setIsCreated }
+                      setDataToEdit={ setDataToEdit }
+                      setIdQualificationDelete={ setIdQualificationDelete }
+                    />
+                  }
                   { isLoadingQualifications &&
                     <SpinnerLoading />
                   }
@@ -82,9 +88,14 @@ const Qualifications = () => {
             <Route path="ordenated"
               element={
                 <Suspense fallback={ <SpinnerLoading /> }>
-                  <OrdenatedQualification
-                    qualifications={ qualifications }
-                  />
+                  { qualifications.length !== 0 &&
+                    <OrdenatedQualification
+                      qualifications={ qualifications }
+                    />
+                  }
+                  { isLoadingQualifications &&
+                    <SpinnerLoading />
+                  }
                 </Suspense>
               }
             />
