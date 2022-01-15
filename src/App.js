@@ -25,13 +25,20 @@ const App = () => {
       <main>
         <AuthProvider>
           <BrowserRouter>
+            <Helmet>
+              <meta property="og:site_name" content="Gestiocal" />
+              <meta property="og:type" content="website" />
+              <meta property="og:locale" content="es" />
+            </Helmet>
             <Routes>
               <Route index
                 element={
                   <PublicRoute>
                     <Helmet>
                       <title>Login | Calificaciones</title>
-                      <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones" />
+                      <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
+                      <meta property="og:title" content="Login | Calificaciones" />
+                      <meta property="og:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
                     </Helmet>
                     <Suspense fallback={ <SpinnerLoading /> }>
                       <Login />
@@ -44,7 +51,9 @@ const App = () => {
                   <PublicRoute>
                     <Helmet>
                       <title>Registrarse | Calificaciones</title>
-                      <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones" />
+                      <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
+                      <meta property="og:title" content="Registrarse | Calificaciones" />
+                      <meta property="og:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
                     </Helmet>
                     <Suspense fallback={ <SpinnerLoading /> }>
                       <Register />

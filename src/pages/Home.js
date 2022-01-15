@@ -28,7 +28,9 @@ const Home = () => {
             <>
               <Helmet>
                 <title>Inicio | Calificaciones</title>
-                <meta name="description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones" />
+                <meta name="description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
+                <meta property="og:title" content="Inicio | Calificaciones" />
+                <meta property="og:description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <Qualifications />
@@ -41,7 +43,9 @@ const Home = () => {
             <>
               <Helmet>
                 <title>Configuración | Calificaciones</title>
-                <meta name="description" content="Configurar tus datos de usuario para esta cuenta" />
+                <meta name="description" content="Configurar tus datos de usuario para esta cuenta." />
+                <meta property="og:title" content="Configuración | Calificaciones" />
+                <meta property="og:description" content="Configurar tus datos de usuario para esta cuenta." />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <SettingsUser />
@@ -54,7 +58,9 @@ const Home = () => {
             <>
               <Helmet>
                 <title>Historial | Calificaciones</title>
-                <meta name="description" content="Ver y eliminar tu historial de acciones u operaciones" />
+                <meta name="description" content="Ver y eliminar tu historial de acciones u operaciones." />
+                <meta property="og:title" content="Historial | Calificaciones" />
+                <meta property="og:description" content="Ver y eliminar tu historial de acciones u operaciones." />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <History />
@@ -67,7 +73,9 @@ const Home = () => {
             <>
               <Helmet>
                 <title>Actualizar datos | Calificaciones</title>
-                <meta name="description" content="Editar tus datos de usuario" />
+                <meta name="description" content="Editar tus datos de usuario." />
+                <meta property="og:title" content="Actualizar datos | Calificaciones" />
+                <meta property="og:description" content="Editar tus datos de usuario." />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <EditUser />
@@ -80,7 +88,9 @@ const Home = () => {
             <>
               <Helmet>
                 <title>Actualizar contraseña | Calificaciones</title>
-                <meta name="description" content="Editar tu contraseña de usuario" />
+                <meta name="description" content="Editar tu contraseña de usuario." />
+                <meta property="og:title" content="Actualizar contraseña | Calificaciones" />
+                <meta property="og:description" content="Editar tu contraseña de usuario." />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <EditPassword />
