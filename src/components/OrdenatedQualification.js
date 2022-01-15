@@ -5,19 +5,16 @@ import '../styles/ordenatedQualification.css';
 import { sortQualification } from '../utils/sortQualification';
 
 const OrdenatedQualification = ({qualifications}) => {
-  const [ordenatedQualification, setOrdenatedQualification] = useState(null);
+  const [ordenatedQualification, setOrdenatedQualification] = useState([]);
 
   useEffect(() => {
-    if (qualifications !== null ) {
-      
-      const ordenated = sortQualification({ qualifications });
-      setOrdenatedQualification(ordenated);
-    }
+    const ordenated = sortQualification({ qualifications });
+    setOrdenatedQualification(ordenated);
   }, [qualifications]);
   
   return (
     <>
-      { ordenatedQualification !== null ?
+      {
         ordenatedQualification.map((array, generalIndex) => {
           if (array !== null) {
             return <div
@@ -73,7 +70,6 @@ const OrdenatedQualification = ({qualifications}) => {
             </div>;
           }
         })
-        : <p>Sin registros</p>
       }
     </>
   );
