@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import SpinnerLoading from '../../components/SpinnerLoading';
 import useHistory from '../../hooks/useHistory';
+import NoHistoryMessage from '../../components/NoHistoryMessage';
 
 const History = () => {
-  const [history, setHistory] = useState(null);
+  const [history, setHistory] = useState([]);
   const [isLoadHistory, setIsLoadHistory] = useState(false);
   const [buttonLoading, setButtonLoading] = useState(0);
 
@@ -65,6 +66,9 @@ const History = () => {
           </tbody>
         </table>
       </div>
+      { history.length === 0 && !isLoadHistory &&
+        <NoHistoryMessage />
+      }
       { isLoadHistory &&
         <SpinnerLoading />
       }
