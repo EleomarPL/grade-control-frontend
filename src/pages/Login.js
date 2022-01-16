@@ -54,10 +54,12 @@ const Login = () => {
             <button className="btn btn-primary mt-3 w-100" type="submit"
               disabled={ isLoading }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status" aria-hidden="true"
-              ></span>
+              { isLoading &&
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status" aria-hidden="true"
+                />
+              }
               Iniciar ahora
             </button>
           </div>
