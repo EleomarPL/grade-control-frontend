@@ -28,7 +28,6 @@ const App = () => {
             <Helmet>
               <meta property="og:site_name" content="Gestiocal" />
               <meta property="og:type" content="website" />
-              <meta property="og:locale" content="es" />
             </Helmet>
             <Routes>
               <Route index
