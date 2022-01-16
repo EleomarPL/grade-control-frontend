@@ -5,7 +5,6 @@ import { Helmet } from 'react-helmet';
 import Logo from '../components/Logo';
 import OptionsUser from '../components/OptionsUser';
 import SpinnerLoading from '../components/SpinnerLoading';
-import '../styles/home.css';
 
 const Qualifications = lazy(() => import('./subpages/Qualifications'));
 const SettingsUser = lazy(() => import('./subpages/SettingsUser'));

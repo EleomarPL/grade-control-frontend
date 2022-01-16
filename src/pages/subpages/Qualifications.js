@@ -1,15 +1,19 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
-import { NavLink, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import { ModalAddQualification, showModalStatic } from '../../components/ModalAddQualification';
 import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import SpinnerLoading from '../../components/SpinnerLoading';
-import '../../styles/home.css';
+
 import useQualification from '../../hooks/useQualification';
 import NoQualificationMessage from '../../components/NoQualificationMessage';
 
 const ListQualifications = lazy(() => import('../../components/ListQualifications'));
 const OrdenatedQualification = lazy(() => import('../../components/OrdenatedQualification'));
+
+import {
+  ContainerHome, DivAddNewQualification, StylesNavLink
+} from '../../stylesComponents/qualificationStyles';
 
 const Qualifications = () => {
   const [qualifications, setQualification] = useState([]);
@@ -37,31 +41,10 @@ const Qualifications = () => {
       <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
         <strong>Calificaciones</strong>
       </div>
-      <div className="home">
+      <ContainerHome>
         <div className="d-flex flex-wrap justify-content-center">
-          <NavLink
-            className="option-router"
-            to={ '' }
-            end
-            style={ ({ isActive }) => ({
-              opacity: isActive && '1',
-              border: isActive && 'solid 1px gray',
-              borderRadius: isActive && '10px'
-            }) }
-          >
-            Lista
-          </NavLink>
-          <NavLink
-            className="option-router"
-            to={ 'ordenated' }
-            style={ ({ isActive }) => ({
-              opacity: isActive && '1',
-              border: isActive && 'solid 1px gray',
-              borderRadius: isActive && '10px'
-            }) }
-          >
-            Ordenados
-          </NavLink>
+          <StylesNavLink to="" end>Lista</StylesNavLink>
+          <StylesNavLink to={ 'ordenated' }>Ordenados</StylesNavLink>
         </div>
         { qualifications.length === 0 && !isLoadingQualifications &&
           <NoQualificationMessage />
@@ -99,12 +82,12 @@ const Qualifications = () => {
             />
           </Routes>
         </div>
-      </div>
-      <div className="add-new-qualification add-new-qualification">
+      </ContainerHome>
+      <DivAddNewQualification>
         <button type="button" onClick={ showModal }>
           <i className="bi bi-plus-circle-fill" />
         </button>
-      </div>
+      </DivAddNewQualification>
       <ModalAddQualification
         setQualifications={ setQualification }
         qualifications={ qualifications }
