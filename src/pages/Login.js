@@ -63,8 +63,8 @@ const Login = () => {
               Iniciar ahora
             </button>
           </div>
-          <div className="text-center pt-4" style={ {fontSize: '1rem', opacity: '0.7'} }>
-            <p>Todavía no tienes cuenta? <span><Link to="/register"> Registrate aquí</Link></span></p>
+          <div className="text-center pt-4" style={ {fontSize: '1rem'} }>
+            <p>Todavía no tienes cuenta? <span style={ {color: '#0004ff'} }><Link to="/register"> Registrate aquí</Link></span></p>
           </div>
         </form>
       </BorderContainer>

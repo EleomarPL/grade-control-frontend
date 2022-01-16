@@ -7,7 +7,7 @@ const ButtonBack = () => {
     <button
       style={ {
         background: 'transparent',
-        color: '#3b8ff0',
+        color: '#3277c5',
         border: 'none'
       } }
       type="button"
