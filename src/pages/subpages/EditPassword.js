@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import CustomizedInput from '../../components/CustomizedInput';
 import { notifyInfo } from '../../consts/notify';
 import ButtonBack from '../../components/ButtonBack';
-
-import '../../styles/login.css';
 import useUser from '../../hooks/useUser';
+
+import { BorderContainer, ContainerSection } from '../../stylesComponents/loginStyles';
 
 const EditPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -38,11 +38,10 @@ const EditPassword = () => {
     }
   };
   return (
-    <section
-      className="section-form"
+    <ContainerSection
       style={ {height: '90vh'} }
     >
-      <div className="d-flex flex-column form-container apply-border" >
+      <BorderContainer className="d-flex flex-column" >
         <ButtonBack />
         <form
           className="px-4 pb-4 pt-1 mx-4"
@@ -89,8 +88,8 @@ const EditPassword = () => {
             </button>
           </div>
         </form>
-      </div>
-    </section>
+      </BorderContainer>
+    </ContainerSection>
   );
 };
 

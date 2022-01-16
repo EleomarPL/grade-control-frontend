@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/customizedInput.css';
+import { ContainerInputs, IconSize } from '../stylesComponents/customizedInputStyles';
 
 const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) => {
   const handleChange = (evt) => {
@@ -19,8 +19,8 @@ const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) 
     };
   }, []);
   return (
-    <div className="input-icon bg-white mb-3" id={ placeholder }>
-      <i className={ `${classNameIcon} icon-size` }></i>
+    <ContainerInputs className="bg-white mb-3" id={ placeholder }>
+      <IconSize className={ classNameIcon }></IconSize>
       <input
         type={ type }
         placeholder={ placeholder }
@@ -28,7 +28,7 @@ const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) 
         value={ state }
         onChange={ handleChange }
       />
-    </div>
+    </ContainerInputs>
   );
 };
 
