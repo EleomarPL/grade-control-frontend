@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import '../styles/ordenatedQualification.css';
 import { sortQualification } from '../utils/sortQualification';
+
+import {
+  DivUnit, StatusQualification
+} from '../stylesComponents/ordenatedQualificationStyles';
 
 const OrdenatedQualification = ({qualifications}) => {
   const [ordenatedQualification, setOrdenatedQualification] = useState([]);
@@ -50,10 +53,10 @@ const OrdenatedQualification = ({qualifications}) => {
                                   array[key].sort((a, b) => (a['unit'] - b['unit']) * 1).map((object, indexObject) =>
                                     <td key={ indexObject }>
                                       <div className="d-flex flex-column">
-                                        <div className="unit">Unidad { ` ${object.unit}` }</div>
-                                        <div className={ `${object.score <= 69 ? 'reproved' : 'approved'}` }>
-                                          { ` ${object.score}` }
-                                        </div>
+                                        <DivUnit>Unidad { object.unit }</DivUnit>
+                                        <StatusQualification isApproved={ object.score > 69 }>
+                                          { object.score }
+                                        </StatusQualification>
                                       </div>
                                     </td>
                                   )
