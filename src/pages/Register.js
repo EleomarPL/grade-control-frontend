@@ -6,10 +6,12 @@ import Logo from '../components/Logo';
 import { dataUser } from '../consts/user';
 import { notifyInfo } from '../consts/notify';
 import { validationRegisterUser } from '../services/validations/validationUser';
-
-import '../styles/register.css';
 import useUser from '../hooks/useUser';
 
+import {
+  ButtonSave, ContainerRegister,
+  ContainerRegisterData, FormContainer, Indication
+} from '../stylesComponents/registerStyles';
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,14 +65,14 @@ const Register = () => {
       <div className="px-4 mx-1 pt-2">
         <Logo />
       </div>
-      <div className="register-container m-auto py-3">
+      <ContainerRegister className="register-container m-auto py-3">
         <ButtonBack />
-        <div className="container-register-data px-4 pt-2">
-          <div className="indications">
+        <ContainerRegisterData className="container-register-data px-4 pt-2">
+          <Indication className="indications">
             <strong style={ {fontSize: '1.8rem'} }>Registrar usuario</strong>
             <p className="pt-1">Hola, para registrarte debes rellenar los siguientes campos</p>
-          </div>
-          <form className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }>
+          </Indication>
+          <FormContainer className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }>
             {
               Object.keys(dataUser).map(key => {
                 if (dataUser[key] !== undefined) {
@@ -106,7 +108,7 @@ const Register = () => {
                 id="confirm-password"
               />
             </div>
-            <button
+            <ButtonSave
               type="submit"
               className="btn btn-primary save mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
@@ -118,10 +120,10 @@ const Register = () => {
                 aria-hidden="true"
               ></span>
               Registrar
-            </button>
-          </form>
-        </div>
-      </div>
+            </ButtonSave>
+          </FormContainer>
+        </ContainerRegisterData>
+      </ContainerRegister>
     </section>
   );
 };

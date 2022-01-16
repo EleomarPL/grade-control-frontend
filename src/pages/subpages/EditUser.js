@@ -7,7 +7,10 @@ import { notifyInfo } from '../../consts/notify';
 import { validationRegisterUser } from '../../services/validations/validationUser';
 import useUser from '../../hooks/useUser';
 
-import '../../styles/register.css';
+import {
+  ButtonSave, ContainerRegister,
+  ContainerRegisterData, FormContainer, Indication
+} from '../../stylesComponents/registerStyles';
 
 const EditUser = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -65,14 +68,14 @@ const EditUser = () => {
   };
   return (
     <section>
-      <div className="register-container m-auto py-3">
+      <ContainerRegister className="register-container m-auto py-3">
         <ButtonBack />
-        <div className="container-register-data px-4 pt-2">
-          <div className="indications">
+        <ContainerRegisterData className="container-register-data px-4 pt-2">
+          <Indication className="indications">
             <strong style={ {fontSize: '1.8rem'} }>Editar mis datos</strong>
             <p className="pt-1">Hola, para editar, solo basta con cambiar lo necesario</p>
-          </div>
-          <form className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }
+          </Indication>
+          <FormContainer className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }
             id="form-data-user"
           >
             {
@@ -99,7 +102,7 @@ const EditUser = () => {
                 }
               })
             }
-            <button
+            <ButtonSave
               type="submit"
               className="btn btn-primary save mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
@@ -111,10 +114,10 @@ const EditUser = () => {
                 aria-hidden="true"
               ></span>
               Actualizar
-            </button>
-          </form>
-        </div>
-      </div>
+            </ButtonSave>
+          </FormContainer>
+        </ContainerRegisterData>
+      </ContainerRegister>
     </section>
   );
 };
