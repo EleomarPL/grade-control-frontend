@@ -1,9 +1,14 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import '../../styles/settings.css';
 import Auth from '../../context/Auth';
 import { ModalDeleteAccount, showModalStaticDeleteAccount } from '../../components/ModalDeleteAccount';
+
+import { Indication } from '../../stylesComponents/registerStyles';
+import {
+  ButtonDelete, SettingsContainer, SettingsContainerData
+} from '../../stylesComponents/settingsStyles';
+
 
 const SettingsUser = () => {
   const {userData} = useContext(Auth);
@@ -23,13 +28,13 @@ const SettingsUser = () => {
 
   return (
     <section>
-      <div className="settings-container m-auto py-3">
-        <div className="container-settings-data px-4 pt-2">
+      <SettingsContainer className="settings-container m-auto py-3">
+        <SettingsContainerData className="container-settings-data px-4 pt-2">
           <div className="d-flex flex-wrap justify-content-between align-items-center">
-            <div className="indications">
+            <Indication className="indications">
               <strong style={ {fontSize: '1.8rem'} }>Tus datos</strong>
               <p className="pt-1">Hola, estos son tus datos actuales</p>
-            </div>
+            </Indication>
             <div>
               <Link
                 to="/home/edit"
@@ -62,16 +67,16 @@ const SettingsUser = () => {
             </Link>
           </div>
           <div className="py-3">
-            <button
+            <ButtonDelete
               type="button"
               className="btn btn-danger button-delete"
               onClick={ showModalConfirm }
             >
               Eliminar mi cuenta
-            </button>
+            </ButtonDelete>
           </div>
-        </div>
-      </div>
+        </SettingsContainerData>
+      </SettingsContainer>
       <ModalDeleteAccount />
     </section>
   );
