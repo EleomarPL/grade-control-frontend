@@ -1,10 +1,9 @@
 import { Suspense, lazy } from 'react';
-import { Link, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import Logo from '../components/Logo';
-import OptionsUser from '../components/OptionsUser';
 import SpinnerLoading from '../components/SpinnerLoading';
+import HeaderUser from '../components/HeaderUser';
 
 const Qualifications = lazy(() => import('./subpages/Qualifications'));
 const SettingsUser = lazy(() => import('./subpages/SettingsUser'));
@@ -15,12 +14,7 @@ const EditPassword = lazy(() => import('./subpages/EditPassword'));
 const Home = () => {
   return (
     <section>
-      <div className="px-0 mx-0 d-flex flex-wrap justify-content-around align-items-center navbar-user sticky-top">
-        <Link to="/home" style={ {color: 'black', textDecoration: 'none'} }>
-          <Logo />
-        </Link>
-        <OptionsUser />
-      </div>
+      <HeaderUser />
       <Routes>
         <Route path="/*"
           element={

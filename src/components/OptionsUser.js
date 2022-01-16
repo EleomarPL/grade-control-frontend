@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import '../styles/optionsUser.css';
 import Auth from '../context/Auth';
 
+import { ButtonDropdown, DropdownMenu } from '../stylesComponents/optionUserStyles';
+
 const OptionsUser = () => {
-  const {userData, setUserData} = useContext(Auth);
+  const { userData, setUserData } = useContext(Auth);
 
   const logout = () => {
     window.localStorage.clear();
@@ -14,15 +15,15 @@ const OptionsUser = () => {
   return (
     <>
       <div className="dropdown">
-        <button
+        <ButtonDropdown
           className="dropdown-toggle button-user"
           type="button" id="dropdownMenuButton2"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           <i className="bi bi-person-circle"></i>
-        </button>
-        <ul
+        </ButtonDropdown>
+        <DropdownMenu
           className="dropdown-menu text-center px-3"
           aria-labelledby="dropdownMenuButton2"
           style={ {fontSize: '1.1rem'} }
@@ -60,7 +61,7 @@ const OptionsUser = () => {
               Cerrar sesión
             </button>
           </li>
-        </ul>
+        </DropdownMenu>
       </div>
     </>
   );
