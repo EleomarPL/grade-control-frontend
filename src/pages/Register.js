@@ -65,10 +65,10 @@ const Register = () => {
       <div className="px-4 mx-1 pt-2">
         <Logo />
       </div>
-      <ContainerRegister className="register-container m-auto py-3">
+      <ContainerRegister className="m-auto py-3">
         <ButtonBack />
-        <ContainerRegisterData className="container-register-data px-4 pt-2">
-          <Indication className="indications">
+        <ContainerRegisterData className="px-4 pt-2">
+          <Indication>
             <strong style={ {fontSize: '1.8rem'} }>Registrar usuario</strong>
             <p className="pt-1">Hola, para registrarte debes rellenar los siguientes campos</p>
           </Indication>
@@ -110,7 +110,7 @@ const Register = () => {
             </div>
             <ButtonSave
               type="submit"
-              className="btn btn-primary save mb-3 px-3 py-2"
+              className="btn btn-primary mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
               disabled={ isLoading }
             >

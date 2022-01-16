@@ -68,10 +68,10 @@ const EditUser = () => {
   };
   return (
     <section>
-      <ContainerRegister className="register-container m-auto py-3">
+      <ContainerRegister className="m-auto py-3">
         <ButtonBack />
-        <ContainerRegisterData className="container-register-data px-4 pt-2">
-          <Indication className="indications">
+        <ContainerRegisterData className="px-4 pt-2">
+          <Indication>
             <strong style={ {fontSize: '1.8rem'} }>Editar mis datos</strong>
             <p className="pt-1">Hola, para editar, solo basta con cambiar lo necesario</p>
           </Indication>
@@ -104,15 +104,17 @@ const EditUser = () => {
             }
             <ButtonSave
               type="submit"
-              className="btn btn-primary save mb-3 px-3 py-2"
+              className="btn btn-primary mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
               disabled={ isLoading }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status"
-                aria-hidden="true"
-              ></span>
+              { isLoading &&
+                <span
+                  className="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+              }
               Actualizar
             </ButtonSave>
           </FormContainer>
