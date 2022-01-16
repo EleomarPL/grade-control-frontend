@@ -1,19 +1,12 @@
 
-import { useEffect, useState, createContext } from 'react';
+import { useState, createContext } from 'react';
 import PropTypes from 'prop-types';
 
 const Auth = createContext({});
 
 export const AuthProvider = ({ children }) => {
-  const [userData, setUserData] = useState({});
-  useEffect(() => {
-    const getUserFromStorage = window.localStorage.getItem('datauser');
-    if (getUserFromStorage) {
-      setUserData(JSON.parse(getUserFromStorage));
-    } else {
-      setUserData(null);
-    }
-  }, []);
+  const [userData, setUserData] = useState(JSON.parse(window.localStorage.getItem('datauser')) || null);
+  
   return (
     <Auth.Provider value={ { userData, setUserData } }>
       { children }
