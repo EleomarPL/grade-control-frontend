@@ -22,6 +22,8 @@ const Home = () => {
               <Helmet>
                 <title>Inicio | Calificaciones</title>
                 <meta name="description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
+                <meta name="twitter:title" content="Inicio | Calificaciones" />
+                <meta name="twitter:description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
                 <meta property="og:title" content="Inicio | Calificaciones" />
                 <meta property="og:description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
               </Helmet>
@@ -37,6 +39,8 @@ const Home = () => {
               <Helmet>
                 <title>Configuración | Calificaciones</title>
                 <meta name="description" content="Configurar tus datos de usuario para esta cuenta." />
+                <meta name="twitter:title" content="Configuración | Calificaciones" />
+                <meta name="twitter:description" content="Configurar tus datos de usuario para esta cuenta." />
                 <meta property="og:title" content="Configuración | Calificaciones" />
                 <meta property="og:description" content="Configurar tus datos de usuario para esta cuenta." />
               </Helmet>
@@ -52,6 +56,8 @@ const Home = () => {
               <Helmet>
                 <title>Historial | Calificaciones</title>
                 <meta name="description" content="Ver y eliminar tu historial de acciones u operaciones." />
+                <meta name="twitter:title" content="Historial | Calificaciones" />
+                <meta name="twitter:description" content="Ver y eliminar tu historial de acciones u operaciones." />
                 <meta property="og:title" content="Historial | Calificaciones" />
                 <meta property="og:description" content="Ver y eliminar tu historial de acciones u operaciones." />
               </Helmet>
@@ -67,6 +73,8 @@ const Home = () => {
               <Helmet>
                 <title>Actualizar datos | Calificaciones</title>
                 <meta name="description" content="Editar tus datos de usuario." />
+                <meta name="twitter:title" content="Actualizar datos | Calificaciones" />
+                <meta name="twitter:description" content="Editar tus datos de usuario." />
                 <meta property="og:title" content="Actualizar datos | Calificaciones" />
                 <meta property="og:description" content="Editar tus datos de usuario." />
               </Helmet>
@@ -82,6 +90,8 @@ const Home = () => {
               <Helmet>
                 <title>Actualizar contraseña | Calificaciones</title>
                 <meta name="description" content="Editar tu contraseña de usuario." />
+                <meta name="twitter:title" content="Actualizar contraseña | Calificaciones" />
+                <meta name="twitter:description" content="Editar tu contraseña de usuario." />
                 <meta property="og:title" content="Actualizar contraseña | Calificaciones" />
                 <meta property="og:description" content="Editar tu contraseña de usuario." />
               </Helmet>
