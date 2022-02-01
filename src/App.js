@@ -41,6 +41,8 @@ const App = () => {
                       <meta name="twitter:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
                       <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
                       <meta property="og:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
+                      <meta name="twitter:url" content="https://gestiocal.vercel.app/" />
+                      <meta property="og:url" content="https://gestiocal.vercel.app/" />
                     </Helmet>
                     <Suspense fallback={ <SpinnerLoading /> }>
                       <Login />
@@ -58,6 +60,8 @@ const App = () => {
                       <meta name="twitter:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
                       <meta property="og:title" content="Registrarse | Calificaciones" />
                       <meta property="og:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
+                      <meta name="twitter:url" content="https://gestiocal.vercel.app/register/" />
+                      <meta property="og:url" content="https://gestiocal.vercel.app/register/" />
                     </Helmet>
                     <Suspense fallback={ <SpinnerLoading /> }>
                       <Register />

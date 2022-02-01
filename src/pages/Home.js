@@ -26,6 +26,8 @@ const Home = () => {
                 <meta name="twitter:description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
                 <meta property="og:title" content="Inicio | Calificaciones" />
                 <meta property="og:description" content="Gestiona mediante una hermosa interfaz de usuario, tus calificaciones." />
+                <meta name="twitter:url" content="https://gestiocal.vercel.app/home/" />
+                <meta property="og:url" content="https://gestiocal.vercel.app/home/" />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <Qualifications />
@@ -43,6 +45,8 @@ const Home = () => {
                 <meta name="twitter:description" content="Configurar tus datos de usuario para esta cuenta." />
                 <meta property="og:title" content="Configuración | Calificaciones" />
                 <meta property="og:description" content="Configurar tus datos de usuario para esta cuenta." />
+                <meta name="twitter:url" content="https://gestiocal.vercel.app/home/settings/" />
+                <meta property="og:url" content="https://gestiocal.vercel.app/home/settings/" />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <SettingsUser />
@@ -60,6 +64,8 @@ const Home = () => {
                 <meta name="twitter:description" content="Ver y eliminar tu historial de acciones u operaciones." />
                 <meta property="og:title" content="Historial | Calificaciones" />
                 <meta property="og:description" content="Ver y eliminar tu historial de acciones u operaciones." />
+                <meta name="twitter:url" content="https://gestiocal.vercel.app/home/history/" />
+                <meta property="og:url" content="https://gestiocal.vercel.app/home/history/" />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <History />
@@ -77,6 +83,8 @@ const Home = () => {
                 <meta name="twitter:description" content="Editar tus datos de usuario." />
                 <meta property="og:title" content="Actualizar datos | Calificaciones" />
                 <meta property="og:description" content="Editar tus datos de usuario." />
+                <meta name="twitter:url" content="https://gestiocal.vercel.app/home/edit/" />
+                <meta property="og:url" content="https://gestiocal.vercel.app/home/edit/" />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <EditUser />
@@ -94,6 +102,8 @@ const Home = () => {
                 <meta name="twitter:description" content="Editar tu contraseña de usuario." />
                 <meta property="og:title" content="Actualizar contraseña | Calificaciones" />
                 <meta property="og:description" content="Editar tu contraseña de usuario." />
+                <meta name="twitter:url" content="https://gestiocal.vercel.app/home/editpassword/" />
+                <meta property="og:url" content="https://gestiocal.vercel.app/home/editpassword/" />
               </Helmet>
               <Suspense fallback={ <SpinnerLoading /> }>
                 <EditPassword />
