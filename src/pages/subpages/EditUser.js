@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ButtonBack from '../../components/ButtonBack';
-import { dataUser } from '../../consts/user';
 import { notifyInfo } from '../../consts/notify';
 import { validationRegisterUser } from '../../services/validations/validationUser';
 import useUser from '../../hooks/useUser';
+import ComponentGrouper from '../../components/common/ComponentGrouper';
+import SpinnerLoadingButton from '../../components/common/SpinnerLoadingButton';
 
 import {
   ButtonSave, ContainerRegister,
@@ -13,20 +14,28 @@ import {
 } from '../../stylesComponents/registerStyles';
 
 const EditUser = () => {
+  const [isLoadingInitial, setIsLoadingInitial] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const nameInputRef = useRef({});
+  const lastnameInputRef = useRef({});
+  const motherLastnameInputRef = useRef({});
+  const phoneInputRef = useRef({});
+  const emailInputRef = useRef({});
+  const userInputRef = useRef({});
 
   const { getDataUser, updateDataUser } = useUser();
 
   useEffect(() => {
     getDataUser().then(res => {
+      setIsLoadingInitial(false);
       if (res) {
-        let form = document.getElementById('form-data-user');
-        form[0].value = res.name;
-        form[1].value = res.lastName;
-        form[2].value = res.motherLastName;
-        form[3].value = res.phone;
-        form[4].value = res.email;
-        form[5].value = res.userName;
+        nameInputRef.current.value = res.name;
+        lastnameInputRef.current.value = res.lastName;
+        motherLastnameInputRef.current.value = res.motherLastName;
+        phoneInputRef.current.value = res.phone;
+        emailInputRef.current.value = res.email;
+        userInputRef.current.value = res.userName;
       }
     });
   }, []);
@@ -78,43 +87,82 @@ const EditUser = () => {
           <FormContainer className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }
             id="form-data-user"
           >
-            {
-              Object.keys(dataUser).map((key, index, completeArray) => {
-                if (dataUser[key] !== undefined && completeArray.length - 1 !== index) {
-                  return <div className="d-flex flex-column pb-2" key={ key }>
-                    <label htmlFor={ dataUser[key].label }>
-                      { dataUser[key].label }
-                    </label>
-                    { dataUser[key].type === 'textarea'
-                      ? <textarea
-                        placeholder={ dataUser[key].placeholder }
-                        id={ dataUser[key].label }
-                        style={ {height: '10rem'} }
-                      />
-                      : <input
-                        type={ dataUser[key].type }
-                        className="py-3"
-                        placeholder={ dataUser[key].placeholder }
-                        id={ dataUser[key].label }
-                      />
-                    }
-                  </div>;
-                }
-              })
-            }
+            { isLoadingInitial && <SpinnerLoadingButton /> }
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="name">
+                  Nombre:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu nombre" className="py-3"
+                  id="name" ref={ nameInputRef }
+                  disabled={ isLoadingInitial }
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="lastname">
+                  Apellido Paterno:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu apellido paterno" className="py-3"
+                  id="lastname" ref={ lastnameInputRef }
+                  disabled={ isLoadingInitial }
+                />
+              </div>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="motherlastname">
+                  Apellido Materno:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu apellido materno" className="py-3"
+                  id="motherlastname" ref={ motherLastnameInputRef }
+                  disabled={ isLoadingInitial }
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="phone">
+                  Telefono:
+                </label>
+                <input type="tel"
+                  placeholder="Ingresa tu telefono" className="py-3"
+                  id="phone" ref={ phoneInputRef }
+                  disabled={ isLoadingInitial }
+                />
+              </div>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="email">
+                  Correo Electronico:
+                </label>
+                <input type="email"
+                  placeholder="Ingresa tu correo electronico" className="py-3"
+                  id="email" ref={ emailInputRef }
+                  disabled={ isLoadingInitial }
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="user">
+                  Usuario:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu usuario" className="py-3"
+                  id="user" ref={ userInputRef }
+                  disabled={ isLoadingInitial }
+                />
+              </div>
+            </ComponentGrouper>
             <ButtonSave
               type="submit"
               className="btn btn-primary mb-3 px-3 py-2"
               style={ {fontSize: '1.3rem'} }
-              disabled={ isLoading }
+              disabled={ isLoading || isLoadingInitial }
             >
-              { isLoading &&
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                />
-              }
+              { isLoading && <SpinnerLoadingButton /> }
               Actualizar
             </ButtonSave>
           </FormContainer>
