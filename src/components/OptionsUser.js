@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Auth from '../context/Auth';
 
 import { ButtonDropdown, DropdownMenu } from '../stylesComponents/optionUserStyles';
+import Icon from './Icon';
 
 const OptionsUser = () => {
   const { userData, setUserData } = useContext(Auth);
@@ -33,31 +34,32 @@ const OptionsUser = () => {
           <li className="py-1">{ userData.email }</li>
           <li><hr className="dropdown-divider" /></li>
           <li className="pb-2">
-            <NavLink
-              to={ 'settings' }
+            <Link
+              to="settings"
               end
-              className="btn btn-primary w-100"
+              className="text-dark text-decoration-none w-100"
             >
-              <i className="bi bi-gear"> </i>
+              <Icon classNameIcon="bi-gear" />
               Configuración
-            </NavLink>
+            </Link>
           </li>
           <li className="pb-2">
-            <NavLink
-              to={ '/home/history' }
+            <Link
+              to="/home/history"
               end
-              className="btn btn-secondary w-100"
+              className="text-dark text-decoration-none w-100"
             >
-              <i className="bi bi-clock-history"> </i>
+              <Icon classNameIcon="bi-clock-history" />
               Historial
-            </NavLink>
+            </Link>
           </li>
           <li>
             <button
               type="button"
-              className="btn btn-danger w-100"
+              className="btn text-danger w-100"
               onClick={ logout }
             >
+              <Icon classNameIcon="bi-box-arrow-left" />
               Cerrar sesión
             </button>
           </li>
