@@ -4,6 +4,7 @@ import SpinnerLoading from '../../components/SpinnerLoading';
 import useHistory from '../../hooks/useHistory';
 import NoHistoryMessage from '../../components/NoHistoryMessage';
 import SpinnerLoadingButton from '../../components/common/SpinnerLoadingButton';
+import Icon from '../../components/Icon';
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -53,7 +54,7 @@ const History = () => {
                     onClick={ () => deleteSingleHistory(object.id) }
                   >
                     { buttonLoading === object.id && <SpinnerLoadingButton /> }
-                    Eliminar
+                    <Icon classNameIcon="bi-trash-fill" textNV="Eliminar" />
                   </button>
                 </td>
               </tr>)

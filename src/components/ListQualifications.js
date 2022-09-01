@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 import { showModalStatic } from '../components/ModalAddQualification';
 import { showModalStaticDelete } from '../components/ModalConfirmDelete';
+import Icon from './Icon';
 
 const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQualificationDelete}) => {
 
@@ -44,7 +45,7 @@ const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQ
                     className="btn btn-primary w-100"
                     onClick={ () => editQualification(value) }
                   >
-                    Editar
+                    <Icon classNameIcon="bi-pencil-fill" textNV="Editar" />
                   </button>
                 </td>
                 <td>
@@ -53,7 +54,7 @@ const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQ
                     className="btn btn-danger w-100"
                     onClick={ () => deleteThisQualification(value.id) }
                   >
-                    Eliminar
+                    <Icon classNameIcon="bi-trash-fill" textNV="Eliminar" />
                   </button>
                 </td>
               </tr>
