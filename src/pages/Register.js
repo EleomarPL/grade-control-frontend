@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
-import { dataUser } from '../consts/user';
 import { notifyInfo } from '../consts/notify';
 import { validationRegisterUser } from '../services/validations/validationUser';
 import useUser from '../hooks/useUser';
@@ -12,6 +11,7 @@ import {
   ButtonSave, ContainerRegister,
   ContainerRegisterData, FormContainer, Indication
 } from '../stylesComponents/registerStyles';
+import ComponentGrouper from '../components/common/ComponentGrouper';
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -73,41 +73,88 @@ const Register = () => {
             <p className="pt-1">Hola, para registrarte debes rellenar los siguientes campos</p>
           </Indication>
           <FormContainer className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }>
-            {
-              Object.keys(dataUser).map(key => {
-                if (dataUser[key] !== undefined) {
-                  return <div className="d-flex flex-column pb-2" key={ key }>
-                    <label htmlFor={ dataUser[key].label }>
-                      { dataUser[key].label }
-                    </label>
-                    { dataUser[key].type === 'textarea'
-                      ? <textarea
-                        placeholder={ dataUser[key].placeholder }
-                        id={ dataUser[key].label }
-                        style={ {height: '10rem'} }
-                      />
-                      : <input
-                        type={ dataUser[key].type }
-                        className="py-3"
-                        placeholder={ dataUser[key].placeholder }
-                        id={ dataUser[key].label }
-                      />
-                    }
-                  </div>;
-                }
-              })
-            }
-            <div className="d-flex flex-column pb-2">
-              <label htmlFor="confirm-password">
-                Confirmar contraseña
-              </label>
-              <input
-                type="password"
-                className="py-3"
-                placeholder="Confirma tu contraseña"
-                id="confirm-password"
-              />
-            </div>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="name">
+                  Nombre:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu nombre" className="py-3"
+                  id="name"
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="lastname">
+                  Apellido Paterno:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu apellido paterno" className="py-3"
+                  id="lastname"
+                />
+              </div>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="motherlastname">
+                  Apellido Materno:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu apellido materno" className="py-3"
+                  id="motherlastname"
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="phone">
+                  Telefono:
+                </label>
+                <input type="tel"
+                  placeholder="Ingresa tu telefono" className="py-3"
+                  id="phone"
+                />
+              </div>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="email">
+                  Correo Electronico:
+                </label>
+                <input type="email"
+                  placeholder="Ingresa tu correo electronico" className="py-3"
+                  id="email"
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="user">
+                  Usuario:
+                </label>
+                <input type="text"
+                  placeholder="Ingresa tu usuario" className="py-3"
+                  id="user"
+                />
+              </div>
+            </ComponentGrouper>
+            <ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="password">
+                  Contraseña:
+                </label>
+                <input type="password"
+                  placeholder="Ingresa tu contraseña" className="py-3"
+                  id="password"
+                />
+              </div>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="confirmpassword">
+                  Confirmar Contraseña:
+                </label>
+                <input type="password"
+                  placeholder="Confirma tu contraseña" className="py-3"
+                  id="confirmpassword"
+                />
+              </div>
+            </ComponentGrouper>
             <ButtonSave
               type="submit"
               className="btn btn-primary mb-3 px-3 py-2"

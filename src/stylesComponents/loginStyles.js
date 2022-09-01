@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BorderContainer = styled.div`
-  background: white;
+  background: #F8F9FA;
   width: 40%;
 
   border: solid 1.5px #8a8a8a;
@@ -21,8 +21,5 @@ export const ContainerSection = styled.section`
   align-items: center;
   width: 100%;
   height: 100vh;
-
-  @media only screen and (max-width: 700px) {
-    justify-content: flex-start;
-  }
+  background-color: #EDEDE9;
 `;

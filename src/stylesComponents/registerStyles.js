@@ -12,7 +12,6 @@ export const FormContainer = styled.form`
     border-radius: 10px;
     outline: none;
     padding-left: 1rem;
-    width: 50%;
 
     @media only screen and (max-width: 900px) {
       width: 70%;
