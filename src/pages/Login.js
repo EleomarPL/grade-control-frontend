@@ -6,6 +6,7 @@ import CustomizedInput from '../components/CustomizedInput';
 import Logo from '../components/Logo';
 import { notifyInfo } from '../consts/notify';
 import { BorderContainer, ContainerSection } from '../stylesComponents/loginStyles';
+import SpinnerLoadingButton from '../components/common/SpinnerLoadingButton';
 
 const Login = () => {
   const [userName, setUserName] = useState('');
@@ -54,12 +55,7 @@ const Login = () => {
             <button className="btn btn-primary mt-3 w-100" type="submit"
               disabled={ isLoading }
             >
-              { isLoading &&
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status" aria-hidden="true"
-                />
-              }
+              { isLoading && <SpinnerLoadingButton /> }
               Iniciar ahora
             </button>
           </div>

@@ -6,12 +6,13 @@ import Logo from '../components/Logo';
 import { notifyInfo } from '../consts/notify';
 import { validationRegisterUser } from '../services/validations/validationUser';
 import useUser from '../hooks/useUser';
+import ComponentGrouper from '../components/common/ComponentGrouper';
+import SpinnerLoadingButton from '../components/common/SpinnerLoadingButton';
 
 import {
   ButtonSave, ContainerRegister,
   ContainerRegisterData, FormContainer, Indication
 } from '../stylesComponents/registerStyles';
-import ComponentGrouper from '../components/common/ComponentGrouper';
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -161,11 +162,7 @@ const Register = () => {
               style={ {fontSize: '1.3rem'} }
               disabled={ isLoading }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status"
-                aria-hidden="true"
-              ></span>
+              { isLoading && <SpinnerLoadingButton /> }
               Registrar
             </ButtonSave>
           </FormContainer>

@@ -5,6 +5,7 @@ import { Modal } from 'bootstrap';
 import { notifySuccess } from '../consts/notify';
 import useQualification from '../hooks/useQualification';
 import useHistory from '../hooks/useHistory';
+import SpinnerLoadingButton from './common/SpinnerLoadingButton';
 
 export const showModalStaticDelete = () => {
   let myModal = new Modal(
@@ -84,11 +85,7 @@ export const ModalConfirmDelete = ({ idQualificationDelete, setQualifications, q
               onClick={ executeDelete }
               disabled={ isLoading }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status"
-                aria-hidden="true"
-              ></span>
+              { isLoading && <SpinnerLoadingButton /> }
               Eliminar
             </button>
             <button

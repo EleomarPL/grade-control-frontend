@@ -5,6 +5,7 @@ import CustomizedInput from '../../components/CustomizedInput';
 import { notifyInfo } from '../../consts/notify';
 import ButtonBack from '../../components/ButtonBack';
 import useUser from '../../hooks/useUser';
+import SpinnerLoadingButton from '../../components/common/SpinnerLoadingButton';
 
 import { BorderContainer, ContainerSection } from '../../stylesComponents/loginStyles';
 
@@ -79,11 +80,7 @@ const EditPassword = () => {
             <button className="btn btn-primary mt-3 w-100" type="submit"
               disabled={ isLoading }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status"
-                aria-hidden="true"
-              ></span>
+              { isLoading && <SpinnerLoadingButton /> }
               Actualizar
             </button>
           </div>

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import SpinnerLoading from '../../components/SpinnerLoading';
 import useHistory from '../../hooks/useHistory';
 import NoHistoryMessage from '../../components/NoHistoryMessage';
+import SpinnerLoadingButton from '../../components/common/SpinnerLoadingButton';
 
 const History = () => {
   const [history, setHistory] = useState([]);
@@ -51,13 +52,7 @@ const History = () => {
                     disabled={ buttonLoading === object.id }
                     onClick={ () => deleteSingleHistory(object.id) }
                   >
-                    { buttonLoading === object.id &&
-                      <span
-                        className="spinner-border spinner-border-sm"
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                    }
+                    { buttonLoading === object.id && <SpinnerLoadingButton /> }
                     Eliminar
                   </button>
                 </td>

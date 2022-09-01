@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal } from 'bootstrap';
 
 import useUser from '../hooks/useUser';
+import SpinnerLoadingButton from './common/SpinnerLoadingButton';
 
 export const showModalStaticDeleteAccount = () => {
   let myModal = new Modal(
@@ -61,11 +62,7 @@ export const ModalDeleteAccount = () => {
               disabled={ isLoading }
               onClick={ executeDelete }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status"
-                aria-hidden="true"
-              ></span>
+              { isLoading && <SpinnerLoadingButton /> }
               Eliminar
             </button>
             <button

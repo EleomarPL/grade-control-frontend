@@ -6,6 +6,7 @@ import { dataQualification } from '../consts/qualification';
 import { validationCreateQualification } from '../services/validations/validationQualification';
 import { notifyInfo } from '../consts/notify';
 import useQualification from '../hooks/useQualification';
+import SpinnerLoadingButton from './common/SpinnerLoadingButton';
 
 export const showModalStatic = () => {
   let myModal = new Modal(
@@ -169,11 +170,7 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
               form="form-qualification"
               disabled={ isLoading }
             >
-              <span
-                className={ `${isLoading ? 'spinner-border spinner-border-sm' : ''}` }
-                role="status"
-                aria-hidden="true"
-              ></span>
+              { isLoading && <SpinnerLoadingButton /> }
               Aceptar
             </button>
             <button
