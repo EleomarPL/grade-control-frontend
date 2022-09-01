@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'bootstrap';
 
-import { dataQualification } from '../consts/qualification';
 import { validationCreateQualification } from '../services/validations/validationQualification';
 import { notifyInfo } from '../consts/notify';
 import useQualification from '../hooks/useQualification';
 import SpinnerLoadingButton from './common/SpinnerLoadingButton';
+import ComponentGrouper from './common/ComponentGrouper';
 
 export const showModalStatic = () => {
   let myModal = new Modal(
@@ -141,25 +141,44 @@ export const ModalAddQualification = ( { setQualifications, qualifications, data
               </strong>
             </div>
             <form onSubmit={ handleOperations } id="form-qualification">
-              
-              {
-                Object.keys(dataQualification).map(key => {
-                  if (dataQualification[key] !== undefined) {
-                    return <div className="d-flex flex-column pb-2" key={ key }>
-                      <label htmlFor={ dataQualification[key].label }>
-                        { dataQualification[key].label }
-                      </label>
-                      <input
-                        type={ dataQualification[key].type }
-                        className="py-3 w-100"
-                        placeholder={ dataQualification[key].placeholder }
-                        id={ dataQualification[key].label }
-                      />
-                      
-                    </div>;
-                  }
-                })
-              }
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="course">
+                  Materia
+                </label>
+                <input type="text" className="py-3 w-100"
+                  placeholder="Ingrese el nombre de la materia"
+                  id="course"
+                />
+              </div>
+              <ComponentGrouper>
+                <div className="d-flex flex-column pb-2">
+                  <label htmlFor="unit">
+                    Unidad
+                  </label>
+                  <input type="number" className="py-3 w-100"
+                    placeholder="Ingrese la unidad"
+                    id="unit"
+                  />
+                </div>
+                <div className="d-flex flex-column pb-2">
+                  <label htmlFor="score">
+                    Calificación
+                  </label>
+                  <input type="number" className="py-3 w-100"
+                    placeholder="Ingrese la calificación - 0-100"
+                    id="score"
+                  />
+                </div>
+              </ComponentGrouper>
+              <div className="d-flex flex-column pb-2">
+                <label htmlFor="semester">
+                  Semestre
+                </label>
+                <input type="number" className="py-3 w-100"
+                  placeholder="Ingrese el semestre"
+                  id="semester"
+                />
+              </div>
             </form>
           </div>
           <div className="modal-footer">
