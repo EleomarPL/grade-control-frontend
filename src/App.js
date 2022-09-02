@@ -31,53 +31,57 @@ const App = () => {
               <meta name="twitter:card" content="summary" />
             </Helmet>
             <Routes>
-              <Route index
-                element={
-                  <PublicRoute>
-                    <Helmet>
-                      <title>Login | Calificaciones</title>
-                      <meta property="og:title" content="Login | Calificaciones" />
-                      <meta name="twitter:title" content="Login | Calificaciones" />
-                      <meta name="twitter:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
-                      <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
-                      <meta property="og:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
-                      <meta name="twitter:url" content="https://gestiocal.vercel.app/" />
-                      <meta property="og:url" content="https://gestiocal.vercel.app/" />
-                    </Helmet>
-                    <Suspense fallback={ <SpinnerLoading /> }>
-                      <Login />
-                    </Suspense>
-                  </PublicRoute>
-                }
-              />
-              <Route path="/register"
-                element={
-                  <PublicRoute>
-                    <Helmet>
-                      <title>Registrarse | Calificaciones</title>
-                      <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
-                      <meta name="twitter:title" content="Registrarse | Calificaciones" />
-                      <meta name="twitter:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
-                      <meta property="og:title" content="Registrarse | Calificaciones" />
-                      <meta property="og:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
-                      <meta name="twitter:url" content="https://gestiocal.vercel.app/register/" />
-                      <meta property="og:url" content="https://gestiocal.vercel.app/register/" />
-                    </Helmet>
-                    <Suspense fallback={ <SpinnerLoading /> }>
-                      <Register />
-                    </Suspense>
-                  </PublicRoute>
-                }
-              />
-              <Route path="/home/*"
-                element={
-                  <PrivateRoute>
-                    <Suspense fallback={ <SpinnerLoading /> }>
-                      <Home />
-                    </Suspense>
-                  </PrivateRoute>
-                }
-              />
+              <Route element={ <PublicRoute /> }>
+                <Route index
+                  element={
+                    <>
+                      <Helmet>
+                        <title>Login | Calificaciones</title>
+                        <meta property="og:title" content="Login | Calificaciones" />
+                        <meta name="twitter:title" content="Login | Calificaciones" />
+                        <meta name="twitter:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
+                        <meta name="description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
+                        <meta property="og:description" content="Login para acceder, y poder gestionar o controlar tus calificaciones." />
+                        <meta name="twitter:url" content="https://gestiocal.vercel.app/" />
+                        <meta property="og:url" content="https://gestiocal.vercel.app/" />
+                      </Helmet>
+                      <Suspense fallback={ <SpinnerLoading /> }>
+                        <Login />
+                      </Suspense>
+                    </>
+                  }
+                />
+                <Route path="/register"
+                  element={
+                    <>
+                      <Helmet>
+                        <title>Registrarse | Calificaciones</title>
+                        <meta name="description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
+                        <meta name="twitter:title" content="Registrarse | Calificaciones" />
+                        <meta name="twitter:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
+                        <meta property="og:title" content="Registrarse | Calificaciones" />
+                        <meta property="og:description" content="Registrate, y obten la facilidad de gestionar tus calificaciones." />
+                        <meta name="twitter:url" content="https://gestiocal.vercel.app/register/" />
+                        <meta property="og:url" content="https://gestiocal.vercel.app/register/" />
+                      </Helmet>
+                      <Suspense fallback={ <SpinnerLoading /> }>
+                        <Register />
+                      </Suspense>
+                    </>
+                  }
+                />
+              </Route>
+              <Route element={ <PrivateRoute /> }>
+                <Route path="/home/*"
+                  element={
+                    <>
+                      <Suspense fallback={ <SpinnerLoading /> }>
+                        <Home />
+                      </Suspense>
+                    </>
+                  }
+                />
+              </Route>
             </Routes>
           </BrowserRouter>
         </AuthProvider>
