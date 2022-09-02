@@ -45,7 +45,7 @@ const OptionsUser = () => {
           </li>
           <li className="pb-2">
             <Link
-              to="/home/history"
+              to="history"
               end
               className="text-dark text-decoration-none w-100"
             >

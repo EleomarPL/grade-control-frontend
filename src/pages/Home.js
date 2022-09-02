@@ -16,7 +16,7 @@ const Home = () => {
     <section>
       <HeaderUser />
       <Routes>
-        <Route path="/*"
+        <Route path="*"
           element={
             <>
               <Helmet>
@@ -35,7 +35,7 @@ const Home = () => {
             </>
           }
         />
-        <Route path="/settings"
+        <Route path="settings"
           element={
             <>
               <Helmet>
@@ -54,7 +54,7 @@ const Home = () => {
             </>
           }
         />
-        <Route path="/history"
+        <Route path="history"
           element={
             <>
               <Helmet>
@@ -73,7 +73,7 @@ const Home = () => {
             </>
           }
         />
-        <Route path="/edit"
+        <Route path="edit"
           element={
             <>
               <Helmet>
@@ -92,7 +92,7 @@ const Home = () => {
             </>
           }
         />
-        <Route path="/editpassword"
+        <Route path="editpassword"
           element={
             <>
               <Helmet>
