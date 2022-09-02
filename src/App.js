@@ -13,6 +13,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const Register = lazy(() => import('./pages/Register'));
 const Home = lazy(() => import('./pages/Home'));
 const Login = lazy(() => import('./pages/Login'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 import { AuthProvider } from './context/Auth';
 import PublicRoute from './routes/PublicRoute';
@@ -66,6 +67,23 @@ const App = () => {
                       </Helmet>
                       <Suspense fallback={ <SpinnerLoading /> }>
                         <Register />
+                      </Suspense>
+                    </>
+                  }
+                />
+                <Route path="*"
+                  element={
+                    <>
+                      <Helmet>
+                        <title>No Encontrado | Calificaciones</title>
+                        <meta name="description" content="Página publica dentro del sitio gestiocal no encontrada." />
+                        <meta name="twitter:title" content="No Encontrado | Calificaciones" />
+                        <meta name="twitter:description" content="Página publica dentro del sitio gestiocal no encontrada." />
+                        <meta property="og:title" content="No Encontrado | Calificaciones" />
+                        <meta property="og:description" content="Página publica dentro del sitio gestiocal no encontrada." />
+                      </Helmet>
+                      <Suspense fallback={ <SpinnerLoading /> }>
+                        <NotFound />
                       </Suspense>
                     </>
                   }
