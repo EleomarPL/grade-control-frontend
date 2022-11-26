@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { BASE_API } from './BASE_API';
 
-const baseAPI = 'https://radiant-journey-60007.herokuapp.com/api';
+const baseAPI = `${BASE_API}api`;
 
 export const createUserAxios = async({
   name, lastName, motherLastName, phone,
