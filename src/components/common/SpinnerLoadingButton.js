@@ -1,12 +1,13 @@
+import { Loading } from '@nextui-org/react';
+
 const SpinnerLoadingButton = () => {
   return (
-    <span
-      className="spinner-border spinner-border-sm"
-      role="status"
-      aria-hidden="true"
-      style={ { marginRight: '5px' } }
+    <Loading color="currentColor" type="default"
+      css={ { px: '$2' } }
     />
   );
 };
+
+ 
 
 export default SpinnerLoadingButton;

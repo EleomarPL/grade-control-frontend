@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import { Input } from '@nextui-org/react';
 import PropTypes from 'prop-types';
-
-import { ContainerInputs, IconSize } from '../stylesComponents/customizedInputStyles';
+import styled from 'styled-components';
 
 const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) => {
   const handleChange = (evt) => {
@@ -19,12 +19,12 @@ const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) 
     };
   }, []);
   return (
-    <ContainerInputs className="bg-white mb-3" id={ placeholder }>
-      <IconSize className={ classNameIcon }></IconSize>
-      <input
+    <ContainerInputs id={ placeholder }>
+      
+      <InputPersonalized
+        contentLeft={ <IconSize className={ classNameIcon }></IconSize> }
         type={ type }
         placeholder={ placeholder }
-        className="py-1"
         value={ state }
         onChange={ handleChange }
       />
@@ -39,5 +39,22 @@ PersonalizedInput.propTypes = {
   setState: PropTypes.func.isRequired,
   classNameIcon: PropTypes.string.isRequired
 };
+
+const InputPersonalized = styled(Input)`
+  width: 100%;
+  border: 1px solid rgba(9, 113, 163, 1);
+  margin-bottom: 10px;
+`;
+const IconSize = styled.i`
+  opacity: 0.7;
+  font-size: 1.25rem;
+  padding-right: 5px;
+`;
+const ContainerInputs = styled.div`
+  width: 100%;
+  & div {
+    width: 100%;
+  }
+`;
 
 export default PersonalizedInput ;
