@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/roboto": "^4.5.1",
+    "@nextui-org/react": "^1.0.0-beta.10",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -17,7 +18,7 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "^5.0.1",
     "react-toastify": "^8.1.0",
-    "styled-components": "^5.3.3",
+    "styled-components": "^5.3.6",
     "web-vitals": "^2.1.3"
   },
   "scripts": {
