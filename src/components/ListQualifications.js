@@ -1,68 +1,71 @@
+import { Button, Table, Tooltip } from '@nextui-org/react';
 import PropTypes from 'prop-types';
 
-import { showModalStatic } from '../components/ModalAddQualification';
-import { showModalStaticDelete } from '../components/ModalConfirmDelete';
 import Icon from './Icon';
 
-const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQualificationDelete}) => {
+const ListQualifications = ({qualifications, setIsCreated, setDataToEdit, setIdQualificationDelete, setVisibleCreateEdit, setVisibleDelete}) => {
 
   const deleteThisQualification = (idQualification) => {
     setIdQualificationDelete(idQualification);
-    showModalStaticDelete();
+    setVisibleDelete(true);
   };
 
   const editQualification = (valueToEdit) => {
-    setIsCreated(false);
-    if (valueToEdit !== null) {
+    if (valueToEdit) {
+      setIsCreated(false);
       setDataToEdit(valueToEdit);
-      showModalStatic();
+      setVisibleCreateEdit(true);
     }
   };
   return (
-    <div className="table-responsive">
-      <table className="table text-center">
-        <thead className="table-dark">
-          <tr>
-            <th scope="col">Materia</th>
-            <th scope="col">Unidad</th>
-            <th scope="col">Calificación</th>
-            <th scope="col">Semestre</th>
-            <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
-          </tr>
-        </thead>
-        <tbody>
-          { qualifications !== null && qualifications !== undefined &&
+    <Table
+      aria-label="Lista de calificaciones"
+      css={ {
+        height: 'auto',
+        minWidth: '100%'
+      } }
+    >
+      <Table.Header>
+        <Table.Column>Materia</Table.Column>
+        <Table.Column>Unidad</Table.Column>
+        <Table.Column>Semestre</Table.Column>
+        <Table.Column>Calificación</Table.Column>
+        <Table.Column>Editar</Table.Column>
+        <Table.Column>Eliminar</Table.Column>
+      </Table.Header>
+      <Table.Body>
+        { qualifications !== null && qualifications !== undefined &&
             qualifications.map((value, index) =>
-              <tr key={ index }>
-                <th scope="row">{ value.course }</th>
-                <td>{ value.unit }</td>
-                <td>{ value.score }</td>
-                <td>{ value.semester }</td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-primary w-100"
-                    onClick={ () => editQualification(value) }
-                  >
-                    <Icon classNameIcon="bi-pencil-fill" textNV="Editar" />
-                  </button>
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-danger w-100"
-                    onClick={ () => deleteThisQualification(value.id) }
-                  >
-                    <Icon classNameIcon="bi-trash-fill" textNV="Eliminar" />
-                  </button>
-                </td>
-              </tr>
+              <Table.Row key={ `${index}` }>
+                <Table.Cell>{ value.course }</Table.Cell>
+                <Table.Cell>{ value.unit }</Table.Cell>
+                <Table.Cell>{ value.semester }</Table.Cell>
+                <Table.Cell>{ value.score }</Table.Cell>
+                <Table.Cell>
+                  <Tooltip content="Editar">
+                    <Button bordered color="primary"
+                      auto onPress={ () => editQualification(value) }
+                    >
+                      <Icon classNameIcon="bi-pencil-fill" textNV="Editar" />
+                    </Button>
+                  </Tooltip>
+                </Table.Cell>
+                <Table.Cell>
+                  <Tooltip content="Eliminar">
+                    <Button bordered color="error"
+                      auto
+                      onPress={ () => deleteThisQualification(value.id) }
+                    >
+                      <Icon classNameIcon="bi-trash-fill" textNV="Eliminar" />
+                    </Button>
+                  </Tooltip>
+                </Table.Cell>
+              </Table.Row>
             )
-          }
-        </tbody>
-      </table>
-    </div>
+        }
+      </Table.Body>
+    </Table>
+    
   );
 };
 
@@ -73,8 +76,9 @@ ListQualifications.propTypes = {
   ]),
   setIsCreated: PropTypes.func,
   setDataToEdit: PropTypes.func,
-  setIdQualificationDelete: PropTypes.func
-
+  setIdQualificationDelete: PropTypes.func,
+  setVisibleCreateEdit: PropTypes.func,
+  setVisibleDelete: PropTypes.func
 };
 
 export default ListQualifications;
