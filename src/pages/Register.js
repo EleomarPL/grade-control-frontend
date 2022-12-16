@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button, Container, Input, Text } from '@nextui-org/react';
+import styled from 'styled-components';
 
 import ButtonBack from '../components/ButtonBack';
 import Logo from '../components/Logo';
@@ -8,11 +10,6 @@ import { validationRegisterUser } from '../services/validations/validationUser';
 import useUser from '../hooks/useUser';
 import ComponentGrouper from '../components/common/ComponentGrouper';
 import SpinnerLoadingButton from '../components/common/SpinnerLoadingButton';
-
-import {
-  ButtonSave, ContainerRegister,
-  ContainerRegisterData, FormContainer, Indication
-} from '../stylesComponents/registerStyles';
 
 const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,114 +59,96 @@ const Register = () => {
     }
   };
   return (
-    <section>
-      <div className="px-4 mx-1 pt-2">
-        <Logo />
-      </div>
-      <ContainerRegister className="m-auto py-3">
+    <Container>
+      <Logo />
+      <ContainerRegister fluid>
         <ButtonBack />
-        <ContainerRegisterData className="px-4 pt-2">
+        <ContainerRegisterData>
           <Indication>
-            <strong style={ {fontSize: '1.8rem'} }>Registrar usuario</strong>
-            <p className="pt-1">Hola, para registrarte debes rellenar los siguientes campos</p>
+            <Text h2 size="$2xl">Registrar usuario</Text>
+            <Text css={ { paddingBottom: '10px' } }>
+              Hola, para registrarte debes rellenar los siguientes campos
+            </Text>
           </Indication>
-          <FormContainer className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }>
+          <FormContainer onSubmit={ handleChangeData }>
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="name">
-                  Nombre:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu nombre" className="py-3"
-                  id="name"
-                />
-              </div>
+              <Input label="Nombre" placeholder="Ingresa tu nombre"
+                bordered fullWidth
+              />
+              <Input label="Apellido paterno" placeholder="Ingresa tu apellido paterno"
+                bordered fullWidth
+              />
             </ComponentGrouper>
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="lastname">
-                  Apellido Paterno:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu apellido paterno" className="py-3"
-                  id="lastname"
-                />
-              </div>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="motherlastname">
-                  Apellido Materno:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu apellido materno" className="py-3"
-                  id="motherlastname"
-                />
-              </div>
+              <Input label="Apellido materno" placeholder="Ingresa tu apellido materno"
+                bordered fullWidth
+              />
+              <Input label="Telefono" placeholder="Ingresa tu telefono"
+                bordered fullWidth
+              />
             </ComponentGrouper>
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="phone">
-                  Telefono:
-                </label>
-                <input type="tel"
-                  placeholder="Ingresa tu telefono" className="py-3"
-                  id="phone"
-                />
-              </div>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="email">
-                  Correo Electronico:
-                </label>
-                <input type="email"
-                  placeholder="Ingresa tu correo electronico" className="py-3"
-                  id="email"
-                />
-              </div>
+              <Input label="Correo electronico" placeholder="Ingresa tu correo electronico"
+                bordered fullWidth
+              />
+              <Input label="Usuario" placeholder="Ingresa tu usuario"
+                bordered fullWidth
+              />
             </ComponentGrouper>
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="user">
-                  Usuario:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu usuario" className="py-3"
-                  id="user"
-                />
-              </div>
+              <Input label="Contraseña" placeholder="Ingresa tu contraseña"
+                bordered fullWidth
+              />
+              <Input label="Confirmar contraseña" placeholder="Confirma tu contraseña"
+                bordered fullWidth
+              />
             </ComponentGrouper>
-            <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="password">
-                  Contraseña:
-                </label>
-                <input type="password"
-                  placeholder="Ingresa tu contraseña" className="py-3"
-                  id="password"
-                />
-              </div>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="confirmpassword">
-                  Confirmar Contraseña:
-                </label>
-                <input type="password"
-                  placeholder="Confirma tu contraseña" className="py-3"
-                  id="confirmpassword"
-                />
-              </div>
-            </ComponentGrouper>
-            <ButtonSave
+            <Button shadow color="primary"
               type="submit"
-              className="btn btn-primary mb-3 px-3 py-2"
-              style={ {fontSize: '1.3rem'} }
               disabled={ isLoading }
+              css={ { px: '$13', margin: '1rem auto 0 auto' } }
+              auto size="lg"
             >
               { isLoading && <SpinnerLoadingButton /> }
               Registrar
-            </ButtonSave>
+            </Button>
           </FormContainer>
         </ContainerRegisterData>
       </ContainerRegister>
-    </section>
+    </Container>
   );
 };
+
+const FormContainer = styled.form`
+  padding-left: 1rem;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+  }
+`;
+const ContainerRegister = styled(Container)`
+  width: 80%;
+  @media only screen and (max-width: 900px) {
+    width: 90%;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
+const ContainerRegisterData = styled.div`
+  border: solid 1.5px #8a8a8a;
+  border-radius: 10px;
+  background: white;
+  padding: 10px 1rem;
+
+  @media only screen and (max-width: 600px) {
+    border: none;
+  }
+`;
+const Indication = styled.div`
+  @media only screen and (max-width: 600px) {
+    text-align: center;
+  }
+`;
 
 export default Register;
