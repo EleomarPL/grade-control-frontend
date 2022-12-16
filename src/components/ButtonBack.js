@@ -1,22 +1,22 @@
+import { Button } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 
 const ButtonBack = () => {
   const navigate = useNavigate();
 
   return (
-    <button
-      style={ {
-        background: 'transparent',
-        color: '#3277c5',
-        border: 'none'
+    <Button
+      ghost color="primary"
+      auto
+      css={ {
+        marginBottom: '10px'
       } }
       type="button"
-      onClick={ () => navigate(-1) }
-      className="button fw-bold pb-2"
+      onClick={ () => navigate('/') }
     >
       <i className="bi bi-caret-left"></i>
-      <span>Regresar</span>
-    </button>
+      Regresar
+    </Button>
   );
 };
 

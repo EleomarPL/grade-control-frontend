@@ -1,16 +1,23 @@
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const ComponentGrouper = ({ nBloquesFila = 2, nEspacio = 1, children }) => {
+const ComponentGrouper = ({ children }) => {
   return (
-    <div className={ `row row-cols-lg-${nBloquesFila} g-${nEspacio}` }>
+    <ContainerGrouper>
       { children }
-    </div>
+    </ContainerGrouper>
   );
 };
 ComponentGrouper.propTypes = {
-  nBloquesFila: PropTypes.number,
-  nEspacio: PropTypes.number,
   children: PropTypes.node
 };
+
+const ContainerGrouper = styled.div`
+  display: grid;
+  gap: 1rem;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  margin-bottom: 5px;
+`;
 
 export default ComponentGrouper;
