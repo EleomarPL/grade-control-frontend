@@ -1,19 +1,16 @@
 import { useEffect, useState, Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
+import { Container, Row, Spacer, Text } from '@nextui-org/react';
+import styled from 'styled-components';
 
-import { ModalAddQualification, showModalStatic } from '../../components/ModalAddQualification';
+import { ModalAddQualification } from '../../components/ModalAddQualification';
 import { ModalConfirmDelete } from '../../components/ModalConfirmDelete';
 import SpinnerLoading from '../../components/SpinnerLoading';
-
-import useQualification from '../../hooks/useQualification';
 import NoQualificationMessage from '../../components/NoQualificationMessage';
+import useQualification from '../../hooks/useQualification';
 
 const ListQualifications = lazy(() => import('../../components/ListQualifications'));
 const OrdenatedQualification = lazy(() => import('../../components/OrdenatedQualification'));
-
-import {
-  ContainerHome, DivAddNewQualification, StylesNavLink
-} from '../../stylesComponents/qualificationStyles';
 
 const Qualifications = () => {
   const [qualifications, setQualification] = useState([]);
@@ -21,6 +18,8 @@ const Qualifications = () => {
   const [dataToEdit, setDataToEdit] = useState({});
   const [idQualificationDelete, setIdQualificationDelete] = useState(null);
   const [isLoadingQualifications, setIsLoadingQualifications] = useState(false);
+  const [visibleModalCreateEdit, setVisibleModalCreateEdit] = useState(false);
+  const [visibleModalDelete, setVisibleModalDelete] = useState(false);
 
   const { getAllQualifications } = useQualification();
 
@@ -34,18 +33,21 @@ const Qualifications = () => {
   }, []);
   const showModal = () => {
     setIsCreated(true);
-    showModalStatic();
+    setVisibleModalCreateEdit(true);
   };
   return (
     <>
-      <div className="d-flex flex-wrap justify-content-center pt-4 pb-2" style={ {fontSize: '2.1rem'} }>
-        <strong>Calificaciones</strong>
-      </div>
+      <Spacer y={ 1 } />
+      <Text h2 css={ { textAlign: 'center' } }>Calificaciones</Text>
       <ContainerHome>
-        <div className="d-flex flex-wrap justify-content-center">
-          <StylesNavLink to="" end>Lista</StylesNavLink>
-          <StylesNavLink to={ 'ordenated' }>Ordenados</StylesNavLink>
-        </div>
+        <Container fluid>
+          <Row fluid gap={ 1 }
+            justify="center"
+          >
+            <StylesNavLink to="" end>Lista</StylesNavLink>
+            <StylesNavLink to="ordenated">Ordenados</StylesNavLink>
+          </Row>
+        </Container>
         { qualifications.length === 0 && !isLoadingQualifications &&
           <NoQualificationMessage />
         }
@@ -60,6 +62,8 @@ const Qualifications = () => {
                       setIsCreated={ setIsCreated }
                       setDataToEdit={ setDataToEdit }
                       setIdQualificationDelete={ setIdQualificationDelete }
+                      setVisibleCreateEdit={ setVisibleModalCreateEdit }
+                      setVisibleDelete={ setVisibleModalDelete }
                     />
                   }
                   { isLoadingQualifications &&
@@ -93,14 +97,68 @@ const Qualifications = () => {
         qualifications={ qualifications }
         isCreated={ isCreated }
         dataToEdit={ dataToEdit }
+        setDataToEdit={ setDataToEdit }
+        visible={ visibleModalCreateEdit }
+        setVisible={ setVisibleModalCreateEdit }
       />
       <ModalConfirmDelete
         idQualificationDelete={ idQualificationDelete }
         setQualifications={ setQualification }
         qualifications={ qualifications }
+        visible={ visibleModalDelete }
+        setVisible={ setVisibleModalDelete }
       />
     </>
   );
 };
+
+const ContainerHome = styled.div`
+  padding: 0;
+  margin: 0;
+`;
+const StylesNavLink = styled(NavLink)`
+  border: none;
+  opacity: 0.5;
+  color: black;
+  width: 20%;
+  padding: 10px 10px;
+
+  text-decoration: none;
+  font-size: 1.1rem;
+  text-align: center;
+  &.active {
+    opacity: 1;
+    border: solid 1px gray;
+    border-radius: 10px;
+  }
+
+  @media only screen and (max-width: 700px) {
+    width: 40%;
+  }
+`;
+const DivAddNewQualification = styled.div`
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 99999;
+
+  transition: all .5s;
+
+  & button{
+    background: transparent;
+    border: none;
+  }
+  &:hover{
+    transform: scale(1.2);
+  }
+
+  @media only screen and (max-width: 700px) {
+    font-size: 2.5rem;
+  }
+`;
 
 export default Qualifications;

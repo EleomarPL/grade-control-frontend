@@ -107,6 +107,7 @@ const App = () => {
         newestOnTop={ false } closeOnClick
         rtl={ false } pauseOnFocusLoss
         draggable={ false } pauseOnHover
+        style={ { zIndex: '99999' } }
       />
     </>
   );
