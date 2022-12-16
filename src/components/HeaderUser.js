@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import Logo from './Logo';
 import OptionsUser from './OptionsUser';
-import { NavbarUser } from '../stylesComponents/headerStyles';
-
 
 const HeaderUser = () => {
   return (
@@ -15,5 +14,13 @@ const HeaderUser = () => {
     </NavbarUser>
   );
 };
+
+const NavbarUser = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: sticky;
+  background: rgb(48, 108, 197);
+`;
 
 export default HeaderUser;
