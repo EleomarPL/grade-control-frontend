@@ -1,14 +1,11 @@
 import PropTypes from 'prop-types';
 
-const Icon = ({ classNameIcon, textNV }) => {
+const Icon = ({ classNameIcon }) => {
   return (
     <>
       <i className={ `bi ${classNameIcon}` }
         style={ { marginRight: '5px' } }
       />
-      { textNV &&
-        <span className="visually-hidden">{ textNV }</span>
-      }
     </>
   );
 };
