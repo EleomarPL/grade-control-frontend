@@ -1,4 +1,4 @@
-import { notifyError, notifyInfo, notifySuccess, notifyWarning } from '../consts/notify';
+import { notifyError, notifySuccess, notifyWarning } from '../consts/notify';
 import { createHistoryAxios, deleteHistoryAxios, getAllHistoryUserAxios } from '../services/apis/history';
 
 const useHistory = () => {
@@ -7,7 +7,6 @@ const useHistory = () => {
 
     try {
       const { data } = await getAllHistoryUserAxios({token});
-      if (data.length === 0) notifyInfo('Historial vacio');
 
       return data.reverse();
     } catch (err) {

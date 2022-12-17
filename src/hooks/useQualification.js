@@ -1,4 +1,4 @@
-import { notifyError, notifyInfo, notifySuccess, notifyWarning } from '../consts/notify';
+import { notifyError, notifySuccess, notifyWarning } from '../consts/notify';
 import {
   createQualificationAxios, deleteQualificationAxios,
   editQualificationAxios, getAllQualificationUserAxios
@@ -10,9 +10,6 @@ const useQualification = () => {
     const token = JSON.parse(window.localStorage.getItem('session'));
     try {
       const { data } = await getAllQualificationUserAxios({token});
-      if (data.length === 0) {
-        notifyInfo('Aun no tienes calificaciones agregadas');
-      }
       return data;
     } catch (err) {
       if (err.message === 'Network Error')
