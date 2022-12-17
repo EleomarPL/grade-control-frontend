@@ -12,7 +12,7 @@ const ButtonBack = () => {
         marginBottom: '10px'
       } }
       type="button"
-      onClick={ () => navigate('/') }
+      onPress={ () => navigate(-1) }
     >
       <i className="bi bi-caret-left"></i>
       Regresar

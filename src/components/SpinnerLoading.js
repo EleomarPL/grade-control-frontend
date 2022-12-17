@@ -1,10 +1,10 @@
+import { Container, Loading } from '@nextui-org/react';
+
 const SpinnerLoading = () => {
   return (
-    <div className="d-flex justify-content-center">
-      <div className="spinner-border text-primary" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    </div>
+    <Container fluid css={ {margin: 'auto'} }>
+      <Loading size="lg" type="points" />
+    </Container>
   );
 };
 
