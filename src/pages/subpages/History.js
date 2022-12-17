@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Button, Table, Tooltip } from '@nextui-org/react';
 
 import SpinnerLoading from '../../components/SpinnerLoading';
 import useHistory from '../../hooks/useHistory';
@@ -33,41 +34,47 @@ const History = () => {
   };
   return (
     <section>
-      <div className="table-responsive">
-        <table className="table text-center ">
-          <thead className="table-dark">
-            <tr>
-              <th scope="col">Operacion</th>
-              <th scope="col">Eliminar</th>
-            </tr>
-          </thead>
-          <tbody>
-            { history !== null &&
-            history.map((object, index) =>
-              <tr key={ index }>
-                <td>{ object.operation }</td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-danger w-100"
-                    disabled={ buttonLoading === object.id }
-                    onClick={ () => deleteSingleHistory(object.id) }
-                  >
-                    { buttonLoading === object.id && <SpinnerLoadingButton /> }
-                    <Icon classNameIcon="bi-trash-fill" textNV="Eliminar" />
-                  </button>
-                </td>
-              </tr>)
-            }
-          </tbody>
-        </table>
-      </div>
+      <Table
+        aria-label="Lista de operaciones"
+        css={ {
+          height: 'auto',
+          minWidth: '100%'
+        } }
+      >
+        <Table.Header>
+          <Table.Column>Operación</Table.Column>
+          <Table.Column>Eliminar</Table.Column>
+        </Table.Header>
+        <Table.Body>
+          { history !== null &&
+            history.map((value, index) =>
+              <Table.Row key={ `${index}` }>
+                <Table.Cell
+                  css={ { textOverflow: 'ellipsis' } }
+                >
+                  { value.operation }
+                </Table.Cell>
+                <Table.Cell>
+                  <Tooltip content="Eliminar">
+                    <Button bordered color="error"
+                      auto
+                      disabled={ buttonLoading === value.id }
+                      onClick={ () => deleteSingleHistory(value.id) }
+                    >
+                      { buttonLoading === value.id && <SpinnerLoadingButton /> }
+                      <Icon classNameIcon="bi-trash-fill" textNV="Eliminar" />
+                    </Button>
+                  </Tooltip>
+                </Table.Cell>
+              </Table.Row>
+            )
+          }
+        </Table.Body>
+      </Table>
       { history.length === 0 && !isLoadHistory &&
         <NoHistoryMessage />
       }
-      { isLoadHistory &&
-        <SpinnerLoading />
-      }
+      { isLoadHistory && <SpinnerLoading /> }
     </section>
   );
 };
