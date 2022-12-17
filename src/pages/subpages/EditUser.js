@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Button, Container, Input, Text } from '@nextui-org/react';
 
 import ButtonBack from '../../components/ButtonBack';
 import { notifyInfo } from '../../consts/notify';
@@ -7,11 +9,6 @@ import { validationRegisterUser } from '../../services/validations/validationUse
 import useUser from '../../hooks/useUser';
 import ComponentGrouper from '../../components/common/ComponentGrouper';
 import SpinnerLoadingButton from '../../components/common/SpinnerLoadingButton';
-
-import {
-  ButtonSave, ContainerRegister,
-  ContainerRegisterData, FormContainer, Indication
-} from '../../stylesComponents/registerStyles';
 
 const EditUser = () => {
   const [isLoadingInitial, setIsLoadingInitial] = useState(true);
@@ -77,99 +74,96 @@ const EditUser = () => {
   };
   return (
     <section>
-      <ContainerRegister className="m-auto py-3">
+      <ContainerRegister fluid>
         <ButtonBack />
-        <ContainerRegisterData className="px-4 pt-2">
+        <ContainerRegisterData>
           <Indication>
-            <strong style={ {fontSize: '1.8rem'} }>Editar mis datos</strong>
-            <p className="pt-1">Hola, para editar, solo basta con cambiar lo necesario</p>
+            <Text h2 size="$2xl">Editar mis datos</Text>
+            <Text css={ { paddingBottom: '10px' } }>
+              Hola, para editar, solo basta con cambiar lo necesario
+            </Text>
           </Indication>
-          <FormContainer className="pt-2" onSubmit={ (evt) => handleChangeData(evt) }
+          <FormContainer onSubmit={ (evt) => handleChangeData(evt) }
             id="form-data-user"
           >
             { isLoadingInitial && <SpinnerLoadingButton /> }
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="name">
-                  Nombre:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu nombre" className="py-3"
-                  id="name" ref={ nameInputRef }
-                  disabled={ isLoadingInitial }
-                />
-              </div>
+              <Input label="Nombre" placeholder="Ingresa tu nombre"
+                bordered fullWidth
+                ref={ nameInputRef }
+              />
+              <Input label="Apellido paterno" placeholder="Ingresa tu apellido paterno"
+                bordered fullWidth
+                ref={ lastnameInputRef }
+              />
             </ComponentGrouper>
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="lastname">
-                  Apellido Paterno:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu apellido paterno" className="py-3"
-                  id="lastname" ref={ lastnameInputRef }
-                  disabled={ isLoadingInitial }
-                />
-              </div>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="motherlastname">
-                  Apellido Materno:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu apellido materno" className="py-3"
-                  id="motherlastname" ref={ motherLastnameInputRef }
-                  disabled={ isLoadingInitial }
-                />
-              </div>
+              <Input label="Apellido materno" placeholder="Ingresa tu apellido materno"
+                bordered fullWidth
+                ref={ motherLastnameInputRef }
+              />
+              <Input label="Telefono" placeholder="Ingresa tu telefono"
+                bordered fullWidth
+                ref={ phoneInputRef }
+              />
             </ComponentGrouper>
             <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="phone">
-                  Telefono:
-                </label>
-                <input type="tel"
-                  placeholder="Ingresa tu telefono" className="py-3"
-                  id="phone" ref={ phoneInputRef }
-                  disabled={ isLoadingInitial }
-                />
-              </div>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="email">
-                  Correo Electronico:
-                </label>
-                <input type="email"
-                  placeholder="Ingresa tu correo electronico" className="py-3"
-                  id="email" ref={ emailInputRef }
-                  disabled={ isLoadingInitial }
-                />
-              </div>
+              <Input label="Correo electronico" placeholder="Ingresa tu correo electronico"
+                bordered fullWidth
+                ref={ emailInputRef }
+              />
+              <Input label="Usuario" placeholder="Ingresa tu usuario"
+                bordered fullWidth
+                ref={ userInputRef }
+              />
             </ComponentGrouper>
-            <ComponentGrouper>
-              <div className="d-flex flex-column pb-2">
-                <label htmlFor="user">
-                  Usuario:
-                </label>
-                <input type="text"
-                  placeholder="Ingresa tu usuario" className="py-3"
-                  id="user" ref={ userInputRef }
-                  disabled={ isLoadingInitial }
-                />
-              </div>
-            </ComponentGrouper>
-            <ButtonSave
+            <Button shadow color="primary"
               type="submit"
-              className="btn btn-primary mb-3 px-3 py-2"
-              style={ {fontSize: '1.3rem'} }
               disabled={ isLoading || isLoadingInitial }
+              css={ { px: '$13', marginTop: '1rem' } }
+              auto size="lg"
             >
               { isLoading && <SpinnerLoadingButton /> }
               Actualizar
-            </ButtonSave>
+            </Button>
           </FormContainer>
         </ContainerRegisterData>
       </ContainerRegister>
     </section>
   );
 };
+
+
+const FormContainer = styled.form`
+  padding-left: 1rem;
+
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+  }
+`;
+const ContainerRegister = styled(Container)`
+  width: 70%;
+  @media only screen and (max-width: 900px) {
+    width: 80%;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
+const ContainerRegisterData = styled.div`
+  border: solid 1.5px #8a8a8a;
+  border-radius: 10px;
+  background: white;
+  padding: 10px 1rem;
+
+  @media only screen and (max-width: 600px) {
+    border: none;
+  }
+`;
+const Indication = styled.div`
+  @media only screen and (max-width: 600px) {
+    text-align: center;
+  }
+`;
 
 export default EditUser;
