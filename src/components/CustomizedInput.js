@@ -20,8 +20,8 @@ const PersonalizedInput = ({type, placeholder, state, setState, classNameIcon}) 
   }, []);
   return (
     <ContainerInputs id={ placeholder }>
-      
       <InputPersonalized
+        aria-label={ placeholder }
         contentLeft={ <IconSize className={ classNameIcon }></IconSize> }
         type={ type }
         placeholder={ placeholder }
