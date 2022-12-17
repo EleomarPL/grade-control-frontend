@@ -90,31 +90,33 @@ const EditUser = () => {
             <ComponentGrouper>
               <Input label="Nombre" placeholder="Ingresa tu nombre"
                 bordered fullWidth
-                ref={ nameInputRef }
+                ref={ nameInputRef } required
               />
               <Input label="Apellido paterno" placeholder="Ingresa tu apellido paterno"
                 bordered fullWidth
-                ref={ lastnameInputRef }
+                ref={ lastnameInputRef } required
               />
             </ComponentGrouper>
             <ComponentGrouper>
               <Input label="Apellido materno" placeholder="Ingresa tu apellido materno"
                 bordered fullWidth
-                ref={ motherLastnameInputRef }
+                ref={ motherLastnameInputRef } required
               />
               <Input label="Telefono" placeholder="Ingresa tu telefono"
                 bordered fullWidth
-                ref={ phoneInputRef }
+                ref={ phoneInputRef } required
+                type="number"
               />
             </ComponentGrouper>
             <ComponentGrouper>
               <Input label="Correo electronico" placeholder="Ingresa tu correo electronico"
                 bordered fullWidth
-                ref={ emailInputRef }
+                ref={ emailInputRef } required
+                type="email"
               />
               <Input label="Usuario" placeholder="Ingresa tu usuario"
                 bordered fullWidth
-                ref={ userInputRef }
+                ref={ userInputRef } required
               />
             </ComponentGrouper>
             <Button shadow color="primary"

@@ -128,26 +128,27 @@ export const ModalAddQualification = memo(function ModalAddQualification( {setQu
           value={ course } onChange={ (e) => setCourse(e.target.value) }
           label="Materia" placeholder="Ingresa el nombre de la materia"
           bordered fullWidth
+          required
         />
         <ComponentGrouper>
           <Input
             value={ unit } onChange={ (e) => setUnit(e.target.value) }
             label="Unidad" placeholder="Ingresa la unidad"
             bordered fullWidth
-            type="number"
+            type="number" required
           />
           <Input
             value={ score } onChange={ (e) => setScore(e.target.value) }
             label="Calificación" placeholder="Calificación 0-100"
             bordered fullWidth
-            type="number"
+            type="number" required
           />
         </ComponentGrouper>
         <Input
           value={ semester } onChange={ (e) => setSemester(e.target.value) }
           label="Semestre" placeholder="Ingresa el semestre"
           bordered fullWidth
-          type="number"
+          type="number" required
         />
       </Modal.Body>
       <Modal.Footer>

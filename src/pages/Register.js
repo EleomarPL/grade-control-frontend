@@ -74,33 +74,41 @@ const Register = () => {
             <ComponentGrouper>
               <Input label="Nombre" placeholder="Ingresa tu nombre"
                 bordered fullWidth
+                required
               />
               <Input label="Apellido paterno" placeholder="Ingresa tu apellido paterno"
                 bordered fullWidth
+                required
               />
             </ComponentGrouper>
             <ComponentGrouper>
               <Input label="Apellido materno" placeholder="Ingresa tu apellido materno"
                 bordered fullWidth
+                required
               />
               <Input label="Telefono" placeholder="Ingresa tu telefono"
                 bordered fullWidth
+                type="number" required
               />
             </ComponentGrouper>
             <ComponentGrouper>
               <Input label="Correo electronico" placeholder="Ingresa tu correo electronico"
                 bordered fullWidth
+                type="email" required
               />
               <Input label="Usuario" placeholder="Ingresa tu usuario"
                 bordered fullWidth
+                required
               />
             </ComponentGrouper>
             <ComponentGrouper>
               <Input label="Contraseña" placeholder="Ingresa tu contraseña"
                 bordered fullWidth
+                type="password" required
               />
               <Input label="Confirmar contraseña" placeholder="Confirma tu contraseña"
                 bordered fullWidth
+                type="password" required
               />
             </ComponentGrouper>
             <Button shadow color="primary"
