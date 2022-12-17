@@ -1,20 +1,18 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Button, Container, Grid, Table, Text } from '@nextui-org/react';
 
 import Auth from '../../context/Auth';
-import { ModalDeleteAccount, showModalStaticDeleteAccount } from '../../components/ModalDeleteAccount';
-
-import { Indication } from '../../stylesComponents/registerStyles';
-import {
-  ButtonDelete, SettingsContainer, SettingsContainerData
-} from '../../stylesComponents/settingsStyles';
-
+import { ModalDeleteAccount } from '../../components/ModalDeleteAccount';
 
 const SettingsUser = () => {
+  const [visibleModal, setVisibleModal] = useState(false);
   const {userData} = useContext(Auth);
+  const navigate = useNavigate();
 
   const showModalConfirm = () => {
-    showModalStaticDeleteAccount();
+    setVisibleModal(true);
   };
 
   let traslationToSpanish = {
@@ -28,59 +26,107 @@ const SettingsUser = () => {
 
   return (
     <section>
-      <SettingsContainer className="settings-container m-auto py-3">
+      <SettingsContainer fluid>
         <SettingsContainerData className="container-settings-data px-4 pt-2">
-          <div className="d-flex flex-wrap justify-content-between align-items-center">
-            <Indication className="indications">
-              <strong style={ {fontSize: '1.8rem'} }>Tus datos</strong>
-              <p className="pt-1">Hola, estos son tus datos actuales</p>
-            </Indication>
-            <div>
-              <Link
-                to="/home/edit"
-                className="btn btn-secondary mb-2"
+          <Grid.Container gap={ 2 }
+            css={ {width: '100%'} }
+          >
+            <Grid sm={ 12 } justify="space-between"
+              css={ {margin: 'auto auto'} }
+            >
+              <Indication className="indications">
+                <Text h2 size="$2xl">Tus datos</Text>
+                <Text css={ { paddingBottom: '10px' } }>
+                  Hola, estos son tus datos actuales
+                </Text>
+              </Indication>
+              <Button as={ Link } color="secondary"
+                auto to="/home/edit"
+                css={ {margin: 'auto 0'} } shadow
               >
                 Editar mis datos
-              </Link>
-            </div>
-          </div>
-          <div className="table-responsive">
-            <table className="table" style={ {fontSize: '1rem'} }>
-              <tbody>
-                { userData !== null &&
+              </Button>
+            </Grid>
+          </Grid.Container>
+          <Table
+            aria-label="Datos usuario"
+            css={ {
+              height: 'auto',
+              minWidth: '100%'
+            } }
+          >
+            <Table.Header>
+              <Table.Column>Dato</Table.Column>
+              <Table.Column>Dato</Table.Column>
+            </Table.Header>
+            <Table.Body>
+              { userData !== null &&
                   Object.keys(userData).map((key, index) =>
-                    <tr className="text-left mx-2" key={ index }>
-                      <td style={ {opacity: '0.5'} }>{ traslationToSpanish[key] }</td>
-                      <td>{ userData[key] }</td>
-                    </tr>
+                    <Table.Row className="text-left mx-2" key={ index }>
+                      <Table.Cell style={ {opacity: '0.5'} }>
+                        <Text>{ traslationToSpanish[key] }</Text>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Text>{ userData[key] }</Text>
+                      </Table.Cell>
+                    </Table.Row>
                   )
-                }
-              </tbody>
-            </table>
-          </div>
-          <div>
-            <Link
-              to="/home/editpassword"
-              className="btn btn-warning button-delete"
+              }
+            </Table.Body>
+          </Table>
+          <Container gap={ 2 }
+            css={ {width: '100%'} }
+          >
+            <Button color="warning"
+              shadow auto
+              onPress={ () => navigate('/home/editpassword') }
+              css={ {margin: '10px 0'} }
             >
               Cambiar mi contraseña
-            </Link>
-          </div>
-          <div className="py-3">
-            <ButtonDelete
-              type="button"
-              className="btn btn-danger button-delete"
-              onClick={ showModalConfirm }
+            </Button>
+            <Button color="error"
+              shadow css={ {margin: '10px 0'} }
+              auto
+              onPress={ showModalConfirm }
             >
               Eliminar mi cuenta
-            </ButtonDelete>
-          </div>
+            </Button>
+          </Container>
         </SettingsContainerData>
       </SettingsContainer>
-      <ModalDeleteAccount />
+      <ModalDeleteAccount
+        setVisible={ setVisibleModal }
+        visible={ visibleModal }
+      />
     </section>
   );
 };
+
+const SettingsContainer = styled(Container)`
+  width: 70%;
+  margin: 1rem auto;
+
+  @media only screen and (max-width: 900px) {
+    width: 80%;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
+`;
+const SettingsContainerData = styled.div`
+  border: solid 1.5px #8a8a8a;
+  border-radius: 10px;
+  background: white;
+
+  @media only screen and (max-width: 600px) {
+    border: none;
+  }
+`;
+const Indication = styled.div`
+  @media only screen and (max-width: 600px) {
+    text-align: center;
+  }
+`;
 
 
 export default SettingsUser;
