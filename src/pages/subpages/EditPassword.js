@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { Button, Text } from '@nextui-org/react';
 
 import CustomizedInput from '../../components/CustomizedInput';
 import { notifyInfo } from '../../consts/notify';
 import ButtonBack from '../../components/ButtonBack';
 import useUser from '../../hooks/useUser';
 import SpinnerLoadingButton from '../../components/common/SpinnerLoadingButton';
-
-import { BorderContainer, ContainerSection } from '../../stylesComponents/loginStyles';
 
 const EditPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,17 +42,10 @@ const EditPassword = () => {
     <ContainerSection
       style={ {height: '90vh'} }
     >
-      <BorderContainer className="d-flex flex-column" >
+      <BorderContainer>
         <ButtonBack />
-        <form
-          className="px-4 pb-4 pt-1 mx-4"
-          onSubmit={ handleUpdatePassword }
-        >
-          <div>
-            <p>
-              <strong>Actualiza tu contraseña</strong>
-            </p>
-          </div>
+        <Text h2 size="$xl">Actualiza tu contraseña</Text>
+        <form onSubmit={ handleUpdatePassword }>
           <div className="d-flex flex-column mt-4 pt-1">
             <CustomizedInput
               type="password"
@@ -76,18 +69,44 @@ const EditPassword = () => {
               classNameIcon="bi bi-lock-fill"
             />
           </div>
-          <div>
-            <button className="btn btn-primary mt-3 w-100" type="submit"
-              disabled={ isLoading }
-            >
-              { isLoading && <SpinnerLoadingButton /> }
-              Actualizar
-            </button>
-          </div>
+          <Button shadow color="primary"
+            type="submit"
+            disabled={ isLoading }
+            css={ { px: '$13' } }
+            auto style={ { width: '100%' } }
+          >
+            { isLoading && <SpinnerLoadingButton /> }
+            Actualizar
+          </Button>
         </form>
       </BorderContainer>
     </ContainerSection>
   );
 };
+
+const BorderContainer = styled.div`
+  background: #F8F9FA;
+  width: 40%;
+  padding: 10px;
+
+  border: solid 1.5px #8a8a8a;
+  border-radius: 10px;
+  @media only screen and (max-width: 900px) {
+    width: 55%;
+  }
+  @media only screen and (max-width: 700px) {
+    width: 100%;
+    border: 0;
+  }
+`;
+const ContainerSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: #EDEDE9;
+`;
 
 export default EditPassword;
