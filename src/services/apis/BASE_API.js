@@ -1,1 +1,1 @@
-export const BASE_API = 'https://grade-control-backend-production.up.railway.app/';
+export const BASE_API = 'https://grade-control-backend.onrender.com/';
